@@ -1,0 +1,47 @@
+/*Como es displey flex, le da el mismo esppacio a cada hijo, en este caso a cada div que es profile item y al link*/
+.profilecontainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /*border: 1px solid #ddd;
+  border-radius: 5px;*/
+  max-width: 400px; /* Ajusta según tus necesidades */
+  margin: auto auto;
+}
+
+/*Profile item, es el div que tiene como hijos al par etiqueta y valor, y como es space between hace que uno este alineado a la izquierda y otro a la derecha*/
+.profileitem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.profilevalue {
+  font-weight: bold;
+  color: #333;
+}
+
+.buttonitem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.backbutton {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  /*margin-left: 1rem;*/
+  font-size: 16px;
+}
+
+.backbutton:hover {
+  background-color: #0056b3; /* Un tono de azul más oscuro al pasar el cursor */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+}

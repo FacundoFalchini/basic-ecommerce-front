@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.leftgroup,
+.rightgroup {
+  display: flex;
+}
+
+/*
+El comprtamiento default de los elementos FLEXIBLES, es estar EN LINEA. 
+
+Luego, el contenedor princiapl distribuye el espacio entre sus hijos (left group y right group).
+Donde, JUSTIFY CONTENT SPACE BETWEEN: 
+  * El primer hijo, se alinea al inicio del contenedor.
+  * El ultimo hijo se alinea al final del contendor. 
+
+*/

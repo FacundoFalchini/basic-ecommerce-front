@@ -1,0 +1,18 @@
+.cartbutton {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none; /*Te asgura que no tenga bordes visibles el elemento*/
+  border-radius: 5px;
+  text-decoration: none; /* Para quitar el subrayado del enlace */
+  font-weight: bold; /* Letra en negrita */
+  transition: background-color 0.3s; /* Transición suave de color de fondo */
+  margin-left: 1rem;
+  font-size: 16px;
+}
+
+.cartbutton:hover {
+  background-color: #0056b3; /* Un tono de azul más oscuro al pasar el cursor */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+}

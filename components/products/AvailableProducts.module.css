@@ -1,0 +1,34 @@
+.products {
+  /*max-width: 60rem; Comento este xq sino no se acomoda los margenes izq y derechos del card*/
+  width: 100%;
+  /*margin: 2rem auto;*/
+  animation: meals-appear 1s ease-out forwards;
+}
+
+.ProductsLoading {
+  text-align: center;
+  color: white;
+}
+
+.ProductsError {
+  text-align: center;
+  color: red;
+}
+
+.products ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes products-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

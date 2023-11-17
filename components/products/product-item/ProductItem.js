@@ -7,6 +7,7 @@ const ProductItem = (props) => {
   //Una lista de item, es un wrapper alrededor de cada meal item, porque cada mealitem se renderizan de manera unorded.
 
   const price = `$${props.price.toFixed(2)}`;
+  console.log(props.stock);
 
   //Aca si esta toda la data. Asique se pasa al form por props y traemos la cantidad hacia aca (de hijo a padre). Y en este componente si accedemos al context.
   //const cartCtx = useContext(CartContext);
@@ -30,6 +31,7 @@ const ProductItem = (props) => {
       <div>
         <ProductItemForm
           id={props.id}
+          stock={props.stock}
           //onAddToCart={addToCartHandler}
         ></ProductItemForm>
       </div>

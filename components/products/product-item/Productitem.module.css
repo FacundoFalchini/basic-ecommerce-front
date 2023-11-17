@@ -6,6 +6,20 @@
   border-bottom: 1px solid #ccc;
 }
 
+/* Estilos para el div que contiene los detalles del producto */
+.product > div:first-child {
+  flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+/* Estilos para el div que contiene el formulario y la cantidad disponible */
+.product > div:last-child {
+  flex: 0 1 180px; /* No crecerá más allá de su contenido y tiene un mínimo de 180px */
+  display: flex;
+  flex-direction: column; /* Organiza los hijos en una columna */
+  justify-content: flex-start; /* Alinea los hijos al inicio del eje cruzado */
+  align-items: center; /* Centra los hijos en el eje principal */
+}
+
 .product h3 {
   margin: 0 0 0.25rem 0;
 }
@@ -17,6 +31,6 @@
 .price {
   margin-top: 0.25rem;
   font-weight: bold;
-  color: #ad5502;
+  color: black;
   font-size: 1.25rem;
 }

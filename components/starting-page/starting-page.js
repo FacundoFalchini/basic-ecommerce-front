@@ -1,7 +1,8 @@
 import Navigation from "../navigation/navigation";
 import AvailableProducts from "../products/AvailableProducts";
-import classes from "./starting-page.module.css";
+//import classes from "./starting-page.module.css";
 import { useState } from "react";
+import { Fragment } from "react";
 
 function StartingPageContent(props) {
   //Con estos 2 estados, me traigo desde navigation el seller y country, y se los paso a avaiableProducts.
@@ -12,7 +13,7 @@ function StartingPageContent(props) {
   const error = props.error;
 
   return (
-    <div className={classes.container}>
+    <Fragment>
       <Navigation
         onCountries={countries}
         onError={error}
@@ -23,7 +24,7 @@ function StartingPageContent(props) {
         onSearchSeller={selectedSeller}
         onSearchCountry={selectedCountry}
       />
-    </div>
+    </Fragment>
   );
 }
 

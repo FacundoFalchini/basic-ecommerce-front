@@ -3,7 +3,7 @@
   flex-direction: column; /* para que los hijos se apilen verticalmente */
   justify-content: center; /* centra los hijos horizontalmente */
   align-items: center; /* centra los hijos verticalmente */
-  height: 70vh; /* 100% de la altura de la ventana */
+  height: 100vh; /* 100% de la altura de la ventana */
   width: 100vw; /* 100% del ancho de la ventana */
 }
 

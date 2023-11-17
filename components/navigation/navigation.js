@@ -57,8 +57,8 @@ const Navigation = (props) => {
           ></SellerDropdown>
         </div>
         <div className={classes.rightgroup}>
-          <Profile></Profile>
           <Cart></Cart>
+          <Profile></Profile>
         </div>
       </div>
     </Card>

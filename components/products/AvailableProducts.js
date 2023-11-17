@@ -47,19 +47,17 @@ const AvailableProducts = (props) => {
 
   if (isLoading) {
     return (
-      <Card>
-        <section className={classes.products}>
-          <h1>Loading...</h1>
-        </section>
-      </Card>
+      <section className={classes.loaderContainer}>
+        <div className={classes.loader}></div>
+      </section>
     );
   }
 
   if (!country || !seller) {
     return (
       <Card>
-        <section className={classes.products}>
-          <h1>Seleccionar pais y vendedor</h1>
+        <section className={classes.messageContainer}>
+          <h1>Select country and seller</h1>
         </section>
       </Card>
     );
@@ -68,8 +66,8 @@ const AvailableProducts = (props) => {
   if (products.length === 0) {
     return (
       <Card>
-        <section className={classes.products}>
-          <h1>El vendedor no tiene productos</h1>
+        <section className={classes.messageContainer}>
+          <h1>The seller has no products</h1>
         </section>
       </Card>
     );
@@ -91,6 +89,7 @@ const AvailableProducts = (props) => {
         name={products.name}
         description={products.description}
         price={products.price}
+        stock={products.stock}
       >
         {products.name}
       </ProductItem>

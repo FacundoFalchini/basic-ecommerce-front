@@ -34,16 +34,22 @@ const ProductItemForm = (props) => {
         ref={amountInputRef}
         label="Amount"
         input={{
-          //Estas son todas props DEFAULT que se peuden agregar a cualquier input elements
           id: "amount_" + props.id,
           type: "number",
           min: "1",
-          max: "5",
+          max: props.stock,
           step: "1",
-          defaultValue: 1,
+          defaultValue: props.stock === 0 ? 0 : 1,
+          disabled: props.stock === 0,
         }}
       ></Input>
-      <button>+ Add</button>
+      <h1 className={classes.stockDisplay}>
+        <span className={classes.stockText}>Available amount:</span>
+        <span className={classes.stockAmount}>{props.stock}</span>
+      </h1>
+      <div className={classes.buttonContainer}>
+        <button disabled={props.stock === 0}>+ Add</button>
+      </div>
       {!amountisValid && <p>Please enter a valid amount (1-5).</p>}
     </form>
   );

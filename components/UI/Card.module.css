@@ -1,0 +1,25 @@
+.card {
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: white;
+  width: 80%;
+  margin: 1rem auto;
+}
+
+/*
+
+paddin lo que hace, es que las cosas que esten dentro del card, no esten pegados al borde. 
+
+box shadow agrega ese efecto de sombra
+
+border radius redondea las puntas 
+
+width limita el tamanio del contenedor, en este caso 80% de la pagina
+
+margin se usa para definir los margenes alrededor de un elemento. 
+  *El primer valor se refiere al margen superior e inferior. En este caso, el margen superior es 0. Al ser 0, se indica q no queremos nigun espacio exterior adicional en relacion a OTROS ELEMENTOS CIRCUNDANTES. Se colocara justo despues o antes del elemento anterior o siguiente. 
+  *El segundo (auto) a el margen izquierdo y derecho. Si es auto, el navegador asigna espacios iguales a ambos lados (derecho e iezquierdo)
+
+
+*/

@@ -1,0 +1,65 @@
+.products {
+  /*max-width: 60rem; Comento este xq sino no se acomoda los margenes izq y derechos del card*/
+  width: 100%;
+  max-height: 380px; /* Ajusta este valor para mostrar, por ejemplo, 5 elementos */
+  overflow-y: auto; /* Permite desplazarse verticalmente si el contenido excede la altura máxima */
+  animation: products-appear 1s ease-out forwards;
+}
+
+.ProductsError {
+  text-align: center;
+  color: red;
+}
+
+.products ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.products h1 {
+  text-align: center;
+  color: black;
+}
+
+@keyframes products-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messageContainer {
+  text-align: center;
+  color: black;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupa todo el alto de la ventana */
+}
+
+.loader {
+  border: 5px solid #f3f3f3; /* Color de fondo */
+  border-top: 5px solid #3498db; /* Color del borde superior */
+  border-radius: 50%; /* Hace que sea circular */
+  width: 40px; /* Ancho del loader */
+  height: 40px; /* Altura del loader */
+  animation: spin 2s linear infinite; /* Animación giratoria */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

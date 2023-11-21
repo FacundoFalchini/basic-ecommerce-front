@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column; /* para que los hijos se apilen verticalmente */
+  justify-content: center; /* centra los hijos horizontalmente */
+  align-items: center; /* centra los hijos verticalmente */
+  height: 100vh; /* 100% de la altura de la ventana */
+  width: 100vw; /* 100% del ancho de la ventana */
+}
+
+/*
+Las propiedades justify-content, align-items y flex-direction son específicas de Flexbox y nos permiten controlar la disposición de los elementos hijos dentro del contenedor flex.
+
+El margin: auto que mencionaste suele funcionar bien para centrar bloques horizontalmente, pero para centrarlos verticalmente (especialmente cuando no conoces el alto del bloque), Flexbox o Grid suelen ser soluciones más robustas
+
+
+*/

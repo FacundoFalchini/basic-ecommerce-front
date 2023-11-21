@@ -1,0 +1,72 @@
+/*Como es displey flex, le da el mismo esppacio a cada hijo, en este caso a cada div que es profile item y al link*/
+.profilecontainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /*border: 1px solid #ddd;
+  border-radius: 5px;*/
+  max-width: 400px; /* Ajusta según tus necesidades */
+  margin: auto auto;
+}
+
+/*Profile item, es el div que tiene como hijos al par etiqueta y valor, y como es space between hace que uno este alineado a la izquierda y otro a la derecha*/
+.profileitem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.profilevalue {
+  font-weight: bold;
+  color: #333;
+}
+
+.buttonitem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.backbutton {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  /*margin-left: 1rem;*/
+  font-size: 16px;
+}
+
+.backbutton:hover {
+  background-color: #0056b3; /* Un tono de azul más oscuro al pasar el cursor */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupa todo el alto de la ventana */
+}
+
+.loader {
+  border: 5px solid #f3f3f3; /* Color de fondo */
+  border-top: 5px solid #3498db; /* Color del borde superior */
+  border-radius: 50%; /* Hace que sea circular */
+  width: 40px; /* Ancho del loader */
+  height: 40px; /* Altura del loader */
+  animation: spin 2s linear infinite; /* Animación giratoria */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

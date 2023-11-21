@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Ocupa igual espacio que los otros elementos */
+}
+
+.dropdown {
+  width: 150px; /* o el tamaño que prefieras */
+  overflow: hidden;
+  text-overflow: ellipsis; /*Esto corta la palabra y agrega los 3 ptos*/
+  white-space: nowrap;
+  padding: 10px 20px;
+  color: #fff; /* Color blanco del texto */
+  background-color: #007bff; /* Color de fondo azul */
+  border: none; /* Asegura que no tenga bordes visibles el elemento */
+  border-radius: 5px; /* Redondea las esquinas */
+  font-weight: bold; /* Letra en negrita */
+  transition: background-color 0.3s; /* Transición suave de color de fondo */
+  margin-right: 1rem; /* Espacio a la derecha */
+  font-size: 16px;
+}
+
+.dropdown:hover {
+  background-color: #0056b3; /* Un tono de azul más oscuro al pasar el cursor */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+}
+
+.dropdown option {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

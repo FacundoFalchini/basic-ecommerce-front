@@ -1,0 +1,15 @@
+import classes from "./Input.module.css";
+import React from "react";
+
+//El ... basicamente hace por cada elemento el key = value
+const Input = React.forwardRef((props, ref) => {
+  return (
+    <div className={classes.input}>
+      <label htmlFor={props.input.id}>{props.label}</label>
+      <input ref={ref} {...props.input}></input>
+    </div>
+  );
+});
+
+Input.displayName = "Input";
+export default Input;

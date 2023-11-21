@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Ocupa igual espacio que los otros elementos */
+}
+
+.dropdown {
+  width: 150px; /* o el tamaño que prefieras */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 10px 20px;
+  color: #fff; /* Color blanco del texto */
+  background-color: #007bff; /* Color de fondo azul */
+  border: none; /* Asegura que no tenga bordes visibles el elemento */
+  border-radius: 5px; /* Redondea las esquinas */
+  font-weight: bold; /* Letra en negrita */
+  transition: background-color 0.3s; /* Transición suave de color de fondo */
+  margin-right: 1rem; /* Espacio a la derecha */
+  font-size: 16px;
+}
+
+.dropdown:hover {
+  background-color: #0056b3; /* Un tono de azul más oscuro al pasar el cursor */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+}
+
+/* Manejar opciones largas */
+.dropdown option {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+
+overflow: hidden;
+
+La propiedad overflow especifica lo que sucede si el contenido excede el tamaño del cuadro o contenedor. hidden significa que cualquier contenido que exceda el tamaño del contenedor será ocultado, y no se mostrarán barras de desplazamiento.
+
+text-overflow: ellipsis;
+
+Esta propiedad determina cómo se debe señalar el desbordamiento de contenido dentro de un bloque en el que se ha utilizado overflow: hidden;. Cuando se establece en ellipsis, significa que si el texto no cabe en su contenedor, se recortará y se mostrarán puntos suspensivos (...) para indicar que hay más contenido del que se está mostrando.
+
+white-space: nowrap;
+
+La propiedad white-space especifica cómo se deben manejar los espacios en blanco dentro de un elemento. Cuando se establece en nowrap, esto impide que el contenido (como texto) se envuelva al siguiente renglón, manteniéndolo todo en una sola línea, independientemente de la longitud del contenido.
+
+
+
+*/

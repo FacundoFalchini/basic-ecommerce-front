@@ -17,10 +17,45 @@ const Cart = (props) => {
   //const [didSubmit, setDidSubmit] = useState(false);
 
   //Estas 2 funciones son para que el click en + y - en el cart aumente o disminuye la cantidad.
-  const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
+  const cartItemRemoveHandler = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:3000/cartitems/delOne", {
+        method: "DELETE",
+        body: JSON.stringify({
+          productId: id,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        const errorMsg =
+          responseData.message ||
+          (responseData.errors &&
+          responseData.errors[0] &&
+          responseData.errors[0].message
+            ? responseData.errors[0].message
+            : "Something went wrong!");
+        throw new Error(errorMsg);
+      }
+
+      cartCtx.removeItem(id);
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      // Manejar la respuesta aquí si es necesario
+    } catch (error) {
+      console.error(error);
+      // Manejar el error aquí, como mostrar un mensaje al usuario
+    }
   };
 
+  //Esto funciona gracias al BIND, que me asocia el item este del parametro, al producto en cuestion en el carrito.
   const cartItemAddHandler = async (item) => {
     try {
       const token = localStorage.getItem("token");

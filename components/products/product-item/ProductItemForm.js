@@ -16,13 +16,13 @@ const ProductItemForm = (props) => {
     if (
       enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
-      enteredAmountNumber > 5
+      enteredAmountNumber > props.stock
     ) {
       setAmountIsValid(false);
       return;
     }
 
-    //Aca solo tenemos la cantidad, nos falta mas data.
+    //Aca solo tenemos la cantidad, nos falta mas data. Tonces pasamos la cantidad al elemento padre (productitem)
     props.onAddToCart(enteredAmountNumber);
   };
 

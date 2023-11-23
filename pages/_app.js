@@ -1,11 +1,14 @@
 import { AuthContextProvider } from "@/store/auth-context";
 
 import "../styles/globals.css";
+import CartProvider from "@/store/cartProvider";
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthContextProvider>
-      <Component {...pageProps} />
+      <CartProvider>
+        <Component {...pageProps} />
+      </CartProvider>
     </AuthContextProvider>
   );
 }

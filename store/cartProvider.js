@@ -1,14 +1,6 @@
-//Este componente es para:
-//1) Manejar el contexto actual del Cart y su data.
-//2) Proveer el contexto a todos los componentes que quieran acceso a el.
-
-//Para manejar el estado, podemos usar el useReducer o UseState, pero como el estado es un poco mas complejo, es mejor usar Reducer.
-import { useReducer, useEffect, useContext } from "react";
+import { useReducer, useEffect, useContext } from "react"; //State mas complejo, entonces useReducer > useState
 import CartContext from "./cart-context";
 import AuthContext from "./auth-context";
-
-//La funcion esta fuera del componente, porque no usa data del componente y ende no deberia ser recreada cada vez que cambia algo del componente.
-//State es el ultimo estado manejado, y la action es determinada por nosotros. Y la funcion retorna el nuevo y ultimo estado. Retornamos el default, y luego en la funcion componente, usamos useReducer. Se le pasa la funcion reducer y el estado inicial.
 
 const defaultCartState = {
   items: [],
@@ -16,8 +8,10 @@ const defaultCartState = {
   error: null,
 };
 
+//Funcion que hace el fetch del cart del usuario. Fuera del componente, porque no usa data del componente y asi no se recrea.
 const fetchCartData = async () => {
   try {
+    console.log("entra");
     const token = localStorage.getItem("token");
     const response = await fetch(
       "http://localhost:3000/cartItems/getCartElements",
@@ -30,6 +24,7 @@ const fetchCartData = async () => {
     );
 
     if (!response.ok) {
+      console.log("entra");
       const responseData = await response.json();
       const errorMsg =
         responseData.message ||
@@ -48,6 +43,10 @@ const fetchCartData = async () => {
   }
 };
 
+//State es el ultimo estado manejado.
+//Action es determinada por nosotros.
+//La funcion retorna el nuevo y ultimo estado. Retornamos el default, y luego en la funcion componente, usamos useReducer. Se le pasa la funcion reducer y el estado inicial.
+
 const cartReducer = (state, action) => {
   if (action.type === "LOAD_CART") {
     return {
@@ -59,19 +58,19 @@ const cartReducer = (state, action) => {
   if (action.type === "SET_ERROR") {
     return {
       ...state,
-      error: action.error, // Configura el mensaje de error
+      error: action.error,
     };
   }
 
+  //Este es para agregar un elemento al carrito, hace la verificacion de que si ya existe o no.
   if (action.type === "ADD") {
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
 
-    //Si ya existe el id, (el elemento) en el carrito, nos retorna el indice
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id,
     );
-    //Obtenemos el elemento existente. Esto solo funciona si existe, y sino dara null.
+
     const existingCartItem = state.items[existingCartItemIndex];
     let updatedItems;
 
@@ -80,39 +79,33 @@ const cartReducer = (state, action) => {
         ...existingCartItem,
         amount: existingCartItem.amount + action.item.amount,
       };
-      //Agarro el arreglo viejo
+
       updatedItems = [...state.items];
-      //Y sobreescribo el elemento
       updatedItems[existingCartItemIndex] = updatedItem;
-      //Y SI NO EXISTE:
     } else {
-      //concat crea un nuevo arreglo, no queremos modificar el anterior como pasaria si usamos push.
       updatedItems = state.items.concat(action.item);
     }
 
-    //Y se retorna el nuevo estado que toma los valores de ariba.
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
     };
   }
 
+  //Este es para eliminar del carrito, hace la verificacion de si es la ultima unidad o no.
   if (action.type === "REMOVE") {
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.id,
     );
 
     const existingCartItem = state.items[existingCartItemIndex];
-
     const updatedTotalAmount = state.totalAmount - existingCartItem.price;
 
     let updatedItems;
-    //Si la cantidad del elemento a quitar es 1, se elimina el elemento porque ya no quedan mas.
+
     if (existingCartItem.amount === 1) {
-      //Aca nos quedamos con todos los items que no son el que queda en 0.
       updatedItems = state.items.filter((item) => item.id !== action.id);
     } else {
-      //Aca no queremos quitar el elemento, sino actualizar la cantidad
       const updatedItem = {
         ...existingCartItem,
         amount: existingCartItem.amount - 1,
@@ -134,20 +127,17 @@ const cartReducer = (state, action) => {
   return defaultCartState;
 };
 
+//Esto es lo que retornamos.
 const CartProvider = (props) => {
   const { token } = useContext(AuthContext);
-  //El JSX que retornamos, es el Context provider, donde:
-  //1) Le pasamos el children, lo que nos permite es werap cualquier componente que deberia tener acceso al contexto.
-  //2) Y tambien toda la logica de manejo del contexto se va a agregar aca.
 
-  //Primero: estadoactual, funcion que permite dar una accion al reducer.
+  //Al reducer se le pasa, el estado actual y las diferentes acciones.
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCartState,
   );
 
   const addItemToCartHandler = (item) => {
-    //La accion es lo que querramos, pero en general es un objeto que tenga algun ID para identificar dicha accion. A su vez, al reducer le pasamos el item.
     dispatchCartAction({ type: "ADD", item: item });
   };
 
@@ -200,12 +190,15 @@ const CartProvider = (props) => {
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
-    error: cartState.error, // Incluye el estado de error
+    error: cartState.error,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
     clearCart: clearCartHandler,
   };
 
+  //El JSX que retornamos, es el Context provider, donde:
+  //1) Le pasamos el children, lo que nos permite es envolver cualquier componente que deberia tener acceso al contexto.
+  //2) Y tambien toda la logica de manejo del contexto se va a agregar aca.
   return (
     <CartContext.Provider value={cartContext}>
       {props.children}

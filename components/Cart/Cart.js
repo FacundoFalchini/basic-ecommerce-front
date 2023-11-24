@@ -9,11 +9,17 @@ const Cart = () => {
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
+  //Este enfoque no sirvio porque necesito manejar un estado de error para C/U de los CartItem, entonces en lugar de pasarle el error, le pasamos la funcion y la ejecutamos en el hijo (CartItem)
+  //const [errorAdd, setErrorAdd] = useState(null);
+  //const [errorRemove, setErrorRemove] = useState(null);
 
   //Funcion para el boton (-)
+
   const cartItemRemoveHandler = async (id) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       const token = localStorage.getItem("token");
+      //const token = localStorage.getItem("sadasdasd12312");
       const response = await fetch("http://localhost:3000/cartitems/delOne", {
         method: "DELETE",
         body: JSON.stringify({
@@ -34,22 +40,26 @@ const Cart = () => {
           responseData.errors[0].message
             ? responseData.errors[0].message
             : "Something went wrong!");
+
         throw new Error(errorMsg);
       }
 
       cartCtx.removeItem(id);
 
-      const responseData = await response.json();
-      console.log(responseData);
+      //const responseData = await response.json();
     } catch (error) {
-      console.error(error);
+      //Es necesario volverlo a lanzar, asi lo agarramos en el catch del CartItem.
+      throw error;
     }
   };
 
   //Funcion para el boton (+)
+
   const cartItemAddHandler = async (item) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       const token = localStorage.getItem("token");
+      //const token = localStorage.getItem("sadasdasd12312");
       const response = await fetch("http://localhost:3000/cartitems/add", {
         method: "POST",
         body: JSON.stringify({
@@ -81,7 +91,7 @@ const Cart = () => {
       const responseData = await response.json();
       console.log(responseData);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 
@@ -126,6 +136,7 @@ const Cart = () => {
     <React.Fragment>
       <Card>
         {cartItems}
+
         <div className={classes.total}>
           <span>Total Amount</span>
           <span>{totalAmount}</span>

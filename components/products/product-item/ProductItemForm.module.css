@@ -50,6 +50,12 @@
   border-color: #ccc;
 }
 
+.productItemError {
+  text-align: center;
+  color: red;
+  font-size: 15px;
+}
+
 /*
 
 Como se combino el .form de aca con el .products de product items:

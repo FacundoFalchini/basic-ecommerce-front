@@ -1,3 +1,9 @@
+.cartItemError {
+  text-align: center;
+  color: red;
+  font-size: 15px;
+}
+
 .cart-item {
   display: flex;
   justify-content: space-between;
@@ -62,4 +68,10 @@
 .cart-item button:active {
   background-color: #8a2b06;
   color: white;
+}
+
+.cartContainerAll {
+  /* tus estilos existentes para cart-item */
+  display: flex;
+  flex-direction: column;
 }

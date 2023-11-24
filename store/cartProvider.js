@@ -13,6 +13,7 @@ import AuthContext from "./auth-context";
 const defaultCartState = {
   items: [],
   totalAmount: 0,
+  error: null,
 };
 
 const fetchCartData = async () => {
@@ -43,8 +44,7 @@ const fetchCartData = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
-    // Maneja el error según sea necesario
+    throw error;
   }
 };
 
@@ -53,6 +53,13 @@ const cartReducer = (state, action) => {
     return {
       items: action.cart.items,
       totalAmount: action.cart.totalAmount,
+    };
+  }
+
+  if (action.type === "SET_ERROR") {
+    return {
+      ...state,
+      error: action.error, // Configura el mensaje de error
     };
   }
 
@@ -154,39 +161,46 @@ const CartProvider = (props) => {
 
   useEffect(() => {
     const loadCart = async () => {
-      const cartData = await fetchCartData();
+      try {
+        const cartData = await fetchCartData();
 
-      if (cartData) {
-        // Aquí asumimos que cartData tiene la estructura correcta para tu contexto
-        const productsFormat = cartData.map((item) => {
-          return {
-            id: item.productId,
-            name: item.productName,
-            price: item.productPrice,
-            amount: item.quantity,
-          };
-        });
+        if (cartData) {
+          // Aquí asumimos que cartData tiene la estructura correcta para tu contexto
+          const productsFormat = cartData.map((item) => {
+            return {
+              id: item.productId,
+              name: item.productName,
+              price: item.productPrice,
+              amount: item.quantity,
+            };
+          });
 
-        const totalAmount = cartData.reduce((accumulator, item) => {
-          return accumulator + item.productPrice * item.quantity;
-        }, 0);
+          const totalAmount = cartData.reduce((accumulator, item) => {
+            return accumulator + item.productPrice * item.quantity;
+          }, 0);
 
-        dispatchCartAction({
-          type: "LOAD_CART",
-          cart: { items: productsFormat, totalAmount: totalAmount },
-        });
+          dispatchCartAction({
+            type: "LOAD_CART",
+            cart: { items: productsFormat, totalAmount: totalAmount },
+          });
+        }
+      } catch (error) {
+        dispatchCartAction({ type: "SET_ERROR", error: error.message });
       }
     };
 
     //Haciendo asi, logro que el contexto del carrito este siempre en sintonia con la auntentificacion del usuario. Cuando este inicia, se hace igual a lo q esta en su backend y cuando sale se borra.
     if (token) {
       loadCart();
+    } else {
+      dispatchCartAction({ type: "CLEAR" });
     }
   }, [token]);
 
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    error: cartState.error, // Incluye el estado de error
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
     clearCart: clearCartHandler,

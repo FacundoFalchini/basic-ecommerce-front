@@ -1,18 +1,10 @@
+/*Botones de los item de productos y contenedor y total*/
 .cart-items {
   list-style: none;
   margin: 0;
   padding: 0;
   max-height: 20rem;
   overflow: auto;
-}
-
-.total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: 1rem 0;
 }
 
 .actions {
@@ -45,28 +37,50 @@
   color: white;
 }
 
-.buttonContainer {
+.total {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 1rem 0;
 }
 
-.cartbutton {
-  padding: 10px 16px; /* Ajusta el padding para que coincida con los otros botones */
-  font-size: 1rem; /* Asegúrate de que la fuente tenga el mismo tamaño que los otros botones */
-  background-color: #f0f0f0; /* Cambia al color de fondo que prefieras */
-  border: 1px solid #cccccc; /* Cambia el color del borde para que sea más sutil */
+/*Botones de movimiento y contenedor*/
+.cartcontainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: auto auto;
+}
+
+.buttonitem {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.motionbutton {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s;
-  /*margin-left: 1rem;*/
-  display: flex; /* Usa flex para alinear la imagen y el texto */
-  align-items: center; /* Alinea verticalmente el contenido */
-  justify-content: center; /* Centra el contenido horizontalmente */
+  font-size: 16px;
 }
 
-.cartbutton:hover {
-  background-color: #e0e0e0;
-  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+.motionbutton:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+
+/*Mensaje de error*/
+.errortext {
+  text-align: center;
+  color: red;
+  margin-bottom: 1.5rem;
 }

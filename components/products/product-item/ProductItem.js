@@ -36,6 +36,7 @@ const ProductItem = (props) => {
           responseData.errors[0].message
             ? responseData.errors[0].message
             : "Something went wrong!");
+
         throw new Error(errorMsg);
       }
 
@@ -48,9 +49,7 @@ const ProductItem = (props) => {
         price: props.price,
       });
 
-      console.log(props.id);
-      const responseData = await response.json();
-      console.log(responseData);
+      //const responseData = await response.json();
 
       // Manejar la respuesta aquí si es necesario
     } catch (error) {

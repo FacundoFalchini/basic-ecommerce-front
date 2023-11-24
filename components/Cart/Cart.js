@@ -1,22 +1,16 @@
-//import Modal from "../UI/Modal";
-import classes from "./Cart.module.css";
-import CartItem from "./CartItem";
 import React, { useContext } from "react";
 import CartContext from "../../store/cart-context";
-//import Checkout from "./Checkout";
+import CartItem from "./CartItem";
 import Card from "../UI/Card";
 import Link from "next/link";
+import classes from "./Cart.module.css";
 
-const Cart = (props) => {
-  //Y aca es donde hacemos que cuando tocamos el cart se vea el carrito actual
+const Cart = () => {
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
-  //const [isCheckout, setIsCheckout] = useState(false);
-  //const [isSubmitting, setIsSubmitting] = useState(false);
-  //const [didSubmit, setDidSubmit] = useState(false);
 
-  //Estas 2 funciones son para que el click en + y - en el cart aumente o disminuye la cantidad.
+  //Funcion para el boton (-)
   const cartItemRemoveHandler = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -47,15 +41,12 @@ const Cart = (props) => {
 
       const responseData = await response.json();
       console.log(responseData);
-
-      // Manejar la respuesta aquí si es necesario
     } catch (error) {
       console.error(error);
-      // Manejar el error aquí, como mostrar un mensaje al usuario
     }
   };
 
-  //Esto funciona gracias al BIND, que me asocia el item este del parametro, al producto en cuestion en el carrito.
+  //Funcion para el boton (+)
   const cartItemAddHandler = async (item) => {
     try {
       const token = localStorage.getItem("token");
@@ -85,22 +76,78 @@ const Cart = (props) => {
         throw new Error(errorMsg);
       }
 
-      //Solo si esta bien la request, tambien actualizamos el context
-
-      //Y aca llamamos a la funcion de addItem del context
       cartCtx.addItem({ ...item, amount: 1 });
 
       const responseData = await response.json();
       console.log(responseData);
-
-      // Manejar la respuesta aquí si es necesario
     } catch (error) {
       console.error(error);
-      // Manejar el error aquí, como mostrar un mensaje al usuario
     }
   };
 
-  /*
+  //En caso de que el fetch que hace el context de error, renderizamos el error.
+  if (cartCtx.error) {
+    return (
+      <Card>
+        <div className={classes.cartcontainer}>
+          <div className={classes.errortext}>Error: {cartCtx.error}</div>
+          <div className={classes.buttonitem}>
+            <Link href="/" className={classes.motionbutton}>
+              Back
+            </Link>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  //Si no hay error, recien ahi mandamos a mapear los items del contexto en cartItem.
+  const cartItems = (
+    <ul className={classes["cart-items"]}>
+      {cartCtx.items.map((item) => {
+        return (
+          <CartItem
+            key={item.id}
+            name={item.name}
+            amount={item.amount}
+            price={item.price}
+            onRemove={cartItemRemoveHandler.bind(null, item.id)}
+            onAdd={cartItemAddHandler.bind(null, item)}
+          >
+            {item.name}
+          </CartItem>
+        );
+      })}
+    </ul>
+  );
+
+  //Y el return exitoso.
+  return (
+    <React.Fragment>
+      <Card>
+        {cartItems}
+        <div className={classes.total}>
+          <span>Total Amount</span>
+          <span>{totalAmount}</span>
+        </div>
+        <div className={classes.cartcontainer}>
+          <div className={classes.buttonitem}>
+            <Link href="/" className={classes.motionbutton}>
+              Back
+            </Link>
+            {hasItems && (
+              <button className={classes.motionbutton}>Order</button>
+            )}
+          </div>
+        </div>
+      </Card>
+    </React.Fragment>
+  );
+};
+
+export default Cart;
+
+/*
 Esto es para efectuar la compra. 
 
   const orderHandler = () => {
@@ -128,71 +175,24 @@ Esto es para efectuar la compra.
     cartCtx.clearCart();
   };
 
-  */
 
-  //Mapeamos todos los elementos del cart a elementos JSX cart items
-  //Es decir, obtenemos los productos del CONTEXTO y los mapeamos para renderizar. La idea seria de alguna forma, cuando por primera vez entramos a la pagina o algo, mandar una request al backend para q nos mande todos los elementos q quedaron en el carrito
-  const cartItems = (
-    <ul className={classes["cart-items"]}>
-      {cartCtx.items.map((item) => {
-        return (
-          <CartItem
-            key={item.id}
-            name={item.name}
-            amount={item.amount}
-            price={item.price}
-            onRemove={cartItemRemoveHandler.bind(null, item.id)}
-            onAdd={cartItemAddHandler.bind(null, item)}
-          >
-            {item.name}
-          </CartItem>
-        );
-      })}
-    </ul>
-  );
-  /*
-  const modalActions = (
-    <div className={classes.actions}>
-      <button className={classes["button--alt"]} onClick={props.onClose}>
-        Close
-      </button>
-      {hasItems && (
-        <button className={classes.button} onClick={orderHandler}>
-          Order
-        </button>
-      )}
-    </div>
-  );
-  */
-
-  const cartModalContent = (
-    <React.Fragment>
-      {cartItems}
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
-      </div>
-      {/* Le pasamos el mismo comportamiento a este boton para cerrar el Modal, que al del Close 
+         Le pasamos el mismo comportamiento a este boton para cerrar el Modal, que al del Close 
       {isCheckout && (
         <Checkout
           onConfirm={submitOrderHandler}
           onCancel={props.onClose}
         ></Checkout>
       )}
-      */}
-      <div className={classes.buttonContainer}>
-        <Link href="/" className={classes.cartbutton}>
-          Back
-        </Link>
-        {hasItems && <button className={classes.cartbutton}>Order</button>}
-      </div>
 
-      {/*<button className={classes.cartbutton} onClick={orderHandler}></button>*/}
-    </React.Fragment>
-  );
 
-  /*
-        Tambien es para cuando se manda la orden. 
+      esto en el return final
+
+                  {!isSubmitting && !didSubmit && cartModalContent}
+      {isSubmitting && isSubmittingModalContent}
+      {!isSubmitting && didSubmit && didSubmitModalContent} 
+
+
+              Tambien es para cuando se manda la orden. 
 
   const isSubmittingModalContent = <p>Sending order data...</p>;
   const didSubmitModalContent = (
@@ -205,17 +205,6 @@ Esto es para efectuar la compra.
       </div>
     </React.Fragment>
   );
+
+
   */
-
-  //En lugar del wrapper ser un div, es un MODAL que renderiza el Cart como un OVERLAY cuando se clickea el boton.
-  return (
-    <Card onClose={props.onClose}>
-      {/*       {!isSubmitting && !didSubmit && cartModalContent}
-      {isSubmitting && isSubmittingModalContent}
-      {!isSubmitting && didSubmit && didSubmitModalContent} */}
-      {cartModalContent}
-    </Card>
-  );
-};
-
-export default Cart;

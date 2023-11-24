@@ -46,6 +46,12 @@
   cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
 }
 
+.errortext {
+  text-align: center;
+  color: red;
+  margin-bottom: 1.5rem;
+}
+
 .loaderContainer {
   display: flex;
   justify-content: center; /* Centra horizontalmente */

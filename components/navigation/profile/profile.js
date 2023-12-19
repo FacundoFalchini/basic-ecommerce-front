@@ -1,7 +1,6 @@
 import Link from "next/link";
 import classes from "./profile.module.css";
 import Image from "next/image";
-import cartIcon from "../../../public/user.png";
 
 const Profile = () => {
   return (

@@ -3,7 +3,6 @@ import classes from "./cart.module.css";
 import Image from "next/image";
 import cartIcon from "../../../public/shopping-cart.png";
 
-
 const Cart = () => {
   return (
     <div className={classes.cart}>

@@ -2,6 +2,7 @@ import classes from "./AvailableProducts.module.css";
 import Card from "../UI/Card";
 import { useEffect, useState } from "react";
 import ProductItem from "./product-item/ProductItem";
+import Loader from "../UI/loader";
 
 const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -46,11 +47,7 @@ const AvailableProducts = (props) => {
   }, [seller]);
 
   if (isLoading) {
-    return (
-      <section className={classes.loaderContainer}>
-        <div className={classes.loader}></div>
-      </section>
-    );
+    return <Loader></Loader>;
   }
 
   if (!country || !seller) {
@@ -106,13 +103,3 @@ const AvailableProducts = (props) => {
 };
 
 export default AvailableProducts;
-
-/*
-  if (isLoading) {
-    return (
-      <section className={classes.ProductsLoading}>
-        <p>Loading...</p>
-      </section>
-    );
-  }
-  */

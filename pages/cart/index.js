@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../../store/auth-context";
-import Profile from "@/components/profile/profile";
-import classes from "../../styles/Profile.module.css";
+import Cart from "@/components/Cart/Cart";
 import Loader from "@/components/UI/loader";
+import classes from "../../styles/Cart.module.css";
 
-function ProfilePage() {
+function CartPage() {
   const router = useRouter();
   const authContext = useContext(AuthContext);
 
@@ -26,10 +26,11 @@ function ProfilePage() {
 
   //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
   if (!authContext.isLoggedIn) {
+    console.log("entra 2");
     return null;
   }
 
-  return <Profile></Profile>;
+  return <Cart></Cart>;
 }
 
-export default ProfilePage;
+export default CartPage;

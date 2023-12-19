@@ -2,6 +2,7 @@ import AuthForm from "@/components/auth/AuthForm";
 import { useRouter } from "next/router";
 import AuthContext from "../store/auth-context";
 import React, { useContext, useEffect } from "react";
+import Loader from "@/components/UI/loader";
 
 function AuthPage() {
   const router = useRouter();
@@ -14,7 +15,7 @@ function AuthPage() {
   }, [authContext.isLoading, authContext.isLoggedIn, router]);
 
   if (authContext.isLoading) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>;
   }
 
   if (authContext.isLoggedIn) {

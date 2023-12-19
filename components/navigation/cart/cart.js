@@ -2,17 +2,6 @@ import Link from "next/link";
 import classes from "./cart.module.css";
 import Image from "next/image";
 import cartIcon from "../../../public/shopping-cart.png";
-/*
-const Cart = () => {
-  return (
-    <div>
-      <Link href="/carrito" className={classes.cartbutton}>
-        Cart
-      </Link>
-    </div>
-  );
-};
-*/
 
 const Cart = () => {
   return (

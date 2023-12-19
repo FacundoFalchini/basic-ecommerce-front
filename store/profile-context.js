@@ -4,6 +4,8 @@ import AuthContext from "./auth-context";
 const ProfileContext = React.createContext({
   name: "",
   email: "",
+  isLoading: false,
+  error: "",
 });
 
 const fetchData = async () => {
@@ -37,8 +39,10 @@ export const ProfileContextProvider = (props) => {
   const { token } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [profileData, setProfileData] = useState({ name: "", email: "" });
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const loadProfile = async () => {
+      setLoading(true);
       try {
         const data = await fetchData();
         if (data) {
@@ -50,6 +54,8 @@ export const ProfileContextProvider = (props) => {
         }
       } catch (error) {
         setError(error.message); // Establece el mensaje de error
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -61,6 +67,7 @@ export const ProfileContextProvider = (props) => {
   const contextValue = {
     name: profileData.name,
     email: profileData.email,
+    isLoading: loading,
     error: error, // Incluir error en el contexto
   };
 

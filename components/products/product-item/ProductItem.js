@@ -19,6 +19,7 @@ const ProductItem = (props) => {
           productId: props.id,
           productName: props.name,
           productPrice: props.price,
+          productStock: props.stock,
           quantity: amount,
         }),
         headers: {
@@ -47,6 +48,7 @@ const ProductItem = (props) => {
         name: props.name,
         amount: amount,
         price: props.price,
+        stock: props.stock,
       });
 
       //const responseData = await response.json();

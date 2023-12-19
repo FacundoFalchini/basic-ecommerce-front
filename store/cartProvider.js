@@ -1,17 +1,17 @@
-import { useReducer, useEffect, useContext } from "react"; //State mas complejo, entonces useReducer > useState
+import { useReducer, useEffect, useContext, useState } from "react"; //State mas complejo, entonces useReducer > useState
 import CartContext from "./cart-context";
 import AuthContext from "./auth-context";
 
 const defaultCartState = {
   items: [],
   totalAmount: 0,
+  isLoading: false,
   error: null,
 };
 
 //Funcion que hace el fetch del cart del usuario. Fuera del componente, porque no usa data del componente y asi no se recrea.
 const fetchCartData = async () => {
   try {
-    console.log("entra");
     const token = localStorage.getItem("token");
     const response = await fetch(
       "http://localhost:3000/cartItems/getCartElements",
@@ -24,7 +24,6 @@ const fetchCartData = async () => {
     );
 
     if (!response.ok) {
-      console.log("entra");
       const responseData = await response.json();
       const errorMsg =
         responseData.message ||
@@ -120,6 +119,20 @@ const cartReducer = (state, action) => {
     };
   }
 
+  //Este es para eliminar de una de carrito
+  if (action.type === "DELETE") {
+    const updatedItems = state.items.filter((item) => item.id !== action.id);
+
+    const existingCartItem = state.items.find((item) => item.id === action.id);
+    const updatedTotalAmount =
+      state.totalAmount - existingCartItem.price * existingCartItem.amount;
+
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  }
+
   if (action.type === "CLEAR") {
     return defaultCartState;
   }
@@ -130,6 +143,7 @@ const cartReducer = (state, action) => {
 //Esto es lo que retornamos.
 const CartProvider = (props) => {
   const { token } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   //Al reducer se le pasa, el estado actual y las diferentes acciones.
   const [cartState, dispatchCartAction] = useReducer(
@@ -145,12 +159,17 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
 
+  const deleteItemFromCartHandler = (id) => {
+    dispatchCartAction({ type: "DELETE", id: id });
+  };
+
   const clearCartHandler = () => {
     dispatchCartAction({ type: "CLEAR" });
   };
 
   useEffect(() => {
     const loadCart = async () => {
+      setLoading(true);
       try {
         const cartData = await fetchCartData();
 
@@ -161,6 +180,7 @@ const CartProvider = (props) => {
               id: item.productId,
               name: item.productName,
               price: item.productPrice,
+              stock: item.productStock,
               amount: item.quantity,
             };
           });
@@ -176,11 +196,14 @@ const CartProvider = (props) => {
         }
       } catch (error) {
         dispatchCartAction({ type: "SET_ERROR", error: error.message });
+      } finally {
+        setLoading(false);
       }
     };
 
     //Haciendo asi, logro que el contexto del carrito este siempre en sintonia con la auntentificacion del usuario. Cuando este inicia, se hace igual a lo q esta en su backend y cuando sale se borra.
     if (token) {
+      console.log("CARGANDO CARRITO");
       loadCart();
     } else {
       dispatchCartAction({ type: "CLEAR" });
@@ -190,9 +213,11 @@ const CartProvider = (props) => {
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    isLoading: loading,
     error: cartState.error,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    deleteItem: deleteItemFromCartHandler,
     clearCart: clearCartHandler,
   };
 

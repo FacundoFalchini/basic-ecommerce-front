@@ -84,3 +84,16 @@
   color: red;
   margin-bottom: 1.5rem;
 }
+
+.noitemstext {
+  text-align: center;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+
+.loadercontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Establece el alto del div al 100% del viewport */
+}

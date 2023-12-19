@@ -6,11 +6,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import ProfileForm from "./profileForm";
 import ProfileContext from "@/store/profile-context";
+import Loader from "../UI/loader";
 
 const Profile = () => {
   const authCtx = useContext(AuthContext);
   const profileCtx = useContext(ProfileContext);
-  //const [error, setError] = useState(null);
 
   const router = useRouter();
 
@@ -19,6 +19,14 @@ const Profile = () => {
     //Se puede redigirigar aca o, tratarlo con lo de paginas protegidas.
     router.push("/");
   };
+
+  if (profileCtx.isLoading) {
+    return (
+      <div className={classes.loadercontainer}>
+        <Loader></Loader>
+      </div>
+    );
+  }
 
   if (profileCtx.error) {
     return (

@@ -26,7 +26,6 @@ const Navigation = (props) => {
     if (selectedSeller) {
       onSelectSeller(selectedSeller);
     }
-    //console.log(selectedSeller);
   }, [selectedSeller]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,8 +35,6 @@ const Navigation = (props) => {
       onSelectSeller(null);
     }
     //Si bien aca, no sale como null, en el proximo render (cuando llega a starting page, si vale null)
-    //console.log(selectedCountry);
-    //console.log(selectedSeller);
   }, [selectedCountry]);
 
   return (

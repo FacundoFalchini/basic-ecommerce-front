@@ -21,32 +21,32 @@
 }
 
 .form .buttonContainer {
-  width: 100%; /* Ocupa todo el ancho */
+  width: 100%;
   display: flex;
-  justify-content: center; /* Centra el botón horizontalmente */
+  justify-content: center;
 }
 
 .form .stockDisplay {
-  font-size: 1rem; /* Ajusta el tamaño de la fuente */
-  color: #333; /* Color del texto, cámbialo según tu diseño */
-  margin: 0.5rem 0; /* Ajusta el margen según necesites */
-  text-align: left; /* Alineación del texto */
-  display: flex; /* Usa flexbox para alinear los elementos horizontalmente */
-  align-items: center; /* Centra los elementos verticalmente */
+  font-size: 1rem;
+  color: #333;
+  margin: 0.5rem 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
 }
 
 .form .stockText {
-  margin-right: 0.5rem; /* Espaciado entre el texto y el número */
+  margin-right: 0.5rem;
 }
 
 .form .stockAmount {
-  font-weight: bold; /* Si quieres que el número sea más destacado */
+  font-weight: bold;
 }
 
 .form button:disabled {
-  background-color: #ccc; /* Color de fondo para el botón deshabilitado */
-  color: #666; /* Color del texto para el botón deshabilitado */
-  cursor: not-allowed; /* Cambiar el cursor para indicar que no se puede presionar */
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
   border-color: #ccc;
 }
 

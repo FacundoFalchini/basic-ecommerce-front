@@ -2,6 +2,7 @@ import { useState, useRef, useContext } from "react";
 import { useRouter } from "next/router";
 import classes from "./AuthForm.module.css";
 import AuthContext from "../../store/auth-context";
+import Loader from "../UI/loader";
 
 const AuthForm = () => {
   const router = useRouter();
@@ -12,6 +13,10 @@ const AuthForm = () => {
   const passwordInputRef = useRef();
 
   const authCtx = useContext(AuthContext);
+
+  if (authCtx.isLoading) {
+    console.log("cargando");
+  }
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -42,9 +47,12 @@ const AuthForm = () => {
       }
 
       const data = await response.json();
+
       const expirationTime = new Date(
         new Date().getTime() + +data.expiresIn * 1000,
       );
+
+      //const expirationTime2 = new Date(new Date().getTime() + 5 * 1000); // 5 segundos en milisegundos
 
       authCtx.login(data.token, expirationTime.toISOString());
       setTimeout(() => {
@@ -104,7 +112,7 @@ const AuthForm = () => {
           {!isLoading && (
             <button>{isLogin ? "Login" : "Create Account"}</button>
           )}
-          {isLoading && <p>Sending request...</p>}
+          {isLoading && <Loader></Loader>}
           <button
             type="button"
             className={classes.toggle}

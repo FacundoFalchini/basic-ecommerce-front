@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import classes from "./CartItem.module.css";
+import Image from "next/image";
+
+//import cartIcon from "../../public/bin.ping";
 
 const CartItem = (props) => {
   const [localremove, setLocalErrorRemove] = useState(""); // Estado de error local
   const [localadd, setLocalErrorAdd] = useState("");
+  const [localdelete, setLocalErrorDelete] = useState("");
   const [showErrorAdd, setShowErrorAdd] = useState(false);
   const [showErrorRemove, setShowErrorRemove] = useState(false);
+  const [showErrorDelete, setShowErrorDelete] = useState(false);
 
   //Y asi, para que cada uno tenga su estado de error local.
   const handleRemove = async () => {
@@ -23,6 +28,15 @@ const CartItem = (props) => {
       setLocalErrorAdd("");
     } catch (e) {
       setLocalErrorAdd(e.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await props.onDelete();
+      setLocalErrorDelete("");
+    } catch (e) {
+      setLocalErrorDelete(e.message);
     }
   };
 
@@ -54,9 +68,22 @@ const CartItem = (props) => {
     }
   }, [localremove]);
 
+  useEffect(() => {
+    if (localdelete) {
+      setShowErrorRemove(true);
+
+      const timer = setTimeout(() => {
+        setShowErrorDelete(false);
+        setLocalErrorDelete("");
+      }, 3000); // 3000 milisegundos = 3 segundos
+
+      return () => clearTimeout(timer); // Limpiar el timer si el componente se desmonta
+    }
+  }, [localdelete]);
+
   const price = `$${props.price.toFixed(2)}`;
   return (
-    <div className={classes.cartContainerAll}>
+    <Fragment>
       <li className={classes["cart-item"]}>
         <div>
           <h2>{props.name}</h2>
@@ -65,9 +92,15 @@ const CartItem = (props) => {
             <span className={classes.amount}>x {props.amount}</span>
           </div>
         </div>
-        <div className={classes.actions}>
-          <button onClick={handleRemove}>−</button>
-          <button onClick={handleAdd}>+</button>
+        <div className={classes.cartContainerAll}>
+          <div className={classes.actions}>
+            <button onClick={handleRemove}>−</button>
+            <button onClick={handleAdd}>+</button>
+            <button onClick={handleDelete}>
+              <Image src="/bin.png" alt="profile" width={20} height={20} />
+            </button>
+          </div>
+          <p className={classes.description}>available: {props.stock}</p>
         </div>
       </li>
       {showErrorRemove && (
@@ -76,7 +109,10 @@ const CartItem = (props) => {
       {showErrorAdd && (
         <div className={classes.cartItemError}>Add error: {localadd}</div>
       )}
-    </div>
+      {showErrorDelete && (
+        <div className={classes.cartItemError}>Delete error: {localdelete}</div>
+      )}
+    </Fragment>
   );
 };
 

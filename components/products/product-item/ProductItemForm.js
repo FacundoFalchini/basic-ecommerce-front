@@ -18,11 +18,6 @@ const ProductItemForm = (props) => {
     const enteredAmount = amountInputRef.current.value;
     const enteredAmountNumber = +enteredAmount;
 
-    const itemEncontrado = cartCtx.items.find((item) => item.id === props.id);
-    console.log(cartCtx.items);
-    console.log(props.id);
-    console.log(itemEncontrado.amount);
-
     if (
       enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
@@ -32,15 +27,17 @@ const ProductItemForm = (props) => {
       return;
     }
 
-    const sum = enteredAmountNumber + itemEncontrado.amount;
-    console.log(sum);
+    const itemFound = cartCtx.items.find((item) => item.id === props.id);
 
-    if (sum > props.stock) {
-      console.log("entramos");
-      setAmountIsValidStock(
-        "The quantity in your cart of this product exceeds the available stock",
-      );
-      return;
+    if (itemFound) {
+      const sum = enteredAmountNumber + itemFound.amount;
+
+      if (sum > props.stock) {
+        setAmountIsValidStock(
+          "The quantity in your cart of this product exceeds the available stock",
+        );
+        return;
+      }
     }
     setAmountIsValidStock("");
 

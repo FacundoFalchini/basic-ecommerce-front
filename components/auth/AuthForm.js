@@ -1,10 +1,11 @@
 import { useState, useRef, useContext } from "react";
 import { useRouter } from "next/router";
-//import classes from "./AuthForm.module.css";
 import AuthContext from "../../store/auth-context";
 import Loader from "../UI/loader";
 import Image from "next/image";
 import logo from "../../public/logo.png";
+import logoAmazon from "../../public/logoAmazon.png";
+import Footer from "../UI/Footer";
 
 const AuthForm = () => {
   const router = useRouter();
@@ -30,6 +31,14 @@ const AuthForm = () => {
     setErrorRequest("");
   };
 
+  function updatePlaceholder() {
+    const inputElement = document.getElementById("password");
+    const placeholderText = !isLogin ? "Minimum 7 characters" : "";
+    if (inputElement) {
+      inputElement.setAttribute("placeholder", placeholderText);
+    }
+  }
+
   async function makeRequest(url, bodyObj) {
     try {
       const response = await fetch(url, {
@@ -44,6 +53,7 @@ const AuthForm = () => {
 
       if (!response.ok) {
         const responseData = await response.json();
+        console.log(responseData.message);
         const errorMsg =
           responseData.message ||
           (responseData.errors &&
@@ -68,6 +78,7 @@ const AuthForm = () => {
       }, 500);
     } catch (error) {
       //En lugar de hacer el alert, mandamos el error al estado y se renderiza.
+      //Los 2 casos diferenciados son mal contrasenia y mal email, el resto es el msg que salga del validate o el que salga del 500... que en teoria no deberian salir porque los tengo que forzar desde el backend.
       setErrorRequest(error.message);
     }
   }
@@ -129,8 +140,9 @@ const AuthForm = () => {
     }
   }
 
+  //Colocando min-h-screen en lugar de h-screen aseguro que al hacer mucho zoom se siga viendo fondo blanco y tambien que el footer no se pise con el login, porque el div del login tiene justamente esa altura minima que no se puede topear.
   return (
-    <div className="relative flex flex-col items-center  h-screen bg-white">
+    <div className="relative flex flex-col items-center w-screen  min-h-screen min-w-96 bg-white ">
       {/* Hago que el contenedor principal sea relativo en sentido que se agrega un CONTEXTO de posicion relativa para los elementos hijos. Es decir, que los elementos que sean absolutos se uhicaran respecto al elemento absolute mas cercano que tegngan y no con respecto al documento. 
        A la imagen hago que se ubique de manera absoluta en la parte superior del contenedor principal */}
       <Image
@@ -140,7 +152,33 @@ const AuthForm = () => {
         height={60}
         className="absolute top-3"
       />
-      <section className="max-w-sm  min-w-80  mx-auto bg-white p-8  rounded-md border  border-gray-300 mt-20">
+      {errorRequest && (
+        <div
+          className="inline-block w-full max-w-96 h-20  bg-white p-4 rounded-xl border border-red-600 mt-20 ring-4 ring-opacity-20 	
+        ring-red-300 ring-inset "
+        >
+          <Image
+            src={logoAmazon}
+            alt="danger"
+            width={30}
+            height={30}
+            className="inline-block align-top mr-5 "
+          />
+          <div className="inline-block   ">
+            <h1 className="text-lg  text-red-600 ">A problem occurred</h1>
+            <h2 className="inline-block  text-blackText text-xs ">
+              {errorRequest}
+            </h2>
+          </div>
+        </div>
+      )}
+
+      {/* Y como el margen si hay error es mt-1, y es siempre al ser flex column es en funcion del div del error, entonces por mas q cambie el alto del div del error, el section del login queda bien ubicado siempre */}
+      <section
+        className={`w-full max-w-96 bg-white p-8  rounded-xl border  border-gray-300  ${
+          errorRequest ? "mt-4" : "mt-20"
+        }`}
+      >
         <h1 className="text-2xl font-semibold mb-6">
           {isLogin ? "Login" : "Sign Up"}
         </h1>
@@ -155,7 +193,7 @@ const AuthForm = () => {
               {/* Hacemos display block en las etiquetas, para que ocupen todo el ancho disponible y empiecen una nueva linea, asi evitamos que la etiqueta pueda llegar a estar en la misma lineal del input */}
               <label
                 htmlFor="name"
-                className="text-sm text-black block font-semibold"
+                className="text-sm text-blackText block font-semibold"
               >
                 Your name
               </label>
@@ -166,8 +204,8 @@ const AuthForm = () => {
                 placeholder="Names and surnames"
                 required
                 ref={nameInputRef}
-                className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-40 	
-                ring-blue-300 focus:border-blue-600 placeholder:text-sm 
+                className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-100 	
+                ring-borderRingLogin focus:border-borderLogin placeholder:text-sm  focus:bg-bgRingCreate focus:bg-opacity-20
                 ${
                   enteredNameErrorFront !== ""
                     ? " ring-red-300 border-red-600  focus:border-red-600 "
@@ -175,16 +213,16 @@ const AuthForm = () => {
                 }`}
               />
               {enteredNameErrorFront !== "" && (
-                <span className="mr-2 text-center text-red-600 text-xs">
+                <p className="mr-2  text-red-600 text-xs">
                   {enteredNameErrorFront}
-                </span>
+                </p>
               )}
             </div>
           )}
           <div className="space-y-1">
             <label
               htmlFor="email"
-              className="text-sm text-black block font-semibold"
+              className="text-sm text-blackText block font-semibold"
             >
               Email
             </label>
@@ -193,8 +231,8 @@ const AuthForm = () => {
               id="email"
               required
               ref={emailInputRef}
-              className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-40 	
-              ring-blue-300 focus:border-blue-600 placeholder:text-sm 
+              className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-100 	
+              ring-borderRingLogin focus:border-borderLogin placeholder:text-sm  focus:bg-bgRingCreate focus:bg-opacity-20
               ${
                 enteredEmailErrorFront !== ""
                   ? " ring-red-300 border-red-600  focus:border-red-600 "
@@ -202,80 +240,90 @@ const AuthForm = () => {
               }`}
             />
             {enteredEmailErrorFront !== "" && (
-              <span className="mr-2 text-center text-red-600 text-xs">
+              <p className="mr-2  text-red-600 text-xs">
                 {enteredEmailErrorFront}
-              </span>
+              </p>
             )}
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 ">
             <label
               htmlFor="password"
-              className="text-sm text-black block font-semibold"
+              className="text-sm text-blackText block font-semibold"
             >
               Password
             </label>
             <input
               type="password"
               id="password"
-              placeholder="Minimum 7 characters"
+              onInput={updatePlaceholder()}
               required
               ref={passwordInputRef}
-              className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-40 	
-                ring-blue-300 focus:border-blue-600 placeholder:text-sm 
+              className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-100 	
+              ring-borderRingLogin focus:border-borderLogin placeholder:text-sm focus:bg-bgRingCreate focus:bg-opacity-20
                 ${
                   enteredPasswordErrorFront !== ""
                     ? " ring-red-300 border-red-600  focus:border-red-600 "
                     : ""
                 }`}
             />
-            {enteredPasswordErrorFront == "" && (
-              <span className="mr-2 text-center  text-gray-500 text-xs">
+            {enteredPasswordErrorFront == "" && !isLogin && (
+              <p className="mr-2    text-blackText text-xs">
                 The password must contain at least 7 characters.
-              </span>
+              </p>
             )}
             {enteredPasswordErrorFront !== "" && (
-              <span className="mr-2 text-center text-red-600 text-xs">
+              <p className="mr-2  text-red-600 text-xs">
                 {enteredPasswordErrorFront}
-              </span>
+              </p>
             )}
           </div>
-          {/* Hay 2 formas de hacer que el span del error pueda centrarse:
-              1) Que el padre sea flexible y flex-colum de manera que funcione el w-full en el span.
-              2) Que el div sea por default y que el span sea block y w-full. El span por defecto es inline (izq a der) lo que ocupe el contenido y no ocupa todo el largo, por ende hay que cambiarlo a block para que pueda hacerlo. El div es block por defecto. 
-          */}
           <div className="space-y-4">
             {!isLoading && (
               <button
-                className="w-full bg-yellow-500 text-black text-sm p-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:border focus:border-blue-600 focus:ring ring-opacity-40 	
-              ring-blue-300 "
+                className="w-full bg-yellowButton text-blackText text-sm p-2 rounded-lg hover:bg-yellowButtonHover focus:outline-none focus:border focus:ring  ring-opacity-100 	
+                ring-borderRingLogin focus:border-borderLogin  "
               >
                 Continue
               </button>
             )}
             {isLoading && <Loader />}
-            {errorRequest && (
-              <span className="w-full block text-center text-red-600 text-xs ">
-                {errorRequest}
-              </span>
-            )}
             {/* Items center me alinea vertifcalmente en el contenedor a los hijos en el centro del mismo. Mientras que el justify alinea en el eje horizontal a los hijos, al ser start es al principio */}
             <div className="flex items-center justify-start">
-              <span className="mr-2 text-center  text-gray-500 text-xs">
-                {isLogin
-                  ? "You do not have an account?"
-                  : "Already have an account?"}
-              </span>
+              <p className="mr-2  text-blackText text-xs">
+                {!isLogin && "Already have an account?"}
+              </p>
               <button
                 type="button"
-                className="text-blue-500 hover:underline focus:outline-none hover:text-red-900  "
+                className="text-xs  text-blueText hover:underline focus:outline-none hover:text-red-900  "
                 onClick={switchAuthModeHandler}
               >
-                {isLogin ? "Create new account" : "Log in"}
+                {!isLogin && "Log in"}
               </button>
             </div>
           </div>
         </form>
       </section>
+      {isLogin && (
+        <div className="flex justify-center items-center w-full max-w-96 mt-4 mb-2 ">
+          <div className="h-px flex-grow bg-gray-200 inline"></div>
+          <p className="inline mx-3  text-gray-500 text-xs">
+            Are you new here?
+          </p>
+          <div className="h-px flex-grow bg-gray-200 inline"></div>
+        </div>
+      )}
+
+      {isLogin && (
+        <button
+          className="w-full max-w-96  min-h-8 p-0   bg-white    border  border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:border focus:ring ring-opacity-100 	
+          ring-borderRingLogin focus:border-borderLogin text-xs focus:text-opacity-100  focus:bg-bgRingCreate focus:bg-opacity-20 "
+          onClick={switchAuthModeHandler}
+        >
+          Create your account
+        </button>
+      )}
+
+      <Footer></Footer>
     </div>
   );
 };

@@ -50,7 +50,7 @@ const AvailableProducts = (props) => {
     return <Loader></Loader>;
   }
 
-  if (!country || !seller) {
+  if (!country || !seller || country === "-1" || seller === "-1") {
     return (
       <Card>
         <section className={classes.messageContainer}>

@@ -1,4 +1,4 @@
-import classes from "./SellerDropdown.module.css";
+//import classes from "./SellerDropdown.module.css";
 import { useEffect, useState } from "react";
 
 function SellerDropdown(props) {
@@ -45,16 +45,19 @@ function SellerDropdown(props) {
 
   if (isLoading) {
     return (
-      <div className={classes.container}>
+      <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
         <select
           disabled
-          className={classes.dropdown}
           name="sellers"
           id="sellers-dropdown"
           defaultValue=""
+          className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-not-allowed outline-none "
         >
-          <option value="" disabled>
+          <option value="" disabled className=" bg-navColor">
             Seller
+          </option>
+          <option value="2" className=" bg-navColor">
+            Sellerasdasd
           </option>
         </select>
       </div>
@@ -70,17 +73,19 @@ function SellerDropdown(props) {
   }
 
   return (
-    <div className={classes.container}>
+    <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
       <select
         //Cuando no hay pais seleccionado, el dropdown de seller no se permite hacer.
         disabled={!isSelectable}
         onChange={handleSelect}
-        className={classes.dropdown}
         name="sellers"
         id="sellers-dropdown"
         defaultValue=""
+        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-pointer outline-none"
       >
-        <option value="">Seller</option>
+        <option value="-1" className="bg-navColor ">
+          Seller
+        </option>
         {sellers.map((seller) => (
           <option key={seller.id} value={seller.id}>
             {seller.name}

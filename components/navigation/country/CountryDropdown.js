@@ -1,4 +1,4 @@
-import classes from "./CountryDropdown.module.css";
+//import classes from "./CountryDropdown.module.css";
 
 function CountryDropdown(props) {
   const countriesprops = props.country;
@@ -13,7 +13,7 @@ function CountryDropdown(props) {
     const selected = event.target.value;
     onSelectCountry(selected);
 
-    if (selected) {
+    if (selected && selected != "-1") {
       onSellerSelectable(true);
     } else {
       onSellerSelectable(false);
@@ -29,19 +29,24 @@ function CountryDropdown(props) {
   }
 
   return (
-    <div className={classes.container}>
+    //El div se adapta al contenido que tiene... osea que si el select tiene una opcion que es MUY larga el div se alargara tanto como esa opcion, por eso es importante ponerle un MAX WIDTH permitido, que crezca hasta un maximo y le trunco lo que diga.
+    <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
       <select
         onChange={handleSelect}
-        className={classes.dropdown}
         name="paises"
         id="paises-dropdown"
-        defaultValue=""
+        defaultValue="AAAA"
+        className=" w-full h-[58px] text-center text-white truncate bg-navColor text-sm font-semibold cursor-pointer  outline-none "
       >
-        <option value="" disabled>
+        <option value="-1" className=" bg-navColor ">
           Country
         </option>
         {countriesprops.map((country) => (
-          <option key={country.id} value={country.name}>
+          <option
+            key={country.id}
+            value={country.name}
+            className=" bg-navColor   "
+          >
             {country.name}
           </option>
         ))}
@@ -51,3 +56,12 @@ function CountryDropdown(props) {
 }
 
 export default CountryDropdown;
+
+/*
+.dropdown option {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+*/

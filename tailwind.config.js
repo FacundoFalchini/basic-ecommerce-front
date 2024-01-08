@@ -16,6 +16,7 @@ module.exports = {
         searchButtonHover: "#f8ac44",
         searchSelectHover: "#d8d4d4",
         searchButtonBorderBg: "#ff9c04",
+        optionsBar: "#232f3e",
       },
       borderColor: {
         borderLogin: "#047484 ",

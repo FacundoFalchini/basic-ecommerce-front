@@ -1,4 +1,50 @@
 import React, { Fragment } from "react";
+import OptionsBar from "./optionsBar/OptionsBar";
+import MainBar from "./mainBar/MainBar";
+
+const Navigation = (props) => {
+  return (
+    <Fragment>
+      <MainBar
+        onCountries={props.onCountries}
+        onError={props.onError}
+        onSelectSeller={props.onSelectSeller}
+        onSelectCountry={props.onSelectCountry}
+      ></MainBar>
+      <OptionsBar></OptionsBar>
+    </Fragment>
+  );
+};
+
+export default Navigation;
+
+/*
+Antes de empezar a cambiar 
+    <Card>
+      <div className={classes.container}>
+        <div className={classes.leftgroup}>
+          <CountryDropdown
+            country={country}
+            error={error}
+            onSelectCountry={setSelectedCountry}
+            onIsSellerSelectable={setIsSellerSelectable}
+          ></CountryDropdown>
+          <SellerDropdown
+            onSelectSeller={setSelectedSeller}
+            isSelectable={isSellerSelectable}
+            selectedCountry={selectedCountry}
+          ></SellerDropdown>
+        </div>
+        <div className={classes.rightgroup}>
+          <Cart></Cart>
+          <Profile></Profile>
+        </div>
+      </div>
+    </Card>
+
+
+
+    import React, { Fragment } from "react";
 //import Card from "../UI/Card";
 //import classes from "./navigation.module.css";
 import CountryDropdown from "./country/CountryDropdown";
@@ -12,6 +58,7 @@ import Purchases from "./purchases/purchases";
 import SearchBar from "./searchBar/SearchBar";
 import Language from "./language/language";
 import OptionsBar from "./optionsBar/OptionsBar";
+import MainBar from "./mainBar/MainBar";
 
 const Navigation = (props) => {
   //Con estos 2 set, nos traemos el selectedCountry desde dropdowncountry y idem con el seller.
@@ -45,14 +92,13 @@ const Navigation = (props) => {
     //Si bien aca, no sale como null, en el proximo render (cuando llega a starting page, si vale null)
   }, [selectedCountry]);
 
+  //min-w-[1200px]
   return (
     <Fragment>
-      <div className="flex items-center bg-navColor min-h-16 w-screen min-w-[1200px]">
-        {/* Les coloco padding en lugar de margin xq el borde se coloca despues del padding y antes del margen y queda raro, quiero que quede bien fuera no antes del margen */}
+      <div className="flex items-center bg-navColor min-h-16  w-full">
         <div className=" flex items-center  justify-center ml-4 min-h-[58px] w-auto min-w-[66px]   border border-transparent hover:border-white rounded-sm">
           <Image src={logo} alt="cart" width={40} height={40} />
         </div>
-
         <CountryDropdown
           country={country}
           error={error}
@@ -66,9 +112,7 @@ const Navigation = (props) => {
         ></SellerDropdown>
         <SearchBar></SearchBar>
         <Language></Language>
-
         <Profile></Profile>
-
         <Purchases></Purchases>
         <Cart></Cart>
       </div>
@@ -78,29 +122,5 @@ const Navigation = (props) => {
 };
 
 export default Navigation;
-
-/*
-Antes de empezar a cambiar 
-    <Card>
-      <div className={classes.container}>
-        <div className={classes.leftgroup}>
-          <CountryDropdown
-            country={country}
-            error={error}
-            onSelectCountry={setSelectedCountry}
-            onIsSellerSelectable={setIsSellerSelectable}
-          ></CountryDropdown>
-          <SellerDropdown
-            onSelectSeller={setSelectedSeller}
-            isSelectable={isSellerSelectable}
-            selectedCountry={selectedCountry}
-          ></SellerDropdown>
-        </div>
-        <div className={classes.rightgroup}>
-          <Cart></Cart>
-          <Profile></Profile>
-        </div>
-      </div>
-    </Card>
 
 */

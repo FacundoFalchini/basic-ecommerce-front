@@ -1,13 +1,37 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useContext } from "react";
 import Image from "next/image";
 import lineasIcon from "../../../public/lineas.png";
 import { RxCross1 } from "react-icons/rx";
 import { HiUserCircle } from "react-icons/hi";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import ProfileContext from "@/store/profile-context";
+import Link from "next/link";
+import AuthContext from "@/store/auth-context";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
+  const profileCtx = useContext(ProfileContext);
+  const authCtx = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
+  const logoutHandler = () => {
+    authCtx.logout();
+    router.push("/");
+  };
+
+  const generateClassName1 = () => `
+  flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
+`;
+
+  const generateClassName2 = () => `
+py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
+`;
+
+  const generateClassName3 = () => `
+"w-[20px] h-[15px] text-grayText hover:text-black"
+`;
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -30,140 +54,169 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px]  bg-white ${
-          isOpen ? "" : "hidden"
-        } duration-500 `}
+        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px] bg-white z-40
+      ${
+        isOpen ? "translate-x-0 duration-500" : "-translate-x-full duration-500"
+      }`}
       >
         <p className=" flex items-center w-full bg-optionsBar text-white font-bold font-sans px-[36px] text-[19px] py-3  h-[50px]">
           <HiUserCircle className="w-[27px] h-[25px] mr-2.5"></HiUserCircle>
-          Hola, Facundo
+          Hello, {profileCtx.name}
         </p>
-
-        <div
-          onClick={toggleSidebar}
-          className="overlay fixed w-full h-full left-[365px] bg-black opacity-80 "
-        ></div>
-
-        <RxCross1
-          className="text-white fixed  top-5 left-[370px] cursor-pointer w-[20px] h-[20px] "
-          onClick={toggleSidebar}
-        ></RxCross1>
 
         <ul>
           <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
-            Tendencias
+            Trending
           </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200 ">
-            Mas Vendidos
-          </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Nuevos Lanzamientos
-          </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Productos del momento
-          </li>
+          <li className={generateClassName2()}>Best Sellers</li>
+          <li className={generateClassName2()}>New Releases</li>
+          <li className={generateClassName2()}>Movers & Shakers</li>
           <li className="h-[44px] pb-[2px] pt-[13px] pl-[36px] text-[18px] font-bold font-sans">
-            Contenido Y Dispositivos Digitales
+            Digital Content & Devices
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200 ">
+          <li className={generateClassName1()}>
             Prime Video
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black "></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className={generateClassName1()}>
             Site Music
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Echo y Alexa
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Echo & Alexa
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className={generateClassName1()}>
             Fire Tablets
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className={generateClassName1()}>
             Fire TV
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            E-readres Kindle y Libros
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Kindle E-readers & Books
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Libros y Audible Originals
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Audible Books & Originals
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Site Photos e Impresiones
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Site Photos
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className={generateClassName1()}>
             Site Appstore
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
           <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
-            Buscar Por Departamento
+            Shop By Department
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Ropa, zapatos y joyeria
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Clothing, Shoes, Jewelry & Watches
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className={generateClassName1()}>
             Site Fresh
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Libros
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Books
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Peliculas, musica y juegos
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Movies, Music & Games
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
           <li className=" flex items-center py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Ver Todo
+            See All
             <IoIosArrowDown className="ml-1 w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowDown>
           </li>
           <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
-            Programas y Funcionalidades
+            Programs & Features
           </li>
-          <li className=" flex items-center justify-between  py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Entrega el mismo dia
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Same-Day Delivery
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between  py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className={generateClassName1()}>
             Whole Foods Market
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between  py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Atencion medica y farmacia
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Medical Care & Pharmacy
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center justify-between  py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Tiendas fisicas del Site
-            <IoIosArrowForward className="w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowForward>
+          <li className={generateClassName1()}>
+            Amazon Physical Stores
+            <IoIosArrowForward
+              className={generateClassName3()}
+            ></IoIosArrowForward>
           </li>
           <li className=" flex items-center py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Ver Todo
+            See All
             <IoIosArrowDown className="ml-1 w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowDown>
           </li>
           <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
-            Ayuda y Configuracion
+            Help & Setting
           </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Tu Cuenta
-          </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Espaniol
-          </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Estados Unidos
-          </li>
-          <li className=" py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
-            Salir
+          <Link href="/profile">
+            <li className={generateClassName2()}>Your Account</li>
+          </Link>
+          <li className={generateClassName2()}>English</li>
+          <li className={generateClassName2()}>Argentina</li>
+          <li className={generateClassName2()} onClick={logoutHandler}>
+            Sign Out
           </li>
         </ul>
       </div>
+
+      {isOpen && (
+        <div
+          onClick={toggleSidebar}
+          className="overlay fixed w-full  h-full  bg-black  transition-opacity duration-1000  opacity-80 z-30"
+        ></div>
+      )}
+
+      {isOpen && (
+        <RxCross1
+          className="text-white fixed top-5 left-[370px] cursor-pointer w-[20px] h-[20px] z-40"
+          onClick={toggleSidebar}
+        ></RxCross1>
+      )}
     </>
   );
 };
@@ -178,33 +231,40 @@ export default Sidebar;
 //overflow-y-auto: si el contenido vertical es mas largo que la pantalla, el navegador automaticamente tiene que agregar barra de desplazamieto verticular.
 
 /*
+      <div
+        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px]  bg-white ${
+          isOpen ? "" : "hidden"
+        } duration-500 `}
+      >
 
-w-[365px]
+
+      overlay original 
+
+      
+        <div
+          onClick={toggleSidebar}
+          className="overlay fixed w-full h-full left-[365px] bg-black opacity-80 "
+        ></div>
 
 
-          <div
-            onClick={toggleSidebar}
-            className="overlay fixed inset-0 bg-black opacity-50 "
-          ></div>
+        div nuevo:
 
-      {isOpen && (
-        <>
-          <div
-            className={`fixed left-0 top-0 h-screen bg-white  overflow-y-auto shadow-lg  ${
-              isOpen ? "w-[365px]" : "w-10"
-            } duration-300 `}
-          >
+              <div
+        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px] bg-white 
+        ${
+          isOpen
+            ? "transition-transform translate-x-0"
+            : "transition-transform -translate-x-full"
+        }`}
+      >
 
-            <p className="p-4">Opción 1</p>
-            <p className="p-4">Opción 2</p>
-            <p className="p-4">Opción 3</p>
-          </div>
 
-          <div
-            onClick={toggleSidebar}
-            className="overlay fixed inset-0 bg-black opacity-50 "
-          ></div>
-        </>
-      )}
+En este caso, element-1 se mostrará encima de element-2 debido a su mayor valor de z-index.
+
+Es importante tener en cuenta que el z-index solo tiene efecto en elementos que están posicionados (position: relative, position: absolute, position: fixed, o position: sticky). Si un elemento no tiene una posición especificada, el valor de z-index no tendrá ningún efecto.
+
+
+
+
 
 */

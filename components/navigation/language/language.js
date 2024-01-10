@@ -8,7 +8,7 @@ const Language = () => {
         name="languages"
         id="language-dropdown"
         defaultValue=""
-        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-xs font-semibold cursor-pointer outline-none"
+        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-xs font-semibold cursor-pointer outline-none font-sans"
       >
         <option value="english" className="bg-navColor ">
           🇬🇧 English

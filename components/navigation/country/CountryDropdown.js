@@ -35,8 +35,8 @@ function CountryDropdown(props) {
         onChange={handleSelect}
         name="paises"
         id="paises-dropdown"
-        defaultValue="AAAA"
-        className=" w-full h-[58px] text-center text-white truncate bg-navColor text-sm font-semibold cursor-pointer  outline-none "
+        defaultValue=""
+        className=" w-full h-[58px] text-center text-white truncate bg-navColor text-sm font-semibold cursor-pointer  outline-none font-sans "
       >
         <option value="-1" className=" bg-navColor ">
           Country

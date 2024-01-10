@@ -8,7 +8,7 @@ const SearchBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Solo limpio el input y ya.
-    event.target.value = "";
+    event.target.reset();
   };
 
   const handleMouseDown = () => {
@@ -29,8 +29,8 @@ const SearchBar = () => {
       id="container"
     >
       {/*  */}
-      <select className="h-full w-auto min-w-16 max-w-20 text-xs truncate indent-2.5 rounded-tl-md rounded-bl-md bg-zinc-200 hover:bg-searchSelectHover hover:text-black border-r border-serachSelectBorder focus:border-2 focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 outline-none">
-        <option value="1" className=" bg-gray-100 ">
+      <select className="h-full w-auto min-w-16 max-w-20 text-xs truncate indent-2.5 rounded-tl-md rounded-bl-md bg-zinc-200 hover:bg-searchSelectHover hover:text-black border-r border-serachSelectBorder focus:border-2 focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 outline-none font-sans">
+        <option value="1" className=" bg-gray-100">
           All
         </option>
         <option value="2" className=" bg-gray-100 ">
@@ -53,7 +53,7 @@ const SearchBar = () => {
           onFocus={handleMouseDown}
           onBlur={handleMouseUp}
           placeholder="Search..."
-          className="grow outline-none indent-2.5 placeholder:text-gray-500 placeholder:text-sm"
+          className="grow outline-none indent-2.5 placeholder:text-gray-500 placeholder:text-sm font-sans"
         />
 
         <button

@@ -1,19 +1,18 @@
+import StartingFooter from "../footers/startingFooter";
 import Navigation from "../navigation/navigation";
 import AvailableProducts from "../products/AvailableProducts";
-//import classes from "./starting-page.module.css";
 import { useState } from "react";
-import { Fragment } from "react";
 
 function StartingPageContent(props) {
   //Con estos 2 estados, me traigo desde navigation el seller y country, y se los paso a avaiableProducts.
   const [selectedSeller, setSeller] = useState(null);
   const [selectedCountry, setCountry] = useState(null);
-
   const countries = props.countries;
   const error = props.error;
 
+  //En el componente que contiene todo clavo el min-widht, despues en todos los otros componentes hijos, que estan contenidos a su vez en algun div, le coloco a ese w-full para que ocupe todo el tamanio de su contenedor padre.
   return (
-    <Fragment>
+    <div className="min-w-[1200px]">
       <Navigation
         onCountries={countries}
         onError={error}
@@ -24,7 +23,8 @@ function StartingPageContent(props) {
         onSearchSeller={selectedSeller}
         onSearchCountry={selectedCountry}
       />
-    </Fragment>
+      <StartingFooter></StartingFooter>
+    </div>
   );
 }
 

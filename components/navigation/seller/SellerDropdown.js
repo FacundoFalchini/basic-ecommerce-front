@@ -51,7 +51,7 @@ function SellerDropdown(props) {
           name="sellers"
           id="sellers-dropdown"
           defaultValue=""
-          className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-not-allowed outline-none "
+          className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-not-allowed outline-none font-sans"
         >
           <option value="" disabled className=" bg-navColor">
             Seller
@@ -81,7 +81,7 @@ function SellerDropdown(props) {
         name="sellers"
         id="sellers-dropdown"
         defaultValue=""
-        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-pointer outline-none"
+        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-pointer outline-none font-sans"
       >
         <option value="-1" className="bg-navColor ">
           Seller

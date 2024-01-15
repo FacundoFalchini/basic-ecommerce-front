@@ -21,15 +21,15 @@ const SearchBar = () => {
 
   return (
     <div
-      className={`flex grow mx-1.5 h-10  rounded-md ${
+      className={`mx-1.5 flex h-10 grow  rounded-md ${
         clickeado
-          ? "border-2 border-searchButtonBorder ring-1 ring-searchButtonBorderRing ring-opacity-45 bg-searchButtonBorderBg"
+          ? "border-2 border-searchButtonBorder bg-searchButtonBorderBg ring-1 ring-searchButtonBorderRing ring-opacity-45"
           : ""
       }`}
       id="container"
     >
       {/*  */}
-      <select className="h-full w-auto min-w-16 max-w-20 text-xs truncate indent-2.5 rounded-tl-md rounded-bl-md bg-zinc-200 hover:bg-searchSelectHover hover:text-black border-r border-serachSelectBorder focus:border-2 focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 outline-none font-sans">
+      <select className="h-full w-auto min-w-16 max-w-20 truncate rounded-bl-md rounded-tl-md border-r border-serachSelectBorder bg-zinc-200 indent-2.5 font-sans text-xs outline-none hover:bg-searchSelectHover hover:text-black focus:border-2 focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45">
         <option value="1" className=" bg-gray-100">
           All
         </option>
@@ -53,12 +53,12 @@ const SearchBar = () => {
           onFocus={handleMouseDown}
           onBlur={handleMouseUp}
           placeholder="Search..."
-          className="grow outline-none indent-2.5 placeholder:text-gray-500 placeholder:text-sm font-sans"
+          className="grow indent-2.5 font-sans outline-none placeholder:text-sm placeholder:text-gray-500"
         />
 
         <button
           type="submit"
-          className="items-center flex justify-center w-auto min-w-11 rounded-br-md rounded-tr-md bg-searchButton hover:bg-searchButtonHover focus:border-2  focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 
+          className="flex w-auto min-w-11 items-center justify-center rounded-br-md rounded-tr-md bg-searchButton hover:bg-searchButtonHover focus:border-2  focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 
           "
         >
           <Image src={searchIcon} alt="cart" width={20} height={20} />

@@ -3,12 +3,12 @@
 
 const Language = () => {
   return (
-    <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
+    <div className="bg flex min-h-[58px] min-w-28 max-w-40 items-center justify-center rounded-sm border border-transparent hover:border-white">
       <select
         name="languages"
         id="language-dropdown"
         defaultValue=""
-        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-xs font-semibold cursor-pointer outline-none font-sans"
+        className="h-[58px] w-full cursor-pointer truncate bg-navColor text-center  font-sans text-xs font-semibold text-white outline-none"
       >
         <option value="english" className="bg-navColor ">
           🇬🇧 English

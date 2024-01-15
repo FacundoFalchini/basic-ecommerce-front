@@ -45,13 +45,13 @@ function SellerDropdown(props) {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
+      <div className="bg flex min-h-[58px] min-w-28 max-w-40 items-center justify-center rounded-sm border border-transparent hover:border-white">
         <select
           disabled
           name="sellers"
           id="sellers-dropdown"
           defaultValue=""
-          className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-not-allowed outline-none font-sans"
+          className="h-[58px] w-full cursor-not-allowed truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
         >
           <option value="" disabled className=" bg-navColor">
             Seller
@@ -73,7 +73,7 @@ function SellerDropdown(props) {
   }
 
   return (
-    <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
+    <div className="bg flex min-h-[58px] min-w-28 max-w-40 items-center justify-center rounded-sm border border-transparent hover:border-white">
       <select
         //Cuando no hay pais seleccionado, el dropdown de seller no se permite hacer.
         disabled={!isSelectable}
@@ -81,7 +81,7 @@ function SellerDropdown(props) {
         name="sellers"
         id="sellers-dropdown"
         defaultValue=""
-        className="w-full h-[58px] text-center truncate bg-navColor text-white  text-sm font-semibold cursor-pointer outline-none font-sans"
+        className="h-[58px] w-full cursor-pointer truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
       >
         <option value="-1" className="bg-navColor ">
           Seller

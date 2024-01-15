@@ -142,7 +142,7 @@ const AuthForm = () => {
 
   //Colocando min-h-screen en lugar de h-screen aseguro que al hacer mucho zoom se siga viendo fondo blanco y tambien que el footer no se pise con el login, porque el div del login tiene justamente esa altura minima que no se puede topear.
   return (
-    <div className="relative flex flex-col items-center w-screen  min-h-screen min-w-96 bg-white ">
+    <div className="relative flex min-h-screen w-screen min-w-96  flex-col items-center bg-white ">
       {/* Hago que el contenedor principal sea relativo en sentido que se agrega un CONTEXTO de posicion relativa para los elementos hijos. Es decir, que los elementos que sean absolutos se uhicaran respecto al elemento absolute mas cercano que tegngan y no con respecto al documento. 
        A la imagen hago que se ubique de manera absoluta en la parte superior del contenedor principal */}
       <Image
@@ -154,19 +154,19 @@ const AuthForm = () => {
       />
       {errorRequest && (
         <div
-          className="inline-block w-full max-w-96 h-20  bg-white p-4 rounded-xl border border-red-600 mt-20 ring-4 ring-opacity-20 	
-        ring-red-300 ring-inset "
+          className="mt-20 inline-block h-20 w-full  max-w-96 rounded-xl border border-red-600 bg-white p-4 ring-4 ring-inset 	
+        ring-red-300 ring-opacity-20 "
         >
           <Image
             src={logoAmazon}
             alt="danger"
             width={30}
             height={30}
-            className="inline-block align-top mr-5 "
+            className="mr-5 inline-block align-top "
           />
           <div className="inline-block   ">
             <h1 className="text-lg  text-red-600 ">A problem occurred</h1>
-            <h2 className="inline-block  text-blackText text-xs ">
+            <h2 className="inline-block  text-xs text-blackText ">
               {errorRequest}
             </h2>
           </div>
@@ -175,11 +175,11 @@ const AuthForm = () => {
 
       {/* Y como el margen si hay error es mt-1, y es siempre al ser flex column es en funcion del div del error, entonces por mas q cambie el alto del div del error, el section del login queda bien ubicado siempre */}
       <section
-        className={`w-full max-w-96 bg-white p-8  rounded-xl border  border-gray-300  ${
+        className={`w-full max-w-96 rounded-xl border  border-gray-300 bg-white  p-8  ${
           errorRequest ? "mt-4" : "mt-20"
         }`}
       >
-        <h1 className="text-2xl font-semibold mb-6">
+        <h1 className="mb-6 text-2xl font-semibold">
           {isLogin ? "Login" : "Sign Up"}
         </h1>
         {/* El space-y-4 en cada elemento hijo del form agregar un espaciado vertical */}
@@ -193,7 +193,7 @@ const AuthForm = () => {
               {/* Hacemos display block en las etiquetas, para que ocupen todo el ancho disponible y empiecen una nueva linea, asi evitamos que la etiqueta pueda llegar a estar en la misma lineal del input */}
               <label
                 htmlFor="name"
-                className="text-sm text-blackText block font-semibold"
+                className="block text-sm font-semibold text-blackText"
               >
                 Your name
               </label>
@@ -204,16 +204,16 @@ const AuthForm = () => {
                 placeholder="Names and surnames"
                 required
                 ref={nameInputRef}
-                className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-100 	
-                ring-borderRingLogin focus:border-borderLogin placeholder:text-sm  focus:bg-bgRingCreate focus:bg-opacity-20
+                className={`w-full rounded-md border border-gray-500 p-1 ring-borderRingLogin  ring-opacity-100 placeholder:text-sm 	
+                focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20  focus:outline-none focus:ring
                 ${
                   enteredNameErrorFront !== ""
-                    ? " ring-red-300 border-red-600  focus:border-red-600 "
+                    ? " border-red-600 ring-red-300  focus:border-red-600 "
                     : ""
                 }`}
               />
               {enteredNameErrorFront !== "" && (
-                <p className="mr-2  text-red-600 text-xs">
+                <p className="mr-2  text-xs text-red-600">
                   {enteredNameErrorFront}
                 </p>
               )}
@@ -222,7 +222,7 @@ const AuthForm = () => {
           <div className="space-y-1">
             <label
               htmlFor="email"
-              className="text-sm text-blackText block font-semibold"
+              className="block text-sm font-semibold text-blackText"
             >
               Email
             </label>
@@ -231,16 +231,16 @@ const AuthForm = () => {
               id="email"
               required
               ref={emailInputRef}
-              className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-100 	
-              ring-borderRingLogin focus:border-borderLogin placeholder:text-sm  focus:bg-bgRingCreate focus:bg-opacity-20
+              className={`w-full rounded-md border border-gray-500 p-1 ring-borderRingLogin  ring-opacity-100 placeholder:text-sm 	
+              focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20  focus:outline-none focus:ring
               ${
                 enteredEmailErrorFront !== ""
-                  ? " ring-red-300 border-red-600  focus:border-red-600 "
+                  ? " border-red-600 ring-red-300  focus:border-red-600 "
                   : ""
               }`}
             />
             {enteredEmailErrorFront !== "" && (
-              <p className="mr-2  text-red-600 text-xs">
+              <p className="mr-2  text-xs text-red-600">
                 {enteredEmailErrorFront}
               </p>
             )}
@@ -248,7 +248,7 @@ const AuthForm = () => {
           <div className="space-y-1 ">
             <label
               htmlFor="password"
-              className="text-sm text-blackText block font-semibold"
+              className="block text-sm font-semibold text-blackText"
             >
               Password
             </label>
@@ -258,21 +258,21 @@ const AuthForm = () => {
               onInput={updatePlaceholder()}
               required
               ref={passwordInputRef}
-              className={`w-full border border-gray-500 p-1 rounded-md focus:outline-none  focus:ring ring-opacity-100 	
-              ring-borderRingLogin focus:border-borderLogin placeholder:text-sm focus:bg-bgRingCreate focus:bg-opacity-20
+              className={`w-full rounded-md border border-gray-500 p-1 ring-borderRingLogin  ring-opacity-100 placeholder:text-sm 	
+              focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20 focus:outline-none focus:ring
                 ${
                   enteredPasswordErrorFront !== ""
-                    ? " ring-red-300 border-red-600  focus:border-red-600 "
+                    ? " border-red-600 ring-red-300  focus:border-red-600 "
                     : ""
                 }`}
             />
             {enteredPasswordErrorFront == "" && !isLogin && (
-              <p className="mr-2    text-blackText text-xs">
+              <p className="mr-2    text-xs text-blackText">
                 The password must contain at least 7 characters.
               </p>
             )}
             {enteredPasswordErrorFront !== "" && (
-              <p className="mr-2  text-red-600 text-xs">
+              <p className="mr-2  text-xs text-red-600">
                 {enteredPasswordErrorFront}
               </p>
             )}
@@ -280,8 +280,8 @@ const AuthForm = () => {
           <div className="space-y-4">
             {!isLoading && (
               <button
-                className="w-full bg-yellowButton text-blackText text-sm p-2 rounded-lg hover:bg-yellowButtonHover focus:outline-none focus:border focus:ring  ring-opacity-100 	
-                ring-borderRingLogin focus:border-borderLogin  "
+                className="w-full rounded-lg bg-yellowButton p-2 text-sm text-blackText ring-borderRingLogin ring-opacity-100 hover:bg-yellowButtonHover focus:border  focus:border-borderLogin 	
+                focus:outline-none focus:ring  "
               >
                 Continue
               </button>
@@ -289,12 +289,12 @@ const AuthForm = () => {
             {isLoading && <Loader />}
             {/* Items center me alinea vertifcalmente en el contenedor a los hijos en el centro del mismo. Mientras que el justify alinea en el eje horizontal a los hijos, al ser start es al principio */}
             <div className="flex items-center justify-start">
-              <p className="mr-2  text-blackText text-xs">
+              <p className="mr-2  text-xs text-blackText">
                 {!isLogin && "Already have an account?"}
               </p>
               <button
                 type="button"
-                className="text-xs  text-blueText hover:underline focus:outline-none hover:text-red-900  "
+                className="text-xs  text-blueText hover:text-red-900 hover:underline focus:outline-none  "
                 onClick={switchAuthModeHandler}
               >
                 {!isLogin && "Log in"}
@@ -304,19 +304,19 @@ const AuthForm = () => {
         </form>
       </section>
       {isLogin && (
-        <div className="flex justify-center items-center w-full max-w-96 mt-4 mb-2 ">
-          <div className="h-px flex-grow bg-gray-200 inline"></div>
-          <p className="inline mx-3  text-gray-500 text-xs">
+        <div className="mb-2 mt-4 flex w-full max-w-96 items-center justify-center ">
+          <div className="inline h-px flex-grow bg-gray-200"></div>
+          <p className="mx-3 inline  text-xs text-gray-500">
             Are you new here?
           </p>
-          <div className="h-px flex-grow bg-gray-200 inline"></div>
+          <div className="inline h-px flex-grow bg-gray-200"></div>
         </div>
       )}
 
       {isLogin && (
         <button
-          className="w-full max-w-96  min-h-8 p-0   bg-white    border  border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:border focus:ring ring-opacity-100 	
-          ring-borderRingLogin focus:border-borderLogin text-xs focus:text-opacity-100  focus:bg-bgRingCreate focus:bg-opacity-20 "
+          className="min-h-8 w-full  max-w-96 rounded-lg   border    border-gray-300  bg-white p-0 text-xs ring-borderRingLogin ring-opacity-100 hover:bg-gray-50 focus:border 	
+          focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20 focus:text-opacity-100  focus:outline-none focus:ring "
           onClick={switchAuthModeHandler}
         >
           Create your account

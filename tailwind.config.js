@@ -19,6 +19,7 @@ module.exports = {
         optionsBar: "#232f3e",
         footerBackToTop: "#37475A",
         footerBgOptions: "#131A22",
+        gridGray: "#f7f7f7",
       },
       borderColor: {
         borderLogin: "#047484 ",
@@ -26,6 +27,8 @@ module.exports = {
         serachSelectBorder: "#d0cccc",
         footerBorder: "37475A",
         graySelectBorderFooter: "CCCCCC",
+        grayResultsBorder: "cccccc",
+        gridGray: "#E8E8E8",
       },
       ringColor: {
         borderRingLogin: " #ccf4fc",
@@ -38,6 +41,7 @@ module.exports = {
         grayTextFooter: "#999999",
         whiteTextFooter: "#DDDDDD",
         graySelectTextFooter: "#CCCCCC",
+        productsText: "#0F1111",
       },
     },
   },

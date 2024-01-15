@@ -30,13 +30,13 @@ function CountryDropdown(props) {
 
   return (
     //El div se adapta al contenido que tiene... osea que si el select tiene una opcion que es MUY larga el div se alargara tanto como esa opcion, por eso es importante ponerle un MAX WIDTH permitido, que crezca hasta un maximo y le trunco lo que diga.
-    <div className="flex items-center justify-center min-w-28 max-w-40 min-h-[58px] bg border border-transparent hover:border-white rounded-sm">
+    <div className="bg flex min-h-[58px] min-w-28 max-w-40 items-center justify-center rounded-sm border border-transparent hover:border-white">
       <select
         onChange={handleSelect}
         name="paises"
         id="paises-dropdown"
         defaultValue=""
-        className=" w-full h-[58px] text-center text-white truncate bg-navColor text-sm font-semibold cursor-pointer  outline-none font-sans "
+        className=" h-[58px] w-full cursor-pointer truncate bg-navColor text-center font-sans text-sm font-semibold  text-white outline-none "
       >
         <option value="-1" className=" bg-navColor ">
           Country

@@ -5,27 +5,27 @@ import Image from "next/image";
 const StartingFooter = () => {
   //Le saque al contenedor padre (footer) el min-w-1200px... quiero probar que todos los contenedor padres sean w-full y ver de q el padre de todos esos tenga el minimo
   return (
-    <footer className="flex flex-col mt-8 w-full h-auto bg-optionsBar  ">
+    <footer className="flex h-auto w-full flex-col bg-optionsBar  ">
       <a
         href="#"
-        className="w-auto h-auto "
+        className="h-auto w-auto "
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <div className="flex items-center  w-auto mx-auto h-[49px] mb-[40px] bg-footerBackToTop cursor-pointer hover:brightness-110 hover:saturate-125">
-          <span className="flex items-center  justify-center w-auto mx-auto h-[19px] text-white  font-sans ]">
+        <div className="hover:saturate-125 mx-auto  mb-[40px] flex h-[49px] w-auto cursor-pointer items-center bg-footerBackToTop hover:brightness-110">
+          <span className="] mx-auto  flex h-[19px] w-auto items-center justify-center  font-sans text-white">
             {" "}
             Back to top
           </span>
         </div>
       </a>
 
-      <div className="flex  mx-[15.5px]   h-[320px] bg-optionsBar  font-sans ">
-        <div className="px-[10px] w-full flex justify-center space-x-[100px]">
+      <div className="mx-[15.5px]  flex   h-[320px] bg-optionsBar  font-sans ">
+        <div className="flex w-full justify-center space-x-[100px] px-[10px]">
           <div>
-            <div className="w-auto h-auto mt-[6px] mb-[14px] text-[16px] text-whiteTextFooter font-bold">
+            <div className="mb-[14px] mt-[6px] h-auto w-auto text-[16px] font-bold text-whiteTextFooter">
               Get to Know Us
             </div>
-            <ul className="space-y-[10px] text-[14px] text-whiteTextFooter cursor-pointer ">
+            <ul className="cursor-pointer space-y-[10px] text-[14px] text-whiteTextFooter ">
               <li className="hover:underline">Careers</li>
               <li className="hover:underline">Blog</li>
               <li className="hover:underline">About Site</li>
@@ -36,10 +36,10 @@ const StartingFooter = () => {
           </div>
 
           <div>
-            <div className="w-auto h-auto mt-[6px] mb-[14px] text-[16px] text-whiteTextFooter font-bold ">
+            <div className="mb-[14px] mt-[6px] h-auto w-auto text-[16px] font-bold text-whiteTextFooter ">
               Make Money with Us
             </div>
-            <ul className="space-y-[10px] text-[14px] text-whiteTextFooter cursor-pointer">
+            <ul className="cursor-pointer space-y-[10px] text-[14px] text-whiteTextFooter">
               <li className="hover:underline">Sell products on Site</li>
               <li className="hover:underline">Sell on Site Business</li>
               <li className="hover:underline">Sell apps on Amazon</li>
@@ -51,10 +51,10 @@ const StartingFooter = () => {
             </ul>
           </div>
           <div>
-            <div className="w-auto h-auto mt-[6px] mb-[14px] text-[16px] text-whiteTextFooter font-bold ">
+            <div className="mb-[14px] mt-[6px] h-auto w-auto text-[16px] font-bold text-whiteTextFooter ">
               Site Payment Products
             </div>
-            <ul className="space-y-[10px] text-[14px] text-whiteTextFooter cursor-pointer">
+            <ul className="cursor-pointer space-y-[10px] text-[14px] text-whiteTextFooter">
               <li className="hover:underline">Site Business Card</li>
               <li className="hover:underline">Shop with Points</li>
               <li className="hover:underline">Reload Your Balance</li>
@@ -62,10 +62,10 @@ const StartingFooter = () => {
             </ul>
           </div>
           <div>
-            <div className="w-auto h-auto mt-[6px] mb-[14px] text-[16px] text-whiteTextFooter font-bold ">
+            <div className="mb-[14px] mt-[6px] h-auto w-auto text-[16px] font-bold text-whiteTextFooter ">
               Let Us Help You
             </div>
-            <ul className="space-y-[10px] text-[14px] text-whiteTextFooter cursor-pointer">
+            <ul className="cursor-pointer space-y-[10px] text-[14px] text-whiteTextFooter">
               <li className="hover:underline">Site and COVID-19</li>
               <li className="hover:underline">Your Account</li>
               <li className="hover:underline">Your Orders</li>
@@ -81,9 +81,9 @@ const StartingFooter = () => {
         </div>
       </div>
 
-      <div className="w-full h-[1px] bg-footerBackToTop mt-[40px]"></div>
+      <div className="mt-[40px] h-[1px] w-full bg-footerBackToTop"></div>
 
-      <div className="flex justify-center items-center w-auto h-[50px] mb-[10px] mt-[20px] mx-auto ">
+      <div className="mx-auto mb-[10px] mt-[20px] flex h-[50px] w-auto items-center justify-center ">
         <Image
           className="h-[36px] w-[36px] "
           src={logo}
@@ -92,11 +92,11 @@ const StartingFooter = () => {
           height={40}
         />
 
-        <div className="flex items-center ml-[100px] ">
-          <div className="flex items-center justify-center h-[34px] w-auto pl-2 pr-8 border border-graySelectBorderFooter rounded-[3px] text-white">
+        <div className="ml-[100px] flex items-center ">
+          <div className="flex h-[34px] w-auto items-center justify-center rounded-[3px] border border-graySelectBorderFooter pl-2 pr-8 text-white">
             <TfiWorld className=""></TfiWorld>
 
-            <select className=" w-full text-center text-graySelectTextFooter truncate bg-optionsBar text-sm font-semibold cursor-pointer  outline-none font-sans ">
+            <select className=" w-full cursor-pointer truncate bg-optionsBar text-center font-sans text-sm font-semibold  text-graySelectTextFooter outline-none ">
               <option value="1" className=" bg-optionsBar ">
                 English
               </option>
@@ -106,241 +106,241 @@ const StartingFooter = () => {
             </select>
           </div>
 
-          <div className="flex items-center justify-center h-[34px] w-auto pl-2 pr-8 border border-graySelectBorderFooter mx-2 rounded-[3px] text-graySelectTextFooter ar text-sm font-semibold cursor-pointer  outline-none font-sans">
+          <div className="ar mx-2 flex h-[34px] w-auto cursor-pointer items-center justify-center rounded-[3px] border border-graySelectBorderFooter pl-2 pr-8 font-sans text-sm font-semibold  text-graySelectTextFooter outline-none">
             $ USD - U.S. Dollar
           </div>
 
-          <div className="flex items-center justify-center h-[34px] w-auto pl-2 pr-8 border border-graySelectBorderFooter rounded-[3px] text-graySelectTextFooter ar text-sm font-semibold cursor-pointer  outline-none font-sans">
+          <div className="ar flex h-[34px] w-auto cursor-pointer items-center justify-center rounded-[3px] border border-graySelectBorderFooter pl-2 pr-8 font-sans text-sm font-semibold  text-graySelectTextFooter outline-none">
             Argentina
           </div>
         </div>
       </div>
 
-      <div className="mt-[20px] w-full h-auto py-[30px] flex justify-center mx-auto bg-footerBgOptions">
-        <div className="grid grid-rows-4 grid-cols-7 font-sans w-auto max-w-[1000px] mx-auto gap-x-[30px] gap-y-3 h-auto text-[12px] leading-none">
+      <div className="mx-auto mt-[20px] flex h-auto w-full justify-center bg-footerBgOptions py-[30px]">
+        <div className="mx-auto grid h-auto w-auto max-w-[1000px] grid-cols-7 grid-rows-4 gap-x-[30px] gap-y-3 font-sans text-[12px] leading-none">
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Site Music
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Stream millions of songs
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Site Ads
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Reach customers wherever they spend their time
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               6pm
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Score deals on fashion brands
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               AbeBooks
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Books, art & collectibles
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               ACX
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Audiobook Publishing Made Easy
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Sell on Site
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Start a Selling Account
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Site Business
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Everything For Your Business
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               {" "}
               SiteGlobal
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Ship Orders Internationally
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Home Services
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Experienced Pros Happiness Guarantee
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Siet Web Services
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Scalable Cloud Computing Services
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Audible
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Listen to Books & Original Audio Performances
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Box Office Mojo
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Find Movie Box Office Data
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Goodreads
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Book reviews & recommendations
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               IMDb
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Movies, TV & Celebrities
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               IMDbPro
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Get Info Entertainment Professionals Need
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               {" "}
               Kindle Direct Publishing
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Indie Digital & Print Publishing Made Easy
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Prime Video Direct
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Video Distribution Made Easy
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Shopbop
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Designer Fashion Brands
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               {" "}
               Woot!
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Deals and Shenanigans
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Zappos
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Shoes & Clothing
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Ring
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Smart Home Security Systems
             </p>
           </div>
           <div></div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               eero WiFi
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Stream 4K Video in Every Room
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               {" "}
               Blink
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Smart Security for Every Home
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               Neighbors App
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Real-Time Crime & Safety Alerts
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer ">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline ">
               Amazon Subscription Boxes
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer leading-none">
+            <p className="cursor-pointer leading-none text-grayTextFooter hover:underline">
               Top subscription boxes – right to your door
             </p>
           </div>
           <div>
-            <p className="text-whiteTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-whiteTextFooter hover:underline">
               PillPack
             </p>
-            <p className="text-grayTextFooter hover:underline cursor-pointer">
+            <p className="cursor-pointer text-grayTextFooter hover:underline">
               Pharmacy Simplified
             </p>
           </div>
         </div>
       </div>
 
-      <div className=" w-full h-auto pb-[30px]  justify-center mx-auto bg-footerBgOptions flex flex-col items-center text-whiteTextFooter text-xs font-sans">
-        <div className="w-full flex justify-center">
-          <p className="hover:underline cursor-pointer">Conditions of Use</p>
-          <p className=" mr-7 ml-7 hover:underline cursor-pointer">
+      <div className=" mx-auto flex h-auto  w-full flex-col items-center justify-center bg-footerBgOptions pb-[30px] font-sans text-xs text-whiteTextFooter">
+        <div className="flex w-full justify-center">
+          <p className="cursor-pointer hover:underline">Conditions of Use</p>
+          <p className=" ml-7 mr-7 cursor-pointer hover:underline">
             Privacy Notice
           </p>
-          <p className="hover:underline cursor-pointer">
+          <p className="cursor-pointer hover:underline">
             Your Ads Privacy Choices
           </p>
         </div>

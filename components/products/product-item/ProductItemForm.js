@@ -1,4 +1,3 @@
-import classes from "./ProductItemForm.module.css";
 import Input from "../../UI/Input";
 import { useRef, useState, useContext, useEffect } from "react";
 import CartContext from "../../../store/cart-context";
@@ -61,6 +60,42 @@ const ProductItemForm = (props) => {
 
   //Para extraer la cantidad ingresada en el form. Se puede usar con two way binding con state. O usando REFS, como es un componente custom (INPUT), no alcanza con solamente creart la Ref, y agregar la ref propiedad al elemento. Pero es necesario agregarle al INPUT component envolver la funcion con React.forwardRef y agregar el elemento ref ademas de props.
   return (
+    <form className="grow font-sans" onSubmit={submitHandler}>
+      <Input
+        ref={amountInputRef}
+        label="Amount"
+        input={{
+          id: "amount_" + props.id,
+          type: "number",
+          min: "1",
+          max: props.stock,
+          step: "1",
+          defaultValue: props.stock === 0 ? 0 : 1,
+          disabled: props.stock === 0,
+        }}
+      ></Input>
+      <p className="font-sans">Available amount: {props.stock} </p>
+      <div className="font-sans">
+        <button
+          className="hover:bg rounded-md bg-yellowButton px-[8px] py-[5px] text-[13px] hover:bg-yellowButtonHover"
+          disabled={props.stock === 0}
+        >
+          Add to Cart
+        </button>
+      </div>
+      {!amountisValid && <p>Please enter a valid amount ({props.stock}).</p>}
+      {showError && (
+        <div className="font-sans text-red-600">{amountisValidStock}</div>
+      )}
+    </form>
+  );
+};
+
+export default ProductItemForm;
+
+/*
+
+ return (
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
         ref={amountInputRef}
@@ -90,6 +125,6 @@ const ProductItemForm = (props) => {
       )}
     </form>
   );
-};
 
-export default ProductItemForm;
+
+*/

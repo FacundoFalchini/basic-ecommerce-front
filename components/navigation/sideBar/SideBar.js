@@ -41,7 +41,7 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
     <>
       <button
         onClick={toggleSidebar}
-        className="text-white text-sm font-semibold border border-transparent hover:border-white rounded-sm h-10 flex justify-center items-center px-2 w-auto cursor-pointer min-w shrink-0 ml-3.5 grow font-sans"
+        className="min-w ml-3.5 flex h-10 w-auto shrink-0 grow cursor-pointer items-center justify-center rounded-sm border border-transparent px-2 font-sans text-sm font-semibold text-white hover:border-white"
       >
         <Image
           src={lineasIcon}
@@ -54,24 +54,24 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
       </button>
 
       <div
-        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px] bg-white z-40
+        className={`fixed left-0 top-0 z-40 flex h-full w-[365px] flex-col overflow-y-auto bg-white
       ${
         isOpen ? "translate-x-0 duration-500" : "-translate-x-full duration-500"
       }`}
       >
-        <p className=" flex items-center w-full bg-optionsBar text-white font-bold font-sans px-[36px] text-[19px] py-3  h-[50px]">
-          <HiUserCircle className="w-[27px] h-[25px] mr-2.5"></HiUserCircle>
+        <p className=" flex h-[50px] w-full items-center bg-optionsBar px-[36px] py-3 font-sans text-[19px] font-bold  text-white">
+          <HiUserCircle className="mr-2.5 h-[25px] w-[27px]"></HiUserCircle>
           Hello, {profileCtx.name}
         </p>
 
         <ul>
-          <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
+          <li className="h-[44px] px-[36px] pb-[2px] pt-[13px] font-sans text-[18px] font-bold">
             Trending
           </li>
           <li className={generateClassName2()}>Best Sellers</li>
           <li className={generateClassName2()}>New Releases</li>
           <li className={generateClassName2()}>Movers & Shakers</li>
-          <li className="h-[44px] pb-[2px] pt-[13px] pl-[36px] text-[18px] font-bold font-sans">
+          <li className="h-[44px] pb-[2px] pl-[36px] pt-[13px] font-sans text-[18px] font-bold">
             Digital Content & Devices
           </li>
           <li className={generateClassName1()}>
@@ -128,7 +128,7 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
               className={generateClassName3()}
             ></IoIosArrowForward>
           </li>
-          <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
+          <li className="h-[44px] px-[36px] pb-[2px] pt-[13px] font-sans text-[18px] font-bold">
             Shop By Department
           </li>
           <li className={generateClassName1()}>
@@ -155,11 +155,11 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
               className={generateClassName3()}
             ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className=" flex cursor-pointer items-center px-[36px] py-[13px] font-sans text-[14px] hover:bg-zinc-200">
             See All
-            <IoIosArrowDown className="ml-1 w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowDown>
+            <IoIosArrowDown className="ml-1 h-[15px] w-[20px] text-grayText hover:text-black"></IoIosArrowDown>
           </li>
-          <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
+          <li className="h-[44px] px-[36px] pb-[2px] pt-[13px] font-sans text-[18px] font-bold">
             Programs & Features
           </li>
           <li className={generateClassName1()}>
@@ -186,11 +186,11 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
               className={generateClassName3()}
             ></IoIosArrowForward>
           </li>
-          <li className=" flex items-center py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200">
+          <li className=" flex cursor-pointer items-center px-[36px] py-[13px] font-sans text-[14px] hover:bg-zinc-200">
             See All
-            <IoIosArrowDown className="ml-1 w-[20px] h-[15px] text-grayText hover:text-black"></IoIosArrowDown>
+            <IoIosArrowDown className="ml-1 h-[15px] w-[20px] text-grayText hover:text-black"></IoIosArrowDown>
           </li>
-          <li className="h-[44px] pb-[2px] pt-[13px] px-[36px] text-[18px] font-bold font-sans">
+          <li className="h-[44px] px-[36px] pb-[2px] pt-[13px] font-sans text-[18px] font-bold">
             Help & Setting
           </li>
           <Link href="/profile">
@@ -207,13 +207,13 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="overlay fixed w-full  h-full  bg-black  transition-opacity duration-1000  opacity-80 z-30"
+          className="overlay fixed z-30  h-full  w-full  bg-black opacity-80  transition-opacity duration-1000"
         ></div>
       )}
 
       {isOpen && (
         <RxCross1
-          className="text-white fixed top-5 left-[370px] cursor-pointer w-[20px] h-[20px] z-40"
+          className="fixed left-[370px] top-5 z-40 h-[20px] w-[20px] cursor-pointer text-white"
           onClick={toggleSidebar}
         ></RxCross1>
       )}

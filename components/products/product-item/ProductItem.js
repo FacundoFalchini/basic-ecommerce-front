@@ -1,12 +1,13 @@
-import classes from "./Productitem.module.css";
 import ProductItemForm from "./ProductItemForm";
 import CartContext from "../../../store/cart-context";
 import { useContext } from "react";
+import logo from "../../../public/logo.png";
+import Image from "next/image";
 
 const ProductItem = (props) => {
   //Una lista de item, es un wrapper alrededor de cada meal item, porque cada mealitem se renderizan de manera unorded.
 
-  const price = `$${props.price.toFixed(2)}`;
+  const price = `${props.price.toFixed(2)}`;
 
   //Aca si esta toda la data. Asique se pasa al form por props y traemos la cantidad hacia aca (de hijo a padre). Y en este componente si accedemos al context.
   const cartCtx = useContext(CartContext);
@@ -61,6 +62,41 @@ const ProductItem = (props) => {
   };
 
   return (
+    <div className="flex h-[450px] max-h-[500px] flex-col rounded-sm border border-gridGray border-opacity-50">
+      <div className="flex max-h-[40%]  basis-[40%] items-center justify-center bg-gridGray">
+        <Image src={logo} alt="cart" className="h-full w-auto" />
+      </div>
+      <div className="flex max-h-[60%] basis-[60%] flex-col  px-2 py-2 font-sans text-productsText ">
+        <p className="mb-1 flex h-auto max-h-16 overflow-hidden overflow-ellipsis text-[16px] font-semibold">
+          {props.name}
+        </p>
+        <div>
+          <p className="wrap h-[48px] max-h-12  overflow-hidden text-grayText hover:overflow-y-scroll">
+            {props.description}
+          </p>
+        </div>
+        <p className="text-[28px]">
+          <small>$</small>
+          {price}
+        </p>
+
+        <ProductItemForm
+          id={props.id}
+          stock={props.stock}
+          onAddToCart={addToCartHandler}
+        ></ProductItemForm>
+      </div>
+    </div>
+  );
+};
+
+export default ProductItem;
+
+/*
+
+antes de empezar
+
+  return (
     <li className={classes.product}>
       <div>
         <h3>{props.name}</h3>
@@ -76,6 +112,6 @@ const ProductItem = (props) => {
       </div>
     </li>
   );
-};
 
-export default ProductItem;
+
+*/

@@ -44,8 +44,8 @@ const MainBar = (props) => {
 
   //min-w-[1200px]
   return (
-    <div className="flex items-center bg-navColor min-h-16  w-full">
-      <div className=" flex items-center  justify-center ml-4 min-h-[58px] w-auto min-w-[66px]   border border-transparent hover:border-white rounded-sm">
+    <div className="flex min-h-16 w-full items-center bg-navColor">
+      <div className=" ml-4 flex  min-h-[58px] w-auto min-w-[66px] items-center justify-center   rounded-sm border border-transparent hover:border-white">
         <Image src={logo} alt="cart" width={40} height={40} />
       </div>
       <CountryDropdown

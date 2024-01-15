@@ -2,15 +2,15 @@ import Sidebar from "../sideBar/SideBar";
 
 const OptionsBar = () => {
   const generateClassName = (maxWidth) => `
-  text-white text-sm font-semibold border border-transparent 
-  hover:border-white rounded-sm h-10 flex justify-center items-center 
+   font-semibold border border-transparent 
+  hover:border-white rounded-sm h-10 flex justify-center text-white text-sm items-center 
   px-2 w-auto mx-auto cursor-pointer  grow font-sans 
   ${maxWidth ? `max-[${maxWidth}]:hidden` : ""}
 `;
 
   //min-w-[1200px]
   return (
-    <div className="flex items-center justify-evenly min-h-10 max-h-10 w-full  bg-optionsBar   ">
+    <div className="flex  max-h-10 min-h-10 w-full items-center justify-evenly bg-optionsBar   ">
       <Sidebar></Sidebar>
       <p className={generateClassName()}>Medical Care</p>
       <p className={generateClassName()}>Groceries</p>

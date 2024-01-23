@@ -67,14 +67,10 @@ const ProductItem = (props) => {
         <Image src={logo} alt="cart" className="h-full w-auto" />
       </div>
       <div className="flex max-h-[60%] basis-[60%] flex-col  px-2 py-2 font-sans text-productsText ">
-        <p className="mb-1 line-clamp-2 flex h-auto       max-h-16 overflow-hidden text-ellipsis text-[16px] font-semibold">
+        <p className="mb-1 line-clamp-4  h-auto text-[16px] font-semibold">
           {props.name}
         </p>
-        <div>
-          <p className="wrap line-clamp-2 h-[48px]        max-h-12 overflow-hidden text-ellipsis text-grayText ">
-            {props.description}
-          </p>
-        </div>
+
         <p className="text-[28px]">
           <small>$</small>
           {price}
@@ -112,6 +108,19 @@ antes de empezar
       </div>
     </li>
   );
+
+
+        <div>
+          <p className="wrap line-clamp-2 h-[48px]        max-h-12 overflow-hidden text-ellipsis text-grayText ">
+            {props.description}
+          </p>
+        </div>
+
+
+
+
+
+
 
 
 */

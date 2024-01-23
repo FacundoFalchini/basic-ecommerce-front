@@ -4,8 +4,8 @@ import AuthContext from "../../store/auth-context";
 import Loader from "../UI/loader";
 import Image from "next/image";
 import logo from "../../public/logo.png";
-import logoAmazon from "../../public/logoAmazon.png";
 import Footer from "../UI/Footer";
+import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 
 const AuthForm = () => {
   const router = useRouter();
@@ -29,6 +29,16 @@ const AuthForm = () => {
     setEnteredNameErrorFront("");
     setEnteredPasswordErrorFront("");
     setErrorRequest("");
+
+    const inputElement = document.getElementById("password");
+    if (inputElement) {
+      inputElement.value = "";
+    }
+
+    const inputElement2 = document.getElementById("email");
+    if (inputElement2) {
+      inputElement2.value = "";
+    }
   };
 
   function updatePlaceholder() {
@@ -154,32 +164,24 @@ const AuthForm = () => {
       />
       {errorRequest && (
         <div
-          className="mt-20 inline-block h-20 w-full  max-w-96 rounded-xl border border-red-600 bg-white p-4 ring-4 ring-inset 	
-        ring-red-300 ring-opacity-20 "
+          className="mt-20 flex h-20 w-full  max-w-96 rounded-xl border border-red-600 bg-white p-4 ring-4 ring-inset 	
+          ring-red-300 ring-opacity-20 "
         >
-          <Image
-            src={logoAmazon}
-            alt="danger"
-            width={30}
-            height={30}
-            className="mr-5 inline-block align-top "
-          />
-          <div className="inline-block   ">
-            <h1 className="text-lg  text-red-600 ">A problem occurred</h1>
-            <h2 className="inline-block  text-xs text-blackText ">
-              {errorRequest}
-            </h2>
+          <HiOutlineExclamationTriangle className="mr-4  align-top text-[30px] text-[#BA0933]"></HiOutlineExclamationTriangle>
+          <div className="flex flex-col justify-center font-sans    ">
+            <h1 className="text-lg  text-[#BA0933] ">A problem occurred</h1>
+            <h2 className="  text-xs text-blackText ">{errorRequest}</h2>
           </div>
         </div>
       )}
 
       {/* Y como el margen si hay error es mt-1, y es siempre al ser flex column es en funcion del div del error, entonces por mas q cambie el alto del div del error, el section del login queda bien ubicado siempre */}
       <section
-        className={`w-full max-w-96 rounded-xl border  border-gray-300 bg-white  p-8  ${
+        className={`w-full max-w-96 rounded-xl border  border-gray-300 bg-white  p-8 font-sans  ${
           errorRequest ? "mt-4" : "mt-20"
         }`}
       >
-        <h1 className="mb-6 text-2xl font-semibold">
+        <h1 className="mb-6 font-sans text-2xl font-semibold">
           {isLogin ? "Login" : "Sign Up"}
         </h1>
         {/* El space-y-4 en cada elemento hijo del form agregar un espaciado vertical */}
@@ -213,7 +215,7 @@ const AuthForm = () => {
                 }`}
               />
               {enteredNameErrorFront !== "" && (
-                <p className="mr-2  text-xs text-red-600">
+                <p className="mr-2  text-xs text-[#BA0933]">
                   {enteredNameErrorFront}
                 </p>
               )}
@@ -240,7 +242,7 @@ const AuthForm = () => {
               }`}
             />
             {enteredEmailErrorFront !== "" && (
-              <p className="mr-2  text-xs text-red-600">
+              <p className="mr-2  text-xs text-[#BA0933]">
                 {enteredEmailErrorFront}
               </p>
             )}
@@ -272,7 +274,7 @@ const AuthForm = () => {
               </p>
             )}
             {enteredPasswordErrorFront !== "" && (
-              <p className="mr-2  text-xs text-red-600">
+              <p className="mr-2  text-xs text-[#BA0933]">
                 {enteredPasswordErrorFront}
               </p>
             )}
@@ -304,7 +306,7 @@ const AuthForm = () => {
         </form>
       </section>
       {isLogin && (
-        <div className="mb-2 mt-4 flex w-full max-w-96 items-center justify-center ">
+        <div className="mb-2 mt-4 flex w-full max-w-96 items-center justify-center font-sans">
           <div className="inline h-px flex-grow bg-gray-200"></div>
           <p className="mx-3 inline  text-xs text-gray-500">
             Are you new here?
@@ -315,7 +317,7 @@ const AuthForm = () => {
 
       {isLogin && (
         <button
-          className="min-h-8 w-full  max-w-96 rounded-lg   border    border-gray-300  bg-white p-0 text-xs ring-borderRingLogin ring-opacity-100 hover:bg-gray-50 focus:border 	
+          className="min-h-8 w-full  max-w-96 rounded-lg border   border-gray-300    bg-white  p-0 font-sans text-xs ring-borderRingLogin ring-opacity-100 hover:bg-gray-50 focus:border 	
           focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20 focus:text-opacity-100  focus:outline-none focus:ring "
           onClick={switchAuthModeHandler}
         >

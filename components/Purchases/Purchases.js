@@ -15,6 +15,7 @@ import { FaSearch } from "react-icons/fa";
 import PurchasesContext from "@/store/purchases-context";
 import Loader from "../UI/loader";
 import PurchaseItem from "./purchase-item/PurchaseItem";
+import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 
 function Purchases() {
   const purchasesCtx = useContext(PurchasesContext);
@@ -24,7 +25,7 @@ function Purchases() {
   //Para q se corra cuandoa penas entramos al componente con el de 30 dias q es la opcion por defecto
   useEffect(() => {
     filterPurchases("1");
-  }, []);
+  }, [purchasesCtx.isLoading]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +42,7 @@ function Purchases() {
     if (date === "1") {
       //Los ultimos 30 dias
 
+      console.log(purchasesCtx.items);
       const actualDate = new Date();
       const filterItems = purchasesCtx.items.reduce((acum, item) => {
         //Obtengo la fecha de la compra
@@ -79,8 +81,6 @@ function Purchases() {
         //Dif en dias
         const diferenceDays = diferenceMs / (1000 * 60 * 60 * 24);
 
-        console.log(diferenceDays);
-
         if (diferenceDays <= 90) {
           acum.push(item);
         }
@@ -114,10 +114,39 @@ function Purchases() {
     return;
   };
 
+  //Lo primero es cargar el carrito, donde el contexto manda una request al back y esto puede demorar asique agregamos el spinner.
   if (purchasesCtx.isLoading) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-white">
         <Loader></Loader>
+      </div>
+    );
+  }
+
+  //En caso de que el fetch que hace el context de error, renderizamos el error.
+  if (purchasesCtx.error) {
+    return (
+      <div className=" flex h-screen min-w-[1200px]  flex-col  items-center bg-white">
+        <div
+          className="mt-20 flex h-20 w-full  max-w-96 rounded-xl border border-red-600 bg-white p-4 ring-4 ring-inset 	
+          ring-red-300 ring-opacity-20"
+        >
+          <HiOutlineExclamationTriangle className="mr-4  align-top text-[30px] text-[#BA0933]"></HiOutlineExclamationTriangle>
+
+          <div className="flex flex-col justify-center    ">
+            <h1 className="font-sans  text-lg text-[#BA0933]">
+              A problem occurred
+            </h1>
+            <h2 className="  font-sans text-xs text-blackText">
+              {purchasesCtx.error}
+            </h2>
+          </div>
+        </div>
+        <Link href="/">
+          <div className="mt-[14px] flex h-[29px] items-center rounded-[7px] bg-[#FFD814] px-[10px] py-[1px] font-sans text-[13px] text-[#0F1111] hover:bg-[#f7ca00]">
+            Back
+          </div>
+        </Link>
       </div>
     );
   }

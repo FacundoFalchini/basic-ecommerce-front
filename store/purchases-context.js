@@ -9,6 +9,7 @@ const PurchasesContext = React.createContext({
 
 const fetchData = async () => {
   try {
+    //const token = localStorage.getItem("sadasdasd12312");
     const token = localStorage.getItem("token");
     const response = await fetch(
       "http://localhost:3000/purchases/getPurchaseElements",

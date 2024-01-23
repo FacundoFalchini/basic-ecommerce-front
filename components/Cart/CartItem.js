@@ -1,6 +1,4 @@
 import { useState, useEffect, Fragment } from "react";
-import classes from "./CartItem.module.css";
-
 import { IoIosCheckbox } from "react-icons/io";
 import { GiCrossbow } from "react-icons/gi";
 
@@ -80,7 +78,7 @@ const CartItem = (props) => {
 
   useEffect(() => {
     if (localdelete) {
-      setShowErrorRemove(true);
+      setShowErrorDelete(true);
 
       const timer = setTimeout(() => {
         setShowErrorDelete(false);
@@ -90,8 +88,6 @@ const CartItem = (props) => {
       return () => clearTimeout(timer); // Limpiar el timer si el componente se desmonta
     }
   }, [localdelete]);
-
-  //setShowCheckBox
 
   const price = `$${props.price.toFixed(2)}`;
   return (
@@ -125,9 +121,16 @@ const CartItem = (props) => {
                     {price}
                   </p>
                 </div>
-                <div className="font-sans text-[12px] leading-4 text-[#007600]">
-                  In stock: {props.stock}
-                </div>
+                {props.stock != 0 && (
+                  <div className="font-sans text-[12px] leading-4 text-[#007600]">
+                    In stock: {props.stock}
+                  </div>
+                )}
+                {props.stock === 0 && (
+                  <div className="font-sans text-[12px] leading-4       text-[#BA0933]">
+                    In stock: {props.stock}
+                  </div>
+                )}
 
                 <div className="relative mb-[20px]  mt-[4px] flex items-center font-sans text-[#0F1111]">
                   <div
@@ -183,52 +186,24 @@ const CartItem = (props) => {
             </div>
           </div>
         </div>
+        {showErrorRemove && (
+          <div className="text-center font-sans text-[12px] text-[#BA0933] ">
+            Remove error: {localremove}
+          </div>
+        )}
+        {showErrorAdd && (
+          <div className="text-center font-sans text-[12px] text-[#BA0933] ">
+            Add error: {localadd}
+          </div>
+        )}
+        {showErrorDelete && (
+          <div className="text-center font-sans text-[12px] text-[#BA0933] ">
+            Delete error: {localdelete}
+          </div>
+        )}
       </div>
-      {showErrorRemove && (
-        <div className={classes.cartItemError}>Remove error: {localremove}</div>
-      )}
-      {showErrorAdd && (
-        <div className={classes.cartItemError}>Add error: {localadd}</div>
-      )}
-      {showErrorDelete && (
-        <div className={classes.cartItemError}>Delete error: {localdelete}</div>
-      )}
     </Fragment>
   );
 };
 
 export default CartItem;
-
-/*
-      <li className={classes["cart-item"]}>
-        <div>
-          <h2>{props.name}</h2>
-          <div className={classes.summary}>
-            <span className={classes.price}>{price}</span>
-            <span className={classes.amount}>x {props.amount}</span>
-          </div>
-        </div>
-        <div className={classes.cartContainerAll}>
-          <div className={classes.actions}>
-            <button onClick={handleRemove}>−</button>
-            <button onClick={handleAdd}>+</button>
-            <button onClick={handleDelete}>
-              <Image src="/bin.png" alt="profile" width={20} height={20} />
-            </button>
-          </div>
-          <p className={classes.description}>available: {props.stock}</p>
-        </div>
-      </li>
-      {showErrorRemove && (
-        <div className={classes.cartItemError}>Remove error: {localremove}</div>
-      )}
-      {showErrorAdd && (
-        <div className={classes.cartItemError}>Add error: {localadd}</div>
-      )}
-      {showErrorDelete && (
-        <div className={classes.cartItemError}>Delete error: {localdelete}</div>
-      )}
-
-
-
-*/

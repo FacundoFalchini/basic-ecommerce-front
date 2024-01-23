@@ -77,7 +77,11 @@ const ProductItemForm = (props) => {
       <p className="font-sans">Available amount: {props.stock} </p>
       <div className="font-sans">
         <button
-          className="hover:bg rounded-md bg-yellowButton px-[8px] py-[5px] text-[13px] hover:bg-yellowButtonHover"
+          className={`hover:bg rounded-md px-[8px] py-[5px] text-[13px] ${
+            props.stock === 0
+              ? "bg-[#e3e6e6]"
+              : "bg-yellowButton hover:bg-yellowButtonHover"
+          }`}
           disabled={props.stock === 0}
         >
           Add to Cart

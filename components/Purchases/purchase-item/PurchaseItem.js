@@ -12,9 +12,8 @@ const PurchaseItem = (props) => {
         <div>
           <GiCrossbow className="rounded-xl border border-[#DDD] text-[74px]"></GiCrossbow>
         </div>
-        <div className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-[16px] font-semibold">
+        <div className="line-clamp-4  w-[330px]  text-[16px] font-semibold">
           <p>{props.name}</p>
-          <p className=" font-normal text-grayText ">Descripcion</p>
         </div>
         <div className=" flex-1 flex-col text-[16px] ">
           <p className="">Price: ${props.price}</p>

@@ -1,4 +1,4 @@
-import { useState, Fragment, useContext } from "react";
+import { useState, Fragment, useContext, useEffect } from "react";
 import Image from "next/image";
 import lineasIcon from "../../../public/lineas.png";
 import { RxCross1 } from "react-icons/rx";
@@ -36,6 +36,20 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    // Aplica overflow-hidden al body cuando el modal está abierto
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = ""; // Elimina overflow-hidden cuando el modal se cierra
+    }
+
+    // Limpia el efecto al desmontar el componente
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <>

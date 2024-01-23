@@ -1,9 +1,10 @@
 import classes from "./AvailableProducts.module.css";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import ProductItem from "./product-item/ProductItem";
 import FilterBar from "./filterBar/FilterBar";
 import PagesBar from "./pagesBar/PagesBar";
 import ProductsFooter from "../footers/ProductsFooter";
+import HelpFooter from "../footers/HelpFooter";
 
 const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -55,29 +56,35 @@ const AvailableProducts = (props) => {
 
   if (!country || !seller || country === "-1" || seller === "-1") {
     return (
-      <div className="flex h-[500px] w-full flex-col items-center justify-center bg-gray-100">
-        <div className="flex flex-col items-center justify-center rounded-[8px] border border-solid border-gray-300 px-10 py-10 font-sans text-gray-700">
-          <p className="text-2xl font-bold text-gray-800">
-            Select country and seller.
-          </p>
-          <p className="text-base">Explore our wide selection of products!</p>
+      <Fragment>
+        <div className="flex h-[500px] w-full flex-col items-center justify-center bg-gray-100">
+          <div className="flex flex-col items-center justify-center rounded-[8px] border border-solid border-gray-300 px-10 py-10 font-sans text-gray-700">
+            <p className="text-2xl font-bold text-gray-800">
+              Select country and seller.
+            </p>
+            <p className="text-base">Explore our wide selection of products!</p>
+          </div>
         </div>
-      </div>
+        <ProductsFooter></ProductsFooter>
+      </Fragment>
     );
   }
 
   if (products.length === 0) {
     return (
-      <div className="flex h-[500px] w-full flex-col items-center justify-center bg-gray-100">
-        <div className="flex flex-col items-center justify-center rounded-[8px] border border-solid border-gray-300 px-10 py-10 font-sans text-gray-700">
-          <p className="text-2xl font-bold text-gray-800">
-            The seller has no products.
-          </p>
-          <p className="text-base">
-            Discover more by trying a different seller!
-          </p>
+      <Fragment>
+        <div className="flex h-[500px] w-full flex-col items-center justify-center bg-gray-100">
+          <div className="flex flex-col items-center justify-center rounded-[8px] border border-solid border-gray-300 px-10 py-10 font-sans text-gray-700">
+            <p className="text-2xl font-bold text-gray-800">
+              The seller has no products.
+            </p>
+            <p className="text-base">
+              Discover more by trying a different seller!
+            </p>
+          </div>
         </div>
-      </div>
+        <ProductsFooter></ProductsFooter>
+      </Fragment>
     );
   }
 
@@ -130,7 +137,7 @@ const AvailableProducts = (props) => {
           <FilterBar></FilterBar>
         </div>
 
-        <div className=" ml-[100px]  flex-1  ">
+        <div className=" ml-[60px]  flex-1  ">
           <div className="bg-white text-[20px] font-medium text-productsText">
             Results
           </div>
@@ -143,6 +150,7 @@ const AvailableProducts = (props) => {
         </div>
       </div>
       <PagesBar></PagesBar>
+      <HelpFooter></HelpFooter>
       <ProductsFooter></ProductsFooter>
     </div>
   );

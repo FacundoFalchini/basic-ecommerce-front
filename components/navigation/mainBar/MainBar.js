@@ -5,7 +5,7 @@ import Profile from "../profile/profile";
 import { useState, useEffect } from "react";
 import logo from "../../../public/logo.png";
 import Image from "next/image";
-import Purchases from "../purchases/purchases";
+import Orders from "../purchases/purchases";
 import SearchBar from "../searchBar/SearchBar";
 import Language from "../language/language";
 import CountryDropdown from "../country/CountryDropdown";
@@ -62,7 +62,7 @@ const MainBar = (props) => {
       <SearchBar></SearchBar>
       <Language></Language>
       <Profile></Profile>
-      <Purchases></Purchases>
+      <Orders></Orders>
       <Cart></Cart>
     </div>
   );

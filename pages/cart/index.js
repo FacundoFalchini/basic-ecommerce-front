@@ -26,7 +26,6 @@ function CartPage() {
 
   //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
   if (!authContext.isLoggedIn) {
-    console.log("entra 2");
     return null;
   }
 

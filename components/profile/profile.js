@@ -22,7 +22,7 @@ const Profile = () => {
 
   if (profileCtx.isLoading) {
     return (
-      <div className={classes.loadercontainer}>
+      <div className="flex h-full items-center justify-center">
         <Loader></Loader>
       </div>
     );

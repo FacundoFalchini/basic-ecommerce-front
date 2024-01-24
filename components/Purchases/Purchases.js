@@ -26,6 +26,7 @@ function Purchases() {
   useEffect(() => {
     filterPurchases("1");
   }, [purchasesCtx.isLoading]);
+  //Agregue el loading del contexto como dependencia porque sino al hacer F5 el ctx.items estaba vacio y entonces el filterPurchases quedaba vacio.. asi esto se ejecuta apenas cambia a estado que termino de cargar y ya no esta vacio.
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,8 +42,6 @@ function Purchases() {
   const filterPurchases = (date) => {
     if (date === "1") {
       //Los ultimos 30 dias
-
-      console.log(purchasesCtx.items);
       const actualDate = new Date();
       const filterItems = purchasesCtx.items.reduce((acum, item) => {
         //Obtengo la fecha de la compra
@@ -172,12 +171,12 @@ function Purchases() {
           <div className="flex w-full flex-col">
             <div className="mb-[16px] mt-[8px] flex w-full  items-center text-[14px] ">
               <Link href="/profile">
-                <p className="cursor-pointer text-[#007185] hover:text-[#C45500] hover:underline">
+                <p className="cursor-pointer font-sans text-[#007185] hover:text-[#C45500] hover:underline">
                   Your Account
                 </p>
               </Link>
               <IoIosArrowForward className=" mx-1 text-[12px] text-[#555555]"></IoIosArrowForward>
-              <p className="text-[#C45500] ">Your Orders</p>
+              <p className="font-sans text-[#C45500] ">Your Orders</p>
             </div>
             <div className="mb-[16px] flex w-full justify-between">
               <p className="     text-[#0F text-[28px] font-normal leading-9 text-[#0F1111]">
@@ -241,7 +240,7 @@ function Purchases() {
                 </label>
                 <select
                   onChange={handleChange}
-                  className="w-[115px] truncate rounded-[7px] border border-solid border-[#d5d9d9] bg-[#E3E6E6]  "
+                  className="w-[115px] cursor-pointer truncate rounded-[7px] border border-solid border-[#d5d9d9] bg-[#F0F2F2] py-[2px] hover:bg-[#d5d9d9] hover:bg-opacity-60  "
                 >
                   <option value={1}>last 30 days</option>
                   <option value={2}>past 3 months</option>
@@ -395,7 +394,7 @@ function Purchases() {
               </label>
               <select
                 onChange={handleChange}
-                className="w-[115px] truncate rounded-[7px] border border-solid border-[#d5d9d9] bg-[#E3E6E6]  "
+                className="w-[115px] cursor-pointer truncate rounded-[7px] border border-solid border-[#d5d9d9] bg-[#F0F2F2] py-[2px] hover:bg-[#d5d9d9] hover:bg-opacity-60"
               >
                 <option value={1}>last 30 days</option>
                 <option value={2}>past 3 months</option>

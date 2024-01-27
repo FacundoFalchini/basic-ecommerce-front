@@ -1,20 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import AuthForm from "@/components/Auth/AuthForm";
 import { useRouter } from "next/router";
 import AuthContext from "../../store/auth-context";
-import Purchases from "@/components/Purchases/Purchases";
+import React, { useContext, useEffect } from "react";
 import Loader from "@/components/UI/Loader";
 
-function PurchasePage() {
+function AuthPage() {
   const router = useRouter();
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authContext.isLoading && !authContext.isLoggedIn) {
-      router.push("/auth");
+    if (!authContext.isLoading && authContext.isLoggedIn) {
+      router.push("/");
     }
   }, [authContext.isLoading, authContext.isLoggedIn, router]);
 
-  // If the context is still loading, show the loading state
   if (authContext.isLoading) {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
@@ -23,8 +22,8 @@ function PurchasePage() {
     );
   }
 
-  //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
-  if (!authContext.isLoggedIn) {
+  //Esto es el momento donde ponemos bien la credencial y esta cargando la pagina principal.
+  if (authContext.isLoggedIn) {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <Loader></Loader>
@@ -32,7 +31,7 @@ function PurchasePage() {
     );
   }
 
-  return <Purchases></Purchases>;
+  return <AuthForm />;
 }
 
-export default PurchasePage;
+export default AuthPage;

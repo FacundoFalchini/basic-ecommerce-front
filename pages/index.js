@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../store/auth-context";
-import StartingPageContent from "@/components/starting-page/starting-page";
-import Loader from "@/components/UI/loader";
+import StartingPageContent from "@/components/StartingPage/StartingPage";
+import Loader from "@/components/UI/Loader";
 
 function HomePage(props) {
   const router = useRouter();
@@ -16,12 +16,20 @@ function HomePage(props) {
 
   // If the context is still loading, show the loading state
   if (authContext.isLoading) {
-    return <Loader></Loader>;
+    return (
+      <div className="flex h-screen items-center justify-center bg-white">
+        <Loader></Loader>
+      </div>
+    );
   }
 
   //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
   if (!authContext.isLoggedIn) {
-    return null;
+    return (
+      <div className="flex h-screen items-center justify-center bg-white">
+        <Loader></Loader>
+      </div>
+    );
   }
 
   return (

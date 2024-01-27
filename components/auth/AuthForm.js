@@ -1,11 +1,41 @@
 import { useState, useRef, useContext } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../../store/auth-context";
-import Loader from "../UI/loader";
+import Loader from "../UI/Loader";
 import Image from "next/image";
 import logo from "../../public/logo.png";
-import Footer from "../UI/Footer";
+import Footer from "../Footers/CopyrightFooter";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
+
+//Solo letras y espacios.
+const isValidCaracters = (word) => {
+  const regex = /^[a-zA-Z\s]+$/;
+  return regex.test(word);
+};
+
+//No espacios atras o adelante, si en medio
+const noBlankSpace = (word) => {
+  if (word.trim() === word) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+//No espacios en ningun lado
+const noBlankSpacePass = (password) => {
+  if (password.includes(" ")) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+//Solo letras, @ y .
+const emailFormat = (email) => {
+  const regex = /^[a-zA-Z0-9@.]+$/;
+  return regex.test(email);
+};
 
 const AuthForm = () => {
   const router = useRouter();
@@ -109,14 +139,34 @@ const AuthForm = () => {
     setEnteredPasswordErrorFront("");
     setErrorRequest("");
 
-    if (!enteredEmail.includes("@")) {
-      setEnteredEmailErrorFront("Incorrect email format.");
+    //Validacion del EMAIL:
+
+    if (enteredEmail.trim().length < 1) {
+      setEnteredEmailErrorFront("Introduce your email");
+      isNameValid = false;
+    } else if (!enteredEmail.includes("@")) {
+      setEnteredEmailErrorFront("Incorrect email format (requires @)");
+      isEmailValid = false;
+    } else if (!enteredEmail.includes(".com")) {
+      setEnteredEmailErrorFront("Incorrect email format (requires .com)");
+      isEmailValid = false;
+    } else if (!emailFormat(enteredEmail)) {
+      setEnteredEmailErrorFront("Incorrect email format (no spaces allowed)");
       isEmailValid = false;
     }
 
-    if (enteredPassword.trim().length < 7) {
+    //Validacion de la PASSWORD:
+
+    if (enteredPassword.trim().length < 1) {
+      setEnteredPasswordErrorFront("Introduce your password.");
+      isPasswordValid = false;
+    } else if (enteredPassword.trim().length < 7) {
       setEnteredPasswordErrorFront("A minimum of 7 characters is required.");
       isPasswordValid = false;
+    } else if (!noBlankSpacePass(enteredPassword)) {
+      setEnteredPasswordErrorFront(
+        "Incorrect password format (no spaces allowed)",
+      );
     }
 
     if (!isLogin) {
@@ -124,6 +174,14 @@ const AuthForm = () => {
 
       if (enteredName.trim().length < 1) {
         setEnteredNameErrorFront("Introduce your name.");
+        isNameValid = false;
+      } else if (!isValidCaracters(enteredName)) {
+        setEnteredNameErrorFront("Only alphabetic characters are allowed.");
+        isNameValid = false;
+      } else if (!noBlankSpace(enteredName)) {
+        setEnteredNameErrorFront(
+          "No blank spaces allowed at the beginning or end.",
+        );
         isNameValid = false;
       }
     }
@@ -210,7 +268,7 @@ const AuthForm = () => {
                 focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20  focus:outline-none focus:ring
                 ${
                   enteredNameErrorFront !== ""
-                    ? " border-red-600 ring-red-300  focus:border-red-600 "
+                    ? " border-red-600 ring-red-300  focus:border-red-600 focus:bg-white"
                     : ""
                 }`}
               />
@@ -237,7 +295,7 @@ const AuthForm = () => {
               focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20  focus:outline-none focus:ring
               ${
                 enteredEmailErrorFront !== ""
-                  ? " border-red-600 ring-red-300  focus:border-red-600 "
+                  ? " border-red-600 ring-red-300  focus:border-red-600 focus:bg-white"
                   : ""
               }`}
             />
@@ -264,7 +322,7 @@ const AuthForm = () => {
               focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20 focus:outline-none focus:ring
                 ${
                   enteredPasswordErrorFront !== ""
-                    ? " border-red-600 ring-red-300  focus:border-red-600 "
+                    ? " border-red-600 ring-red-300  focus:border-red-600 focus:bg-white "
                     : ""
                 }`}
             />

@@ -352,5 +352,3 @@ const StartingFooter = () => {
 };
 
 export default StartingFooter;
-
-//    <TfiWorld className="mr-[10px]"></TfiWorld> English

@@ -66,17 +66,16 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
         />{" "}
         All
       </button>
-
       <div
         className={`fixed left-0 top-0 z-40 flex h-full w-[365px] flex-col overflow-y-auto bg-white
       ${
         isOpen ? "translate-x-0 duration-500" : "-translate-x-full duration-500"
       }`}
       >
-        <p className=" flex h-[50px] w-full items-center bg-optionsBar px-[36px] py-3 font-sans text-[19px] font-bold  text-white">
+        <div className="flex h-[50px] w-full items-center bg-optionsBar px-[36px] py-3 font-sans text-[19px]  font-bold text-white">
           <HiUserCircle className="mr-2.5 h-[25px] w-[27px]"></HiUserCircle>
-          Hello, {profileCtx.name}
-        </p>
+          <div className="truncate">Hello, {profileCtx.name}</div>
+        </div>
 
         <ul>
           <li className="h-[44px] px-[36px] pb-[2px] pt-[13px] font-sans text-[18px] font-bold">
@@ -217,11 +216,10 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
           </li>
         </ul>
       </div>
-
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="overlay fixed z-30  h-full  w-full  bg-black opacity-80  transition-opacity duration-1000"
+          className=" fixed top-0 z-30  h-full  w-full  bg-black opacity-80  transition-opacity duration-1000"
         ></div>
       )}
 
@@ -236,49 +234,3 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
 };
 
 export default Sidebar;
-
-//Position te usa para controlar como se ubica un elemento en el DOM.
-
-//FIXED: se usa para posicionar un elemento de manera RELATIVA al la pantalla del buscador.  Esto mantiene el elemento en una posicion fija, independiente de la posicion de desplazamiento de la pagina. Se quita del flujo normal del documento, es decir no afectara el disenio del resto de la pagina.
-//La ubicaicon de los diferentes valores se calcula de manera relativa a la pantalla: left-0 y top-0 hace que este arriba a la izquierda.
-
-//overflow-y-auto: si el contenido vertical es mas largo que la pantalla, el navegador automaticamente tiene que agregar barra de desplazamieto verticular.
-
-/*
-      <div
-        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px]  bg-white ${
-          isOpen ? "" : "hidden"
-        } duration-500 `}
-      >
-
-
-      overlay original 
-
-      
-        <div
-          onClick={toggleSidebar}
-          className="overlay fixed w-full h-full left-[365px] bg-black opacity-80 "
-        ></div>
-
-
-        div nuevo:
-
-              <div
-        className={`flex flex-col fixed left-0 top-0 overflow-y-auto h-full w-[365px] bg-white 
-        ${
-          isOpen
-            ? "transition-transform translate-x-0"
-            : "transition-transform -translate-x-full"
-        }`}
-      >
-
-
-En este caso, element-1 se mostrará encima de element-2 debido a su mayor valor de z-index.
-
-Es importante tener en cuenta que el z-index solo tiene efecto en elementos que están posicionados (position: relative, position: absolute, position: fixed, o position: sticky). Si un elemento no tiene una posición especificada, el valor de z-index no tendrá ningún efecto.
-
-
-
-
-
-*/

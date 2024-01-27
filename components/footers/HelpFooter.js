@@ -1,5 +1,3 @@
-//import { IoIosArrowForward } from "react-icons/io";
-
 const HelpFooter = () => {
   return (
     <div className="mt-6 flex h-auto   flex-col justify-center bg-white  font-sans text-productsText">

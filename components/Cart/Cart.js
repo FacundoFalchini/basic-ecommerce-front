@@ -1,24 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
 import CartContext from "../../store/cart-context";
-import CartItem from "./CartItem";
+import CartItem from "./CartItem/CartItem";
 import Link from "next/link";
-import Loader from "../UI/loader";
-import Checkout from "./Checkout";
-import ProductsFooter from "../footers/ProductsFooter";
-import StartingFooter from "../footers/startingFooter";
-import OptionsBar from "../navigation/optionsBar/OptionsBar";
-import Language from "../navigation/language/language";
+import Loader from "../UI/Loader";
+import Checkout from "./Checkout/Checkout";
+import ProductsFooter from "../Footers/ProductsFooter";
+import StartingFooter from "../Footers/StartingFooter";
+import OptionsBar from "../navigation/OptionsBar/OptionsBar";
+import Language from "../navigation/LanguageNav/LanguageNav";
 import logo from "../../public/logo.png";
 import Image from "next/image";
-import SearchBar from "../navigation/searchBar/SearchBar";
-import Profile from "../navigation/profile/profile";
-import Orders from "../navigation/purchases/purchases";
+import SearchBar from "../navigation/SearchBar/SearchBar";
+import Profile from "../navigation/ProfileNav/ProfileNav";
+import Orders from "../navigation/PurchasesNav/PurchasesNav";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoIosCheckbox } from "react-icons/io";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Cart = () => {
+  const router = useRouter();
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
@@ -51,6 +53,21 @@ const Cart = () => {
       document.body.style.overflow = "";
     };
   }, [isCheckout]);
+
+  //ESTO ES PARA ACTUALIZAR TODO ASI SE VE BIEN LOS NOMBRES EN LA BARRA, ETC.
+  useEffect(() => {
+    // Verificar si el reload se hizo a través del router
+    const reloadViaRouter = sessionStorage.getItem("reloadViaRouter");
+
+    if (reloadViaRouter) {
+      // Limpia la marca de recarga del sessionStorage
+      sessionStorage.removeItem("reloadViaRouter");
+      setIsSubmitting(false);
+      setDidSubmit(true);
+      //Una vez que todo sale bien, limpiamos el carro (y el cart en la base de datos lo limpia la request)
+      cartCtx.clearCart();
+    }
+  }, [router.asPath]);
 
   //Funcion que se activa al tocar el boton "Proceed to checkout", basicamente hace que se renderice el modal.
   const orderHandler = () => {
@@ -155,7 +172,7 @@ const Cart = () => {
     // eslint-disable-next-line no-useless-catch
     try {
       const token = localStorage.getItem("token");
-      // const token = localStorage.getItem("sadasdasd12312");
+      //const token = localStorage.getItem("sadasdasd12312");
       const response = await fetch("http://localhost:3000/cartitems/del", {
         method: "DELETE",
         body: JSON.stringify({
@@ -191,7 +208,7 @@ const Cart = () => {
   //Funcion para realizar la compra, es decir va al Checkout. Pasamos la data desde el checkout a Cart, desde este metodo. Es decir, subimos la data del hijo al padre.
 
   const submitOrderHandler = async (userData) => {
-    setIsSubmitting(true);
+    //setIsSubmitting(true);
     //Y aca mandamos la request al backend. Donde queremos mandar tanto la userData con la info del carrito.
     //Aca podria igualarlo a response para agregar error handling. Si no lo hacemos asumimos que siempre sale bien
     try {
@@ -215,14 +232,18 @@ const Cart = () => {
           responseData.errors[0].message
             ? responseData.errors[0].message
             : "Something went wrong!");
-        setIsSubmitting(false);
+        //setIsSubmitting(false);
         throw new Error(errorMsg);
       }
 
-      setIsSubmitting(false);
-      setDidSubmit(true);
+      //Esto lo cambie, aohra va en el reload.
+      //setIsSubmitting(false);
+      //setDidSubmit(true);
       //Una vez que todo sale bien, limpiamos el carro (y el cart en la base de datos lo limpia la request)
-      cartCtx.clearCart();
+      //cartCtx.clearCart();
+
+      sessionStorage.setItem("reloadViaRouter", "true");
+      router.reload();
     } catch (error) {
       //A diferencia de las request que se pasan al hijo, no tiramos el error aca sino que lo almacenamos para poder mostrarlo.
       setErrorPurchase(error);
@@ -562,7 +583,7 @@ const Cart = () => {
 
                 <button
                   className="flex h-[29px] w-full items-center justify-center rounded-[7px] bg-yellowButton text-[13px]  text-[#0F1111] 	
-                ring-borderRingLogin ring-opacity-100 hover:bg-yellowButtonHover focus:border focus:border-borderLogin focus:outline-none focus:ring"
+                ring-borderRingLogin ring-opacity-100 hover:bg-yellowButtonHover active:border active:border-borderLogin active:outline-none active:ring"
                   onClick={orderHandler}
                   type="button"
                 >
@@ -576,7 +597,6 @@ const Cart = () => {
       <div className="h-[20px] w-full bg-white"></div>
       <ProductsFooter></ProductsFooter>
       <StartingFooter></StartingFooter>
-
       {isCheckout && (
         <Checkout
           onConfirm={submitOrderHandler}

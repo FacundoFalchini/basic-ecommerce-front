@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import ProfileContext from "@/store/profile-context";
-import Loader from "../UI/loader";
+import Loader from "../UI/Loader";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import Image from "next/image";
 import order from "../../public/order.png";
@@ -17,30 +17,18 @@ import messages from "../../public/messages.jpg";
 import payment from "../../public/payment.png";
 import prime from "../../public/prime.png";
 import security from "../../public/security.png";
-import Profile from "../navigation/profile/profile";
-
-import ProductsFooter from "../footers/ProductsFooter";
-import StartingFooter from "../footers/startingFooter";
-import Language from "../navigation/language/language";
-import OptionsBar from "../navigation/optionsBar/OptionsBar";
-import SearchBar from "../navigation/searchBar/SearchBar";
-import Orders from "../navigation/purchases/purchases";
-import Cart from "../navigation/cart/cart";
+import ProfileNav from "../navigation/ProfileNav/ProfileNav";
+import ProductsFooter from "../Footers/ProductsFooter";
+import StartingFooter from "../Footers/StartingFooter";
+import Language from "../navigation/LanguageNav/LanguageNav";
+import OptionsBar from "../navigation/OptionsBar/OptionsBar";
+import SearchBar from "../navigation/SearchBar/SearchBar";
+import Orders from "../navigation/PurchasesNav/PurchasesNav";
+import Cart from "../navigation/CartNav/CartNav";
 import logo from "../../public/logo.png";
 
-const Profile2 = () => {
+const Profile = () => {
   const profileCtx = useContext(ProfileContext);
-
-  /*
-  const authCtx = useContext(AuthContext);
-  const router = useRouter();
-
-  const logoutHandler = () => {
-    authCtx.logout();
-    //Se puede redigirigar aca o, tratarlo con lo de paginas protegidas.
-    router.push("/");
-  };
-  */
 
   if (profileCtx.isLoading) {
     return (
@@ -88,7 +76,7 @@ const Profile2 = () => {
         </Link>
         <SearchBar></SearchBar>
         <Language></Language>
-        <Profile></Profile>
+        <ProfileNav></ProfileNav>
         <Orders></Orders>
         <Cart></Cart>
       </div>
@@ -607,44 +595,4 @@ const Profile2 = () => {
   );
 };
 
-/*
-<div className="flex flex-col">
-<h1 className="text-[17px] text-[#111111]">Tus pedidos</h1>
-<h2 className="text-[14px] text-[#565959]">
-  Rastrear, devolver, cancelar un pedido, descargar una factura
-  o comprar de nuevo
-</h2>
-</div>
-*/
-
-export default Profile2;
-
-/*
-    <Card>
-      <div className={classes.profilecontainer}>
-        <div className={classes.profileitem}>
-          <label>Nombre:</label>
-          <div className={classes.profilevalue}>{profileCtx.name}</div>{" "}
-        </div>
-        <div className={classes.profileitem}>
-          <label>Email:</label>
-          <div className={classes.profilevalue}>{profileCtx.email}</div>
-        </div>
-        <div className={classes.profileitem}>
-          <label>Contraseña:</label>
-          <div className={classes.profilevalue}>••••••••</div>{" "}
-        </div>
-
-        <ProfileForm></ProfileForm>
-        <div className={classes.buttonitem}>
-          <Link href="/" className={classes.backbutton}>
-            Back
-          </Link>
-          <button onClick={logoutHandler} className={classes.backbutton}>
-            Logout
-          </button>
-        </div>
-      </div>
-    </Card>
-
-*/
+export default Profile;

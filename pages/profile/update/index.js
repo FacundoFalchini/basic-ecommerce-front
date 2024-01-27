@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../../../store/auth-context";
-import ProfileUpdate from "@/components/profile/profileUpdate/profileUpdate";
-import Loader from "@/components/UI/loader";
+import ProfileUpdate from "@/components/profile/ProfileUpdate/ProfileUpdate";
+import Loader from "@/components/UI/Loader";
 
 function ProfileUpdatePage() {
   const router = useRouter();
@@ -25,7 +25,11 @@ function ProfileUpdatePage() {
 
   //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
   if (!authContext.isLoggedIn) {
-    return null;
+    return (
+      <div className="flex h-screen items-center justify-center bg-white">
+        <Loader></Loader>
+      </div>
+    );
   }
 
   return <ProfileUpdate></ProfileUpdate>;

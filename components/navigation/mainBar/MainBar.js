@@ -1,14 +1,14 @@
 import React from "react";
-import SellerDropdown from "../seller/SellerDropdown";
-import Cart from "../cart/cart";
-import Profile from "../profile/profile";
+import SellerDropdown from "../SellerDropdown/SellerDropdown";
+import Cart from "../CartNav/CartNav";
+import Profile from "../ProfileNav/ProfileNav";
 import { useState, useEffect } from "react";
 import logo from "../../../public/logo.png";
 import Image from "next/image";
-import Orders from "../purchases/purchases";
-import SearchBar from "../searchBar/SearchBar";
-import Language from "../language/language";
-import CountryDropdown from "../country/CountryDropdown";
+import Orders from "../PurchasesNav/PurchasesNav";
+import SearchBar from "../SearchBar/SearchBar";
+import Language from "../LanguageNav/LanguageNav";
+import CountryDropdown from "../CountryDropwdown/CountryDropdown";
 
 const MainBar = (props) => {
   //Con estos 2 set, nos traemos el selectedCountry desde dropdowncountry y idem con el seller.

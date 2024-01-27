@@ -1,5 +1,4 @@
 import { IoIosArrowForward } from "react-icons/io";
-//import HelpFooter from "./HelpFooter";
 
 const ProductsFooter = () => {
   return (

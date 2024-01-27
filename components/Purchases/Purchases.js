@@ -1,11 +1,11 @@
-import ProductsFooter from "../footers/ProductsFooter";
-import StartingFooter from "../footers/startingFooter";
-import Language from "../navigation/language/language";
-import OptionsBar from "../navigation/optionsBar/OptionsBar";
-import Profile from "../navigation/profile/profile";
-import SearchBar from "../navigation/searchBar/SearchBar";
-import Orders from "../navigation/purchases/purchases";
-import Cart from "../navigation/cart/cart";
+import ProductsFooter from "../Footers/ProductsFooter";
+import StartingFooter from "../Footers/StartingFooter";
+import Language from "../navigation/LanguageNav/LanguageNav";
+import OptionsBar from "../navigation/OptionsBar/OptionsBar";
+import ProfileNav from "../navigation/ProfileNav/ProfileNav";
+import SearchBar from "../navigation/SearchBar/SearchBar";
+import Orders from "../navigation/PurchasesNav/PurchasesNav";
+import Cart from "../navigation/CartNav/CartNav";
 import logo from "../../public/logo.png";
 import Image from "next/image";
 import { IoIosArrowForward } from "react-icons/io";
@@ -13,8 +13,8 @@ import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import PurchasesContext from "@/store/purchases-context";
-import Loader from "../UI/loader";
-import PurchaseItem from "./purchase-item/PurchaseItem";
+import Loader from "../UI/Loader";
+import PurchaseItem from "./PurchaseItem/PurchaseItem";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 
 function Purchases() {
@@ -161,7 +161,7 @@ function Purchases() {
           </Link>
           <SearchBar></SearchBar>
           <Language></Language>
-          <Profile></Profile>
+          <ProfileNav></ProfileNav>
           <Orders></Orders>
           <Cart></Cart>
         </div>
@@ -197,8 +197,9 @@ function Purchases() {
 
                   <button
                     type="submit"
-                    className="ml-3 flex  h-[31px] w-auto min-w-11 items-center rounded-[100px] border border-black bg-[#303333] px-2.5  text-center text-[13px] text-sm font-bold leading-5 text-white ring-borderRingLogin hover:bg-black  focus:border-borderLogin  
-                        focus:ring 
+                    className="ml-3 flex  h-[31px] w-auto min-w-11 items-center rounded-[100px] border border-black bg-[#303333] px-2.5  text-center text-[13px] text-sm font-bold leading-5 text-white ring-borderRingLogin  ring-opacity-100 hover:bg-black hover:bg-opacity-100  active:border active:border-borderLogin active:outline-none active:ring
+
+                       
               "
                   >
                     Search Orders
@@ -291,8 +292,6 @@ function Purchases() {
       day: "numeric",
     });
 
-    //console.log(typeof purchase.date);
-
     return (
       <PurchaseItem
         key={Math.random()}
@@ -315,7 +314,7 @@ function Purchases() {
         </Link>
         <SearchBar></SearchBar>
         <Language></Language>
-        <Profile></Profile>
+        <ProfileNav></ProfileNav>
         <Orders></Orders>
         <Cart></Cart>
       </div>
@@ -351,8 +350,8 @@ function Purchases() {
 
                 <button
                   type="submit"
-                  className="ml-3 flex  h-[31px] w-auto min-w-11 items-center rounded-[100px] border border-black bg-[#303333] px-2.5  text-center text-[13px] text-sm font-bold leading-5 text-white ring-borderRingLogin hover:bg-black  focus:border-borderLogin  
-                    focus:ring 
+                  className="ml-3 flex  h-[31px] w-auto min-w-11 items-center rounded-[100px] border border-black bg-[#303333] px-2.5  text-center text-[13px] text-sm font-bold leading-5 text-white ring-borderRingLogin  ring-opacity-100 hover:bg-black active:border  active:border-borderLogin 
+                  active:outline-none active:ring
           "
                 >
                   Search Orders

@@ -1,14 +1,15 @@
-import classes from "./AvailableProducts.module.css";
 import { Fragment, useEffect, useState } from "react";
-import ProductItem from "./product-item/ProductItem";
-import FilterBar from "./filterBar/FilterBar";
-import PagesBar from "./pagesBar/PagesBar";
-import ProductsFooter from "../footers/ProductsFooter";
-import HelpFooter from "../footers/HelpFooter";
+import ProductItem from "./ProductItem/ProductItem";
+import FilterBar from "./FilterBar/FilterBar";
+import PagesBar from "./PagesBar/PagesBar";
+import ProductsFooter from "../Footers/ProductsFooter";
+import HelpFooter from "../Footers/HelpFooter";
+import { HiOutlineExclamationTriangle } from "react-icons/hi2";
+import Loader from "../UI/Loader";
 
 const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
-  //const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [httpError, setHttpError] = useState();
 
   //Obtengo el pais y el vendedor.
@@ -25,7 +26,7 @@ const AvailableProducts = (props) => {
   //Si hay vendedor definido, hay el fetch, y cada vez que cambie el vendedor se hace el fetch de products.
   useEffect(() => {
     if (seller) {
-      //setIsLoading(true);
+      setIsLoading(true);
       setProducts([]);
       const fetchProducts = async () => {
         const response = await fetch(
@@ -38,21 +39,43 @@ const AvailableProducts = (props) => {
 
         const responseData = await response.json();
         setProducts(responseData);
-        //setIsLoading(false);
+        setIsLoading(false);
       };
 
       fetchProducts().catch((error) => {
-        //setIsLoading(false);
+        setIsLoading(false);
         setHttpError(error.message);
       });
     }
   }, [seller]);
 
-  /*
   if (isLoading) {
-    return <Loader></Loader>;
+    return (
+      <div className="flex h-screen items-center justify-center bg-white">
+        <Loader></Loader>
+      </div>
+    );
   }
-*/
+
+  if (httpError) {
+    return (
+      <div className=" flex h-screen min-w-[1200px]  flex-col  items-center bg-white">
+        <div
+          className="mt-20 flex h-20 w-full  max-w-96 rounded-xl border border-red-600 bg-white p-4 ring-4 ring-inset 	
+          ring-red-300 ring-opacity-20"
+        >
+          <HiOutlineExclamationTriangle className="mr-4  align-top text-[30px] text-[#BA0933]"></HiOutlineExclamationTriangle>
+
+          <div className="flex flex-col justify-center    ">
+            <h1 className="font-sans  text-lg text-[#BA0933]">
+              A problem occurred
+            </h1>
+            <h2 className="  font-sans text-xs text-blackText">{httpError}</h2>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!country || !seller || country === "-1" || seller === "-1") {
     return (
@@ -85,14 +108,6 @@ const AvailableProducts = (props) => {
         </div>
         <ProductsFooter></ProductsFooter>
       </Fragment>
-    );
-  }
-
-  if (httpError) {
-    return (
-      <section className={classes.ProductsError}>
-        <p>{httpError}</p>
-      </section>
     );
   }
 
@@ -157,7 +172,3 @@ const AvailableProducts = (props) => {
 };
 
 export default AvailableProducts;
-
-/*
-Cuantas columnas va a hacer el repeat? Bueno esto lo determina el autofill, si tenemos solo 300px habra una sola columna, si tenemos 300-599 habra una sola pero mas grande de 300px (xq esta el 1fr como max), ahora si hay 600 px va a hacer 2 columnas de 300px cada una. 
-*/

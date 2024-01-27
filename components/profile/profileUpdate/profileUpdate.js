@@ -1,33 +1,22 @@
 import { useContext } from "react";
 import Link from "next/link";
 import ProfileContext from "@/store/profile-context";
-import Loader from "../../UI/loader";
+import Loader from "../../UI/Loader";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import Image from "next/image";
-import Profile from "../../navigation/profile/profile";
-import StartingFooter from "../../footers/startingFooter";
-import Language from "../../navigation/language/language";
-import OptionsBar from "../../navigation/optionsBar/OptionsBar";
-import SearchBar from "../../navigation/searchBar/SearchBar";
-import Orders from "../../navigation/purchases/purchases";
-import Cart from "../../navigation/cart/cart";
+import Profile from "../../navigation/ProfileNav/ProfileNav";
+import StartingFooter from "../../Footers/StartingFooter";
+import Language from "../../navigation/LanguageNav/LanguageNav";
+import OptionsBar from "../../navigation/OptionsBar/OptionsBar";
+import SearchBar from "../../navigation/SearchBar/SearchBar";
+import Orders from "../../navigation/PurchasesNav/PurchasesNav";
+import Cart from "../../navigation/CartNav/CartNav";
 import logo from "../../../public/logo.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 const ProfileUpdate = () => {
   const profileCtx = useContext(ProfileContext);
-
-  /*
-  const authCtx = useContext(AuthContext);
-  const router = useRouter();
-
-  const logoutHandler = () => {
-    authCtx.logout();
-    //Se puede redigirigar aca o, tratarlo con lo de paginas protegidas.
-    router.push("/");
-  };
-  */
 
   if (profileCtx.isLoading) {
     return (
@@ -108,7 +97,7 @@ const ProfileUpdate = () => {
                     </h1>
                   </div>
                   <Link href="/profile/update/name" className="grow">
-                    <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
+                    <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
                       Edit
                     </button>
                   </Link>
@@ -125,9 +114,11 @@ const ProfileUpdate = () => {
                       {profileCtx.email}
                     </h1>
                   </div>
-                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
-                    Edit
-                  </button>
+                  <Link href="/profile/update/email" className="grow">
+                    <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
+                      Edit
+                    </button>
+                  </Link>
                 </div>
               </li>
               <li className="border-b border-b-[#D5D9D9] px-[18px] py-[14px]">
@@ -148,7 +139,7 @@ const ProfileUpdate = () => {
                       </h1>
                     </div>
                   </div>
-                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
+                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
                     Add
                   </button>
                 </div>
@@ -164,7 +155,7 @@ const ProfileUpdate = () => {
                       face, fingerprint or PIN.
                     </h1>
                   </div>
-                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
+                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
                     Edit
                   </button>
                 </div>
@@ -179,9 +170,11 @@ const ProfileUpdate = () => {
                       *********
                     </h1>
                   </div>
-                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
-                    Edit
-                  </button>
+                  <Link href="/profile/update/password" className="grow">
+                    <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
+                      Edit
+                    </button>
+                  </Link>
                 </div>
               </li>
               <li className="border-b border-b-[#D5D9D9] px-[18px] py-[14px]">
@@ -201,7 +194,7 @@ const ProfileUpdate = () => {
                       </h1>
                     </div>
                   </div>
-                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
+                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
                     Turn on
                   </button>
                 </div>
@@ -217,7 +210,7 @@ const ProfileUpdate = () => {
                       everywhere.
                     </h1>
                   </div>
-                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 focus:border focus:border-borderLogin focus:outline-none focus:ring">
+                  <button className="mb-[12px] h-[29px] w-full cursor-pointer truncate rounded-[8px] border border-solid border-[#d5d9d9] bg-[#FFF] font-sans text-[13px] text-[#0F1111] shadow-md ring-borderRingLogin hover:bg-[#d5d9d9] hover:bg-opacity-15 active:border active:border-borderLogin active:outline-none active:ring">
                     Start
                   </button>
                 </div>

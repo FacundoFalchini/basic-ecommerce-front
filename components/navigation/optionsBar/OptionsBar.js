@@ -1,4 +1,4 @@
-import Sidebar from "../sideBar/SideBar";
+import Sidebar from "../SideBar/SideBar";
 
 const OptionsBar = () => {
   const generateClassName = (maxWidth) => `
@@ -8,7 +8,6 @@ const OptionsBar = () => {
   ${maxWidth ? `max-[${maxWidth}]:hidden` : ""}
 `;
 
-  //min-w-[1200px]
   return (
     <div className="flex  max-h-10 min-h-10 w-full items-center justify-evenly bg-optionsBar   ">
       <Sidebar></Sidebar>

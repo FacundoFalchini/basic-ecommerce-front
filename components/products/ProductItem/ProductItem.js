@@ -1,7 +1,7 @@
 import ProductItemForm from "./ProductItemForm";
 import CartContext from "../../../store/cart-context";
 import { useContext, useState, useEffect } from "react";
-import logo from "../../../public/logo.png";
+import prueba from "../../../public/address.png";
 import Image from "next/image";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import Loader from "@/components/UI/Loader";
@@ -67,7 +67,7 @@ const ProductItem = (props) => {
       const timer = setTimeout(() => {
         setShowErrorAdd(false);
         setLocalErrorAdd("");
-      }, 3000);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
@@ -105,11 +105,18 @@ const ProductItem = (props) => {
   }
 
   return (
-    <div className="flex h-[450px] max-h-[500px] flex-col rounded-sm border border-gridGray border-opacity-50">
-      <div className="flex max-h-[40%]  basis-[40%] items-center justify-center bg-gridGray">
-        <Image src={logo} alt="cart" className="h-full w-auto" />
+    <div className="flex-col   rounded-sm border border-gridGray border-opacity-50">
+      <div className="h-[275px]   bg-gridGray">
+        <div className="mx-auto my-auto flex h-[100%] w-[80%] items-center justify-items-center">
+          <Image
+            src={prueba}
+            alt="productImage"
+            className="object-scale-down"
+          />
+        </div>
       </div>
-      <div className="flex max-h-[60%] basis-[60%] flex-col  px-2 py-2 font-sans text-productsText ">
+
+      <div className="relative mb-2 flex  flex-col px-2 py-2 font-sans text-productsText">
         <p className="mb-1 line-clamp-4  h-auto text-[16px] font-semibold">
           {props.name}
         </p>
@@ -125,8 +132,8 @@ const ProductItem = (props) => {
           onAddToCart={addToCartHandler}
         ></ProductItemForm>
         {showErrorAdd && (
-          <div className="text-center font-sans text-[12px] text-[#BA0933] ">
-            Add error: {localadd}
+          <div className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2   transform whitespace-nowrap text-center font-sans text-[9px] text-[#BA0933] ">
+            {localadd}
           </div>
         )}
       </div>

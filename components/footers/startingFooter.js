@@ -1,6 +1,7 @@
 import { TfiWorld } from "react-icons/tfi";
 import logoSite from "../../public/logoSite.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const StartingFooter = () => {
   //Le saque al contenedor padre (footer) el min-w-1200px... quiero probar que todos los contenedor padres sean w-full y ver de q el padre de todos esos tenga el minimo
@@ -84,14 +85,15 @@ const StartingFooter = () => {
       <div className="mt-[40px] h-[1px] w-full bg-[#848688] bg-opacity-40"></div>
 
       <div className="mx-auto mb-[10px] mt-[20px] flex h-[50px] w-auto items-center justify-center ">
-        <Image
-          src={logoSite}
-          alt="cart"
-          width={80}
-          height={80}
-          className="mt-[13px]"
-        />
-
+        <Link href="/">
+          <Image
+            src={logoSite}
+            alt="cart"
+            width={80}
+            height={80}
+            className="mt-[13px]"
+          />
+        </Link>
         <div className="ml-[100px] flex items-center  ">
           <div className="flex h-[34px] w-auto items-center justify-center rounded-[3px] border border-solid border-[#848688]  px-5 text-white">
             <TfiWorld className=""></TfiWorld>

@@ -36,7 +36,7 @@ const ProductItemForm = (props) => {
 
       if (sum > props.stock) {
         setAmountIsValidStock(
-          "Add error: The quantity in your cart of this product exceeds the available stock",
+          "The quantity in your cart of this product exceeds the available stock",
         );
         return;
       }
@@ -55,7 +55,7 @@ const ProductItemForm = (props) => {
       const timer = setTimeout(() => {
         setShowError(false);
         setAmountIsValidStock("");
-      }, 3000);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
@@ -69,7 +69,7 @@ const ProductItemForm = (props) => {
       const timer = setTimeout(() => {
         setShowErrorAmount(false);
         setAmountIsValid(true);
-      }, 3000);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
@@ -123,12 +123,12 @@ const ProductItemForm = (props) => {
         }}
       ></Input>
       <p className="font-sans">Available amount: {props.stock} </p>
-      <div className="font-sans">
+      <div className="font-sans ">
         <button
-          className={`hover:bg rounded-md px-[8px] py-[5px] text-[13px] ${
+          className={`hover:bg rounded-md border border-transparent px-[8px] py-[5px] text-[13px]   ${
             props.stock === 0
               ? "bg-[#e3e6e6]"
-              : "bg-yellowButton hover:bg-yellowButtonHover"
+              : "bg-yellowButton ring-borderRingLogin ring-opacity-100 hover:bg-yellowButtonHover hover:bg-opacity-100  active:border active:border-borderLogin active:outline-none  active:ring "
           }`}
           disabled={props.stock === 0}
         >
@@ -136,13 +136,12 @@ const ProductItemForm = (props) => {
         </button>
       </div>
       {showErrorAmount && (
-        <div className="text-center font-sans text-[12px] text-[#BA0933] ">
-          Add error: Please enter an amount greater than zero and less than{" "}
-          {props.stock}.
+        <div className="absolute left-1/2 top-full  -translate-x-1/2   -translate-y-1/2 transform whitespace-nowrap text-center font-sans text-[9px] text-[#BA0933] ">
+          The amount must not exceed the stock: {props.stock}.
         </div>
       )}
       {showError && (
-        <div className="text-center font-sans text-[12px] text-[#BA0933] ">
+        <div className="absolute left-1/2 top-full  -translate-x-1/2  -translate-y-1/2   transform    whitespace-nowrap font-sans text-[9px] text-[#BA0933]">
           {amountisValidStock}
         </div>
       )}

@@ -11,6 +11,8 @@ const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [httpError, setHttpError] = useState();
+  const [selectUsed, setSelectedUsed] = useState(false); //Este para manejar la primera vez, q se muestre el productList normal.
+  const [productsFiltered, setProductsFiltered] = useState([]);
 
   //Obtengo el pais y el vendedor.
   const seller = props.onSearchSeller;
@@ -23,7 +25,7 @@ const AvailableProducts = (props) => {
     }
   }, [country]);
 
-  //Si hay vendedor definido, hay el fetch, y cada vez que cambie el vendedor se hace el fetch de products.
+  //Si hay vendedor definido, hay el fetch, y cada vez que cambie el vendedor se hace el fetch de products. Este SIEMPRE va a ser para la opcion default del Select que es Featured
   useEffect(() => {
     if (seller) {
       setIsLoading(true);
@@ -49,6 +51,67 @@ const AvailableProducts = (props) => {
     }
   }, [seller]);
 
+  const handleChange = (event) => {
+    setSelectedUsed(true);
+    filterProductsItems(event.target.value);
+  };
+
+  const filterProductsItems = async (filter) => {
+    if (filter === "1" || filter === "5" || filter === "6") {
+      setProductsFiltered(productList);
+      return;
+    }
+
+    let URL = "";
+    if (filter === "2") {
+      URL = `http://localhost:3000/products-seller-stock?sellerId=${seller}`;
+    } else if (filter === "3") {
+      URL = `http://localhost:3000/products-seller-lowprice?sellerId=${seller}`;
+    } else if (filter === "4") {
+      URL = `http://localhost:3000/products-seller-highprice?sellerId=${seller}`;
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await fetch(URL);
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        const errorMsg =
+          responseData.message ||
+          (responseData.errors &&
+          responseData.errors[0] &&
+          responseData.errors[0].message
+            ? responseData.errors[0].message
+            : "Something went wrong!");
+        setIsLoading(false);
+        throw new Error(errorMsg);
+      }
+
+      setIsLoading(false);
+      const data = await response.json();
+      const productList = data.map((products) => {
+        return (
+          <ProductItem
+            id={products.id}
+            key={products.id}
+            name={products.name}
+            description={products.description}
+            price={products.price}
+            stock={products.stock}
+          >
+            {products.name}
+          </ProductItem>
+        );
+      });
+      setProductsFiltered(productList);
+    } catch (error) {
+      setHttpError(error.message);
+    }
+  };
+
+  /*
+  No uso esta opcion xq me reinicia la opcion del sort
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
@@ -56,6 +119,13 @@ const AvailableProducts = (props) => {
       </div>
     );
   }
+  */
+
+  const Loading = (
+    <div className="flex h-[700px] items-center justify-center bg-white">
+      <Loader></Loader>
+    </div>
+  );
 
   if (httpError) {
     return (
@@ -126,28 +196,32 @@ const AvailableProducts = (props) => {
     );
   });
 
+  //setProductsList(productList);
+
   return (
     <div className="h-auto w-full bg-white font-sans  ">
       <div className=" mx-auto mb-1 flex h-[40px] w-full justify-between border-b border-t border-solid border-[#CCCCCC] text-[14px] text-productsText shadow-[0_4px_6px_-1px_rgba(245,245,245,1)]">
-        <div className="mx-auto flex w-[95%] justify-between">
+        <div className="mx-auto flex w-[96%] justify-between">
           <p className="  flex h-full  items-center pl-1 font-medium">
             Number of results: {productList.length}
           </p>
           <select
-            className=" my-auto flex  w-[130px]  cursor-pointer items-center truncate rounded-[8px] border border-[#D5D9D9] bg-[#F0F2F2] ring-borderRingLogin ring-opacity-100  placeholder:text-sm hover:bg-[#e3e6e6] 	
-              focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20  focus:outline-none focus:ring"
+            onChange={handleChange}
+            className=" my-auto mr-2.5  flex  w-[130px] cursor-pointer items-center truncate rounded-[8px] border border-[#D5D9D9] bg-[#F0F2F2] ring-borderRingLogin  ring-opacity-100 placeholder:text-sm 	
+              hover:bg-[#e3e6e6] focus:border-borderLogin focus:bg-bgRingCreate  focus:bg-opacity-20 focus:outline-none focus:ring"
           >
-            <option className="cursor-pointer" value="option1">
+            <option className="cursor-pointer" value={1}>
               Sort by: Featured
             </option>
-            <option value="option2">Sort by: Price: Low to High</option>
-            <option value="option3">Sort by: Price: High to Low</option>
-            <option value="option3">Sort by: Avg. Customer Review</option>
-            <option value="option3">Sort by: Price: Best Sellers</option>
+            <option value={2}>Sort by: Stock: High to Low</option>
+            <option value={3}>Sort by: Price: Low to High</option>
+            <option value={4}>Sort by: Price: High to Low</option>
+            <option value={5}>Sort by: Avg. Customer Review</option>
+            <option value={6}>Sort by: Price: Best Sellers</option>
           </select>
         </div>
       </div>
-      <div className="mx-auto flex h-full w-[95%] bg-white py-6 ">
+      <div className="mx-auto flex h-full w-[96%] bg-white py-[10px] ">
         <div className=" w-auto px-[4px] ">
           <FilterBar></FilterBar>
         </div>
@@ -159,9 +233,12 @@ const AvailableProducts = (props) => {
           <div className="bg-white pb-1     text-[14px] text-grayText ">
             Check each product to find the best option.
           </div>
-          <div className="grid h-full  grid-cols-[repeat(auto-fill,minmax(250px,300px))]  gap-2 bg-white">
-            {productList}
-          </div>
+          {isLoading && Loading}
+          {!isLoading && (
+            <div className="grid   grid-cols-[repeat(auto-fill,minmax(250px,270px))]  gap-2 bg-white">
+              {selectUsed === true ? productsFiltered : productList}
+            </div>
+          )}
         </div>
       </div>
       <PagesBar></PagesBar>

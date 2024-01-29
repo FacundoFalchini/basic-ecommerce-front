@@ -53,7 +53,7 @@ function SellerDropdown(props) {
   //El estado de loding es por default TRUE, entonces siempre sale por aca hasta que se seleccione el pais.
   if (isLoading) {
     return (
-      <div className="bg flex max-h-[50px] w-auto max-w-40 items-center justify-center rounded-sm border border-transparent px-3 hover:border-white">
+      <div className="bg flex max-h-[50px] w-auto max-w-40 items-center justify-center rounded-sm border border-transparent px-3 ">
         <select
           disabled
           name="sellers"
@@ -68,7 +68,11 @@ function SellerDropdown(props) {
   }
 
   return (
-    <div className="bg  flex max-h-[50px] w-auto max-w-40 items-center justify-center rounded-sm border border-transparent px-3 hover:border-white">
+    <div
+      className={`bg  flex max-h-[50px] w-auto max-w-40 items-center justify-center rounded-sm border border-transparent px-3 ${
+        isSelectable ? " hover:border-white" : ""
+      }`}
+    >
       <select
         //Cuando no hay pais seleccionado, el dropdown de seller no se permite hacer.
         disabled={!isSelectable}
@@ -76,9 +80,11 @@ function SellerDropdown(props) {
         name="sellers"
         id="sellers-dropdown"
         defaultValue=""
-        className="h-[45px] w-full cursor-pointer truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
+        className={`h-[45px] w-full  truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none ${
+          isSelectable ? " cursor-pointer" : ""
+        }`}
       >
-        <option value="-1" className="bg-navColor " hidden>
+        <option value="-1" className="bg-navColor ">
           Seller
         </option>
         {sellers.map((seller) => (

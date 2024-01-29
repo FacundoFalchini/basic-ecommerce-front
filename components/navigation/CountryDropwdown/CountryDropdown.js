@@ -36,7 +36,7 @@ function CountryDropdown(props) {
         defaultValue=""
         className=" h-[45px] w-full cursor-pointer truncate bg-navColor text-center font-sans text-sm font-semibold  text-white outline-none "
       >
-        <option value="-1" className=" bg-navColor " hidden>
+        <option value="-1" className=" bg-navColor ">
           Country
         </option>
         {countriesprops.map((country) => (

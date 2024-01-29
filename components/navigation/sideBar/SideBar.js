@@ -60,9 +60,9 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
         <Image
           src={lineasIcon}
           alt="cart"
-          width={20}
-          height={20}
-          className="mr-1"
+          width={18}
+          height={18}
+          className="mr-1 mt-[2px]"
         />{" "}
         All
       </button>

@@ -21,7 +21,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className={`mx-1.5 flex h-10 grow  rounded-md ${
+      className={` flex h-10 grow  rounded-md  ${
         clickeado
           ? "border-2 border-searchButtonBorder bg-searchButtonBorderBg ring-1 ring-searchButtonBorderRing ring-opacity-45"
           : ""
@@ -29,7 +29,7 @@ const SearchBar = () => {
       id="container"
     >
       {/*  */}
-      <select className="h-full w-auto min-w-16 max-w-20 truncate rounded-bl-md rounded-tl-md border-r border-serachSelectBorder bg-zinc-200 indent-2.5 font-sans text-xs outline-none hover:bg-searchSelectHover hover:text-black focus:border-2 focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45">
+      <select className="h-full w-auto min-w-16 max-w-20 cursor-pointer truncate rounded-bl-md rounded-tl-md border-r border-serachSelectBorder bg-zinc-200 indent-2.5 font-sans text-xs outline-none hover:bg-searchSelectHover hover:text-black focus:border-2 focus:border-searchButtonBorder focus:bg-searchSelectHover focus:text-black focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45">
         <option value="1" className=" bg-gray-100">
           All
         </option>
@@ -58,7 +58,7 @@ const SearchBar = () => {
 
         <button
           type="submit"
-          className="flex w-auto min-w-11 items-center justify-center rounded-br-md rounded-tr-md bg-searchButton hover:bg-searchButtonHover focus:border-2  focus:border-searchButtonBorder focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 
+          className="flex w-auto min-w-11 items-center justify-center rounded-br-md rounded-tr-md bg-searchButton hover:bg-searchButtonHover focus:border-2  focus:border-searchButtonBorder focus:bg-searchButtonHover focus:ring-1 focus:ring-searchButtonBorderRing focus:ring-opacity-45 
           "
         >
           <Image src={searchIcon} alt="cart" width={20} height={20} />

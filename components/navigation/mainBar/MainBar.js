@@ -3,14 +3,16 @@ import SellerDropdown from "../SellerDropdown/SellerDropdown";
 import Cart from "../CartNav/CartNav";
 import Profile from "../ProfileNav/ProfileNav";
 import { useState, useEffect } from "react";
-import logo from "../../../public/logo.png";
+import logoSite from "../../../public/logoSite.png";
 import Image from "next/image";
 import Orders from "../PurchasesNav/PurchasesNav";
 import SearchBar from "../SearchBar/SearchBar";
 import Language from "../LanguageNav/LanguageNav";
 import CountryDropdown from "../CountryDropwdown/CountryDropdown";
+import { useRouter } from "next/router";
 
 const MainBar = (props) => {
+  const router = useRouter();
   //Con estos 2 set, nos traemos el selectedCountry desde dropdowncountry y idem con el seller.
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedSeller, setSelectedSeller] = useState(null);
@@ -44,10 +46,20 @@ const MainBar = (props) => {
 
   //min-w-[1200px]
   return (
-    <div className="flex min-h-16 w-full items-center bg-navColor">
-      <div className=" ml-4 flex  min-h-[58px] w-auto min-w-[66px] items-center justify-center   rounded-sm border border-transparent hover:border-white">
-        <Image src={logo} alt="cart" width={40} height={40} />
+    <div className="flex h-[55px] w-full items-center space-x-2 bg-navColor">
+      <div
+        className=" ml-4 flex h-[45px] w-auto cursor-pointer items-center justify-center   rounded-sm border border-transparent  hover:border-white"
+        onClick={router.reload}
+      >
+        <Image
+          src={logoSite}
+          alt="cart"
+          width={90}
+          height={90}
+          className="mt-[13px]"
+        />
       </div>
+
       <CountryDropdown
         country={country}
         error={error}

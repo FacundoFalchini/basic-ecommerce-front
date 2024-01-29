@@ -11,7 +11,7 @@ import OptionsBar from "../../../navigation/OptionsBar/OptionsBar";
 import SearchBar from "../../../navigation/SearchBar/SearchBar";
 import Orders from "../../../navigation/PurchasesNav/PurchasesNav";
 import Cart from "../../../navigation/CartNav/CartNav";
-import logo from "../../../../public/logo.png";
+import logoSite from "../../../../public/logoSite.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 import { useRouter } from "next/router";
@@ -163,10 +163,16 @@ const NameUpdate = () => {
 
   return (
     <div className=" min-w-[1200px]  bg-white">
-      <div className="flex min-h-16 w-full items-center bg-navColor">
+      <div className="flex h-[55px] w-full items-center space-x-2 bg-navColor">
         <Link href="/">
-          <div className=" ml-4 flex  min-h-[58px] w-auto min-w-[66px] items-center justify-center   rounded-sm border border-transparent hover:border-white">
-            <Image src={logo} alt="cart" width={40} height={40} />
+          <div className=" ml-4 flex h-[45px] w-auto cursor-pointer items-center justify-center   rounded-sm border border-transparent  hover:border-white">
+            <Image
+              src={logoSite}
+              alt="cart"
+              width={90}
+              height={90}
+              className="mt-[13px]"
+            />
           </div>
         </Link>
         <SearchBar></SearchBar>

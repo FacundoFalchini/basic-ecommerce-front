@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import AuthContext from "../../store/auth-context";
 import Loader from "../UI/Loader";
 import Image from "next/image";
-import logo from "../../public/logo.png";
+import logoSiteBlack from "../../public/logoSiteBlack.png";
 import Footer from "../Footers/CopyrightFooter";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 
@@ -214,11 +214,9 @@ const AuthForm = () => {
       {/* Hago que el contenedor principal sea relativo en sentido que se agrega un CONTEXTO de posicion relativa para los elementos hijos. Es decir, que los elementos que sean absolutos se uhicaran respecto al elemento absolute mas cercano que tegngan y no con respecto al documento. 
        A la imagen hago que se ubique de manera absoluta en la parte superior del contenedor principal */}
       <Image
-        src={logo}
+        src={logoSiteBlack}
         alt="logo"
-        width={60}
-        height={60}
-        className="absolute top-3"
+        className="absolute top-2  w-[100px]"
       />
       {errorRequest && (
         <div
@@ -340,8 +338,8 @@ const AuthForm = () => {
           <div className="space-y-4">
             {!isLoading && (
               <button
-                className="w-full rounded-lg bg-yellowButton p-2 text-sm text-blackText ring-borderRingLogin ring-opacity-100 hover:bg-yellowButtonHover focus:border  focus:border-borderLogin 	
-                focus:outline-none focus:ring  "
+                className="w-full rounded-lg bg-yellowButton p-2 text-sm text-blackText ring-borderRingLogin ring-opacity-100 hover:bg-yellowButtonHover active:border  active:border-borderLogin 	
+                active:outline-none active:ring  "
               >
                 Continue
               </button>
@@ -376,7 +374,7 @@ const AuthForm = () => {
       {isLogin && (
         <button
           className="min-h-8 w-full  max-w-96 rounded-lg border   border-gray-300    bg-white  p-0 font-sans text-xs ring-borderRingLogin ring-opacity-100 hover:bg-gray-50 focus:border 	
-          focus:border-borderLogin focus:bg-bgRingCreate focus:bg-opacity-20 focus:text-opacity-100  focus:outline-none focus:ring "
+          active:border-borderLogin active:bg-bgRingCreate active:bg-opacity-20 active:text-opacity-100  active:outline-none active:ring "
           onClick={switchAuthModeHandler}
         >
           Create your account

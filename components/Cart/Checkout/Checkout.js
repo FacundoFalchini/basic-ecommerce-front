@@ -133,7 +133,9 @@ const Checkout = (props) => {
 
     //Validacion del building:
 
-    if (!isNumberAndLetters(enteredBuilding)) {
+    if (enteredBuilding.trim().length < 1) {
+      isValidBuilding = true;
+    } else if (!isNumberAndLetters(enteredBuilding)) {
       setEnteredBuildingErrorFront(
         "Only alphabetic characters and numbers are allowed.",
       );
@@ -162,7 +164,9 @@ const Checkout = (props) => {
 
     //Validacion del province:
 
-    if (!isNumberAndLetters(enteredProvince)) {
+    if (enteredProvince.trim().length < 1) {
+      isValidProvince = true;
+    } else if (!isNumberAndLetters(enteredProvince)) {
       setEnteredProvinceErrorFront(
         "Only alphabetic characters and numbers are allowed.",
       );
@@ -234,7 +238,7 @@ const Checkout = (props) => {
       onClick={props.onCancel}
     >
       <div
-        class=" relative left-1/2 top-1/2 z-10 my-[80px]   h-auto  max-h-none   max-w-[42%] -translate-x-1/2 -translate-y-1/2 transform rounded-[10px] bg-white font-sans "
+        class=" relative left-1/2 top-1/2 z-10 mb-[80px] mt-[140px]   h-auto  max-h-none   max-w-[42%] -translate-x-1/2 -translate-y-1/2 transform rounded-[10px] bg-white font-sans "
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center  justify-between rounded-t-[10px] border-b border-b-[#D5D9D9] bg-[#F0F2F2] pl-[24px]  font-sans">

@@ -27,7 +27,7 @@ function SellerDropdown(props) {
         );
 
         if (!response.ok) {
-          throw new Error("Something went wrong!"); //Si hay algo malo, todo lo debajo no se ejecuta.
+          throw new Error("Something went wrong!");
         }
 
         const responseData = await response.json();
@@ -42,27 +42,6 @@ function SellerDropdown(props) {
     }
   }, [selectedCountry]);
 
-  if (isLoading) {
-    return (
-      <div className="bg flex min-h-[58px] min-w-28 max-w-40 items-center justify-center rounded-sm border border-transparent hover:border-white">
-        <select
-          disabled
-          name="sellers"
-          id="sellers-dropdown"
-          defaultValue=""
-          className="h-[58px] w-full cursor-not-allowed truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
-        >
-          <option value="" disabled className=" bg-navColor">
-            Seller
-          </option>
-          <option value="2" className=" bg-navColor">
-            Sellerasdasd
-          </option>
-        </select>
-      </div>
-    );
-  }
-
   if (httpError) {
     return (
       <section>
@@ -71,8 +50,25 @@ function SellerDropdown(props) {
     );
   }
 
+  //El estado de loding es por default TRUE, entonces siempre sale por aca hasta que se seleccione el pais.
+  if (isLoading) {
+    return (
+      <div className="bg flex max-h-[50px] w-auto max-w-40 items-center justify-center rounded-sm border border-transparent px-3 hover:border-white">
+        <select
+          disabled
+          name="sellers"
+          id="sellers-dropdown"
+          defaultValue=""
+          className="h-[45px] w-full  truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
+        >
+          <option value="">Seller</option>
+        </select>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg flex min-h-[58px] min-w-28 max-w-40 items-center justify-center rounded-sm border border-transparent hover:border-white">
+    <div className="bg  flex max-h-[50px] w-auto max-w-40 items-center justify-center rounded-sm border border-transparent px-3 hover:border-white">
       <select
         //Cuando no hay pais seleccionado, el dropdown de seller no se permite hacer.
         disabled={!isSelectable}
@@ -80,13 +76,17 @@ function SellerDropdown(props) {
         name="sellers"
         id="sellers-dropdown"
         defaultValue=""
-        className="h-[58px] w-full cursor-pointer truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
+        className="h-[45px] w-full cursor-pointer truncate bg-navColor text-center  font-sans text-sm font-semibold text-white outline-none"
       >
-        <option value="-1" className="bg-navColor ">
+        <option value="-1" className="bg-navColor " hidden>
           Seller
         </option>
         {sellers.map((seller) => (
-          <option key={seller.id} value={seller.id}>
+          <option
+            key={seller.id}
+            value={seller.id}
+            className="cursor-pointer bg-navColor "
+          >
             {seller.name}
           </option>
         ))}

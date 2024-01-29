@@ -1,5 +1,5 @@
 import { TfiWorld } from "react-icons/tfi";
-import logo from "../../public/logo.png";
+import logoSite from "../../public/logoSite.png";
 import Image from "next/image";
 
 const StartingFooter = () => {
@@ -12,7 +12,7 @@ const StartingFooter = () => {
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         <div className="hover:saturate-125 mx-auto  mb-[40px] flex h-[49px] w-auto cursor-pointer items-center bg-footerBackToTop hover:brightness-110">
-          <span className="] mx-auto  flex h-[19px] w-auto items-center justify-center  font-sans text-white">
+          <span className="] mx-auto  flex h-[19px] w-auto items-center justify-center  font-sans text-[13px] text-[#FFFFFF]">
             {" "}
             Back to top
           </span>
@@ -81,22 +81,22 @@ const StartingFooter = () => {
         </div>
       </div>
 
-      <div className="mt-[40px] h-[1px] w-full bg-footerBackToTop"></div>
+      <div className="mt-[40px] h-[1px] w-full bg-[#848688] bg-opacity-40"></div>
 
       <div className="mx-auto mb-[10px] mt-[20px] flex h-[50px] w-auto items-center justify-center ">
         <Image
-          className="h-[36px] w-[36px] "
-          src={logo}
+          src={logoSite}
           alt="cart"
-          width={40}
-          height={40}
+          width={80}
+          height={80}
+          className="mt-[13px]"
         />
 
-        <div className="ml-[100px] flex items-center ">
-          <div className="flex h-[34px] w-auto items-center justify-center rounded-[3px] border border-graySelectBorderFooter pl-2 pr-8 text-white">
+        <div className="ml-[100px] flex items-center  ">
+          <div className="flex h-[34px] w-auto items-center justify-center rounded-[3px] border border-solid border-[#848688]  px-5 text-white">
             <TfiWorld className=""></TfiWorld>
 
-            <select className=" w-full cursor-pointer truncate bg-optionsBar text-center font-sans text-sm font-semibold  text-graySelectTextFooter outline-none ">
+            <select className=" w-full cursor-pointer truncate bg-optionsBar text-center font-sans text-[13px] font-semibold  text-graySelectTextFooter outline-none ">
               <option value="1" className=" bg-optionsBar ">
                 English
               </option>
@@ -106,11 +106,11 @@ const StartingFooter = () => {
             </select>
           </div>
 
-          <div className="ar mx-2 flex h-[34px] w-auto cursor-pointer items-center justify-center rounded-[3px] border border-graySelectBorderFooter pl-2 pr-8 font-sans text-sm font-semibold  text-graySelectTextFooter outline-none">
+          <div className=" mx-2 flex h-[34px] w-auto cursor-pointer items-center justify-center rounded-[3px] border border-solid border-[#848688] px-5 font-sans text-[13px]   font-semibold text-graySelectTextFooter outline-none">
             $ USD - U.S. Dollar
           </div>
 
-          <div className="ar flex h-[34px] w-auto cursor-pointer items-center justify-center rounded-[3px] border border-graySelectBorderFooter pl-2 pr-8 font-sans text-sm font-semibold  text-graySelectTextFooter outline-none">
+          <div className=" flex h-[34px] w-auto cursor-pointer items-center justify-center rounded-[3px] border border-solid border-[#848688] px-5 font-sans text-[13px] font-semibold  text-graySelectTextFooter outline-none">
             Argentina
           </div>
         </div>

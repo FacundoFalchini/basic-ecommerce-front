@@ -4,12 +4,12 @@ const OptionsBar = () => {
   const generateClassName = (maxWidth) => `
    font-semibold border border-transparent 
   hover:border-white rounded-sm h-10 flex justify-center text-white text-sm items-center 
-  px-2 w-auto mx-auto cursor-pointer  grow font-sans 
+  px-3 w-auto mx-auto cursor-pointer  grow font-sans  h-[35px]
   ${maxWidth ? `max-[${maxWidth}]:hidden` : ""}
 `;
 
   return (
-    <div className="flex  max-h-10 min-h-10 w-full items-center justify-evenly bg-optionsBar   ">
+    <div className="flex h-[35px] w-full items-center justify-evenly bg-optionsBar   ">
       <Sidebar></Sidebar>
       <p className={generateClassName()}>Medical Care</p>
       <p className={generateClassName()}>Groceries</p>

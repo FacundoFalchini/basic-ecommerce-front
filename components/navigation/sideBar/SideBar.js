@@ -55,7 +55,7 @@ py-[13px] px-[36px] text-[14px] font-sans cursor-pointer hover:bg-zinc-200
     <>
       <button
         onClick={toggleSidebar}
-        className="min-w ml-3.5 flex h-10 w-auto shrink-0 grow cursor-pointer items-center justify-center rounded-sm border border-transparent px-2 font-sans text-sm font-semibold text-white hover:border-white"
+        className="  ml-3 flex h-[35px] w-auto shrink-0  cursor-pointer items-center  justify-center rounded-sm border border-transparent pl-1 pr-1 font-sans text-sm font-semibold text-white hover:border-white"
       >
         <Image
           src={lineasIcon}

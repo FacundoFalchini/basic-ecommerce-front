@@ -8,7 +8,7 @@ import ProductsFooter from "../Footers/ProductsFooter";
 import StartingFooter from "../Footers/StartingFooter";
 import OptionsBar from "../navigation/OptionsBar/OptionsBar";
 import Language from "../navigation/LanguageNav/LanguageNav";
-import logo from "../../public/logo.png";
+import logoSite from "../../public/logoSite.png";
 import Image from "next/image";
 import SearchBar from "../navigation/SearchBar/SearchBar";
 import Profile from "../navigation/ProfileNav/ProfileNav";
@@ -293,10 +293,16 @@ const Cart = () => {
   if (!hasItems && !didSubmit) {
     return (
       <div className=" min-w-[1200px]  bg-white">
-        <div className="flex min-h-16 w-full items-center bg-navColor">
+        <div className="flex h-[55px] w-full items-center space-x-2 bg-navColor">
           <Link href="/">
-            <div className=" ml-4 flex  min-h-[58px] w-auto min-w-[66px] items-center justify-center   rounded-sm border border-transparent hover:border-white">
-              <Image src={logo} alt="cart" width={40} height={40} />
+            <div className=" ml-4 flex h-[45px] w-auto cursor-pointer items-center justify-center   rounded-sm border border-transparent  hover:border-white">
+              <Image
+                src={logoSite}
+                alt="cart"
+                width={90}
+                height={90}
+                className="mt-[13px]"
+              />
             </div>
           </Link>
           <SearchBar></SearchBar>
@@ -304,12 +310,14 @@ const Cart = () => {
           <Profile></Profile>
           <Orders></Orders>
           <Link href="/cart">
-            <div className=" mr-4 flex  min-h-[58px] w-auto min-w-[66px]  items-center   justify-center rounded-sm border border-transparent leading-none hover:border-white ">
-              <div className="flex flex-col items-center pb-2">
-                <p className="rounded-full font-bold text-[#F08804]">{total}</p>
+            <div className=" relative mr-4  flex max-h-[50px] w-auto items-center   justify-center rounded-sm border border-transparent px-3 leading-none hover:border-white ">
+              <div className="flex max-h-[45px] flex-col items-center">
+                <p className=" relative left-[2px] top-[2px] rounded-full font-bold text-[#F08804]">
+                  {total}
+                </p>
                 <FaShoppingCart className="text-[25px] text-white"></FaShoppingCart>
               </div>
-              <div className="flex h-[58px] items-end pb-3 font-sans text-[14px] text-white">
+              <div className=" relative bottom-1 flex  h-[45px] items-end font-sans text-[14px] text-white">
                 <p>Cart</p>
               </div>
             </div>
@@ -469,10 +477,16 @@ const Cart = () => {
   //Cuando hay elementos, renderizamos todo junto con cartItems.
   const cartContent = (
     <div className=" min-w-[1200px]  bg-white ">
-      <div className="flex min-h-16 w-full items-center bg-navColor">
+      <div className="flex h-[55px] w-full items-center space-x-2 bg-navColor">
         <Link href="/">
-          <div className=" ml-4 flex  min-h-[58px] w-auto min-w-[66px] items-center justify-center   rounded-sm border border-transparent hover:border-white">
-            <Image src={logo} alt="cart" width={40} height={40} />
+          <div className=" ml-4 flex h-[45px] w-auto cursor-pointer items-center justify-center   rounded-sm border border-transparent  hover:border-white">
+            <Image
+              src={logoSite}
+              alt="cart"
+              width={90}
+              height={90}
+              className="mt-[13px]"
+            />
           </div>
         </Link>
         <SearchBar></SearchBar>
@@ -480,12 +494,14 @@ const Cart = () => {
         <Profile></Profile>
         <Orders></Orders>
         <Link href="/cart">
-          <div className=" mr-4 flex  min-h-[58px] w-auto min-w-[66px]  items-center   justify-center rounded-sm border border-transparent leading-none hover:border-white ">
-            <div className="flex flex-col items-center pb-2">
-              <p className="rounded-full font-bold text-[#F08804]">{total}</p>
+          <div className=" relative mr-4  flex max-h-[50px] w-auto items-center   justify-center rounded-sm border border-transparent px-3 leading-none hover:border-white ">
+            <div className="flex max-h-[45px] flex-col items-center">
+              <p className=" relative left-[2px] top-[2px] rounded-full font-bold text-[#F08804]">
+                {total}
+              </p>
               <FaShoppingCart className="text-[25px] text-white"></FaShoppingCart>
             </div>
-            <div className="flex h-[58px] items-end pb-3 font-sans text-[14px] text-white">
+            <div className=" relative bottom-1 flex  h-[45px] items-end font-sans text-[14px] text-white">
               <p>Cart</p>
             </div>
           </div>

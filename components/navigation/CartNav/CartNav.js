@@ -15,7 +15,7 @@ const Cart = () => {
     <Link href="/cart">
       <div className=" relative mr-4  flex max-h-[50px] w-auto items-center   justify-center rounded-sm border border-transparent px-3 leading-none hover:border-white ">
         <div className="flex max-h-[45px] flex-col items-center">
-          <p className=" relative left-[3px] top-[4px] rounded-full font-bold text-[#F08804]">
+          <p className=" relative left-[3px] top-[4px] rounded-full text-[15px] font-bold text-[#F08804]">
             {total}
           </p>
           {/* <FaShoppingCart className="text-[25px] text-white"></FaShoppingCart> */}
@@ -27,7 +27,7 @@ const Cart = () => {
             className="relative bottom-[8px]"
           ></Image>
         </div>
-        <div className=" relative bottom-[7px] flex  h-[45px] items-end font-sans text-[14px] text-white">
+        <div className=" relative bottom-[7px] left-1 flex  h-[45px] items-end font-sans text-[14px] text-white">
           <p>Cart</p>
         </div>
       </div>

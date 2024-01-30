@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import ProductItem from "./ProductItem/ProductItem";
 import FilterBar from "./FilterBar/FilterBar";
-import PagesBar from "./PagesBar/PagesBar";
+//import PagesBar from "./PagesBar/PagesBar";
 import ProductsFooter from "../Footers/ProductsFooter";
 import HelpFooter from "../Footers/HelpFooter";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import Loader from "../UI/Loader";
+import PaginatedProducts from "./PaginatedProducts/PaginatedProducts";
 
 const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -58,7 +59,10 @@ const AvailableProducts = (props) => {
 
   const filterProductsItems = async (filter) => {
     if (filter === "1" || filter === "5" || filter === "6") {
-      setProductsFiltered(productList);
+      setProductsFiltered(
+        <PaginatedProducts products={products}></PaginatedProducts>,
+      );
+      //setProductsFiltered(productList);
       return;
     }
 
@@ -90,6 +94,8 @@ const AvailableProducts = (props) => {
 
       setIsLoading(false);
       const data = await response.json();
+
+      /*
       const productList = data.map((products) => {
         return (
           <ProductItem
@@ -104,7 +110,15 @@ const AvailableProducts = (props) => {
           </ProductItem>
         );
       });
-      setProductsFiltered(productList);
+      */
+
+      setProductsFiltered(
+        <PaginatedProducts products={data}></PaginatedProducts>,
+      );
+      //setProductsFiltered(
+      //  <PaginatedProducts products={productList}></PaginatedProducts>,
+      //);
+      //setProductsFiltered(productList);
     } catch (error) {
       setHttpError(error.message);
     }
@@ -196,19 +210,27 @@ const AvailableProducts = (props) => {
     );
   });
 
+  //const productListPaginated = (
+  // <PaginatedProducts products={productList}></PaginatedProducts>
+  //);
+
+  const productListPaginated2 = (
+    <PaginatedProducts products={products}></PaginatedProducts>
+  );
+
   //setProductsList(productList);
 
   return (
     <div className="h-auto w-full bg-white font-sans  ">
       <div className=" mx-auto mb-1 flex h-[40px] w-full justify-between border-b border-t border-solid border-[#CCCCCC] text-[14px] text-productsText shadow-[0_4px_6px_-1px_rgba(245,245,245,1)]">
         <div className="mx-auto flex w-[96%] justify-between">
-          <p className="  flex h-full  items-center pl-1 font-medium">
+          <p className="  ml-[20px] flex h-full  items-center pl-1 font-medium">
             Number of results: {productList.length}
           </p>
           <select
             onChange={handleChange}
-            className=" my-auto mr-2.5  flex  w-[130px] cursor-pointer items-center truncate rounded-[8px] border border-[#D5D9D9] bg-[#F0F2F2] ring-borderRingLogin  ring-opacity-100 placeholder:text-sm 	
-              hover:bg-[#e3e6e6] focus:border-borderLogin focus:bg-bgRingCreate  focus:bg-opacity-20 focus:outline-none focus:ring"
+            className=" my-auto mr-[85px]  flex  w-[130px] cursor-pointer items-center truncate rounded-[8px] border border-[#D5D9D9] bg-[#F0F2F2] text-[11px]  ring-borderRingLogin ring-opacity-100 	
+              placeholder:text-sm hover:bg-[#e3e6e6] focus:border-borderLogin  focus:bg-bgRingCreate focus:bg-opacity-20 focus:outline-none focus:ring"
           >
             <option className="cursor-pointer" value={1}>
               Sort by: Featured
@@ -222,26 +244,30 @@ const AvailableProducts = (props) => {
         </div>
       </div>
       <div className="mx-auto flex h-full w-[96%] bg-white py-[10px] ">
-        <div className=" w-auto px-[4px] ">
+        <div className=" ml-[20px] mt-[5px] w-auto px-[4px] ">
           <FilterBar></FilterBar>
         </div>
 
         <div className=" ml-[60px]  flex-1  ">
-          <div className="bg-white text-[20px] font-medium text-productsText">
+          <div className="ml-[33px] bg-white text-[20px] font-medium text-productsText">
             Results
           </div>
-          <div className="bg-white pb-1     text-[14px] text-grayText ">
+          <div className="ml-[33px] bg-white pb-1    text-[14px] text-grayText ">
             Check each product to find the best option.
           </div>
           {isLoading && Loading}
-          {!isLoading && (
+
+          {/*        {!isLoading && (
             <div className="grid   grid-cols-[repeat(auto-fill,minmax(250px,270px))]  gap-2 bg-white">
-              {selectUsed === true ? productsFiltered : productList}
+              {selectUsed === true ? productsFiltered : productListPaginated2}
             </div>
-          )}
+          )} */}
+
+          {!isLoading &&
+            (selectUsed === true ? productsFiltered : productListPaginated2)}
         </div>
       </div>
-      <PagesBar></PagesBar>
+      {/* <PagesBar></PagesBar> */}
       <HelpFooter></HelpFooter>
       <ProductsFooter></ProductsFooter>
     </div>

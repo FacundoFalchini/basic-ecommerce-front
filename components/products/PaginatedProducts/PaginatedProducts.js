@@ -15,11 +15,26 @@ const PaginatedProducts = (props) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
+
+    const startIndex = itemOffset + 1;
+    const endIndex = Math.min(itemOffset + itemsPerPage, items.length);
+    const totalResults = items.length;
+    props.onPageChange(
+      `${startIndex}-${endIndex} of over ${totalResults} results`,
+    );
   }, [itemOffset, itemsPerPage, items]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
+
+    const startIndex = newOffset + 1;
+    const endIndex = Math.min(newOffset + itemsPerPage, items.length);
+    const totalResults = items.length;
+
+    props.onPageChange(
+      `${startIndex}-${endIndex} of over ${totalResults} results`,
+    );
   };
 
   const previus = (

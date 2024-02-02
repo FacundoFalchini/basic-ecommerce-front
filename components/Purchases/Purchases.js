@@ -4,7 +4,6 @@ import Language from "../navigation/LanguageNav/LanguageNav";
 import OptionsBar from "../navigation/OptionsBar/OptionsBar";
 import ProfileNav from "../navigation/ProfileNav/ProfileNav";
 import SearchBar from "../navigation/SearchBar/SearchBar";
-import Orders from "../navigation/PurchasesNav/PurchasesNav";
 import Cart from "../navigation/CartNav/CartNav";
 import logoSite from "../../public/logoSite.png";
 import Image from "next/image";
@@ -21,6 +20,7 @@ function Purchases() {
   const purchasesCtx = useContext(PurchasesContext);
   const [purchases, setPurchases] = useState([]);
   const [dateSelected, setDateSelected] = useState([]);
+  const [visibleItems, setVisibleItems] = useState(5);
 
   //Para q se corra cuandoa penas entramos al componente con el de 30 dias q es la opcion por defecto
   useEffect(() => {
@@ -36,6 +36,7 @@ function Purchases() {
   const handleChange = (event) => {
     filterPurchases(event.target.value);
     setDateSelected(event.target.value);
+    setVisibleItems(5);
   };
 
   //Funcion que hace los grupos de productos
@@ -113,6 +114,10 @@ function Purchases() {
     return;
   };
 
+  const handleShowMore = () => {
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + 5);
+  };
+
   //Lo primero es cargar el carrito, donde el contexto manda una request al back y esto puede demorar asique agregamos el spinner.
   if (purchasesCtx.isLoading) {
     return (
@@ -168,7 +173,9 @@ function Purchases() {
           <SearchBar></SearchBar>
           <Language></Language>
           <ProfileNav></ProfileNav>
-          <Orders></Orders>
+          <div className="flex h-[45px]  w-auto cursor-pointer items-center justify-center rounded-sm border border-transparent px-3 hover:border-white ">
+            <p className="font-sans text-sm font-semibold text-white">Orders</p>
+          </div>
           <Cart></Cart>
         </div>
         <OptionsBar></OptionsBar>
@@ -327,7 +334,9 @@ function Purchases() {
         <SearchBar></SearchBar>
         <Language></Language>
         <ProfileNav></ProfileNav>
-        <Orders></Orders>
+        <div className="flex h-[45px]  w-auto cursor-pointer items-center justify-center rounded-sm border border-transparent px-3 hover:border-white ">
+          <p className="font-sans text-sm font-semibold text-white">Orders</p>
+        </div>
         <Cart></Cart>
       </div>
       <OptionsBar></OptionsBar>
@@ -423,7 +432,17 @@ function Purchases() {
             </form>
           </div>
           <div className="mb-[32px] mt-[24px] flex flex-col items-center justify-center text-[14px] leading-5 text-[#0f1111]">
-            {purchaseList}
+            {purchaseList.slice(0, visibleItems).map((purchase, index) => (
+              <div key={index}>{purchase}</div>
+            ))}
+            {visibleItems < purchaseList.length && (
+              <button
+                onClick={handleShowMore}
+                className="cursor-pointer pl-1 font-sans text-[#007185] hover:text-[#C45500] hover:underline"
+              >
+                Show more
+              </button>
+            )}
           </div>
         </div>
       </section>
@@ -434,3 +453,10 @@ function Purchases() {
 }
 
 export default Purchases;
+
+/*
+
+       <div className="mb-[32px] mt-[24px] flex flex-col items-center justify-center text-[14px] leading-5 text-[#0f1111]">
+            {purchaseList}
+          </div>
+*/

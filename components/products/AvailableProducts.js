@@ -1,7 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import ProductItem from "./ProductItem/ProductItem";
 import FilterBar from "./FilterBar/FilterBar";
-//import PagesBar from "./PagesBar/PagesBar";
 import ProductsFooter from "../Footers/ProductsFooter";
 import HelpFooter from "../Footers/HelpFooter";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
@@ -14,6 +12,7 @@ const AvailableProducts = (props) => {
   const [httpError, setHttpError] = useState();
   const [selectUsed, setSelectedUsed] = useState(false); //Este para manejar la primera vez, q se muestre el productList normal.
   const [productsFiltered, setProductsFiltered] = useState([]);
+  const [rangeInfo, setRangeInfo] = useState("");
 
   //Obtengo el pais y el vendedor.
   const seller = props.onSearchSeller;
@@ -60,7 +59,10 @@ const AvailableProducts = (props) => {
   const filterProductsItems = async (filter) => {
     if (filter === "1" || filter === "5" || filter === "6") {
       setProductsFiltered(
-        <PaginatedProducts products={products}></PaginatedProducts>,
+        <PaginatedProducts
+          products={products}
+          onPageChange={handlePageChange}
+        ></PaginatedProducts>,
       );
       //setProductsFiltered(productList);
       return;
@@ -95,33 +97,19 @@ const AvailableProducts = (props) => {
       setIsLoading(false);
       const data = await response.json();
 
-      /*
-      const productList = data.map((products) => {
-        return (
-          <ProductItem
-            id={products.id}
-            key={products.id}
-            name={products.name}
-            description={products.description}
-            price={products.price}
-            stock={products.stock}
-          >
-            {products.name}
-          </ProductItem>
-        );
-      });
-      */
-
       setProductsFiltered(
-        <PaginatedProducts products={data}></PaginatedProducts>,
+        <PaginatedProducts
+          products={data}
+          onPageChange={handlePageChange}
+        ></PaginatedProducts>,
       );
-      //setProductsFiltered(
-      //  <PaginatedProducts products={productList}></PaginatedProducts>,
-      //);
-      //setProductsFiltered(productList);
     } catch (error) {
       setHttpError(error.message);
     }
+  };
+
+  const handlePageChange = (info) => {
+    setRangeInfo(info);
   };
 
   /*
@@ -195,37 +183,19 @@ const AvailableProducts = (props) => {
     );
   }
 
-  const productList = products.map((products) => {
-    return (
-      <ProductItem
-        id={products.id}
-        key={products.id}
-        name={products.name}
-        description={products.description}
-        price={products.price}
-        stock={products.stock}
-      >
-        {products.name}
-      </ProductItem>
-    );
-  });
-
-  //const productListPaginated = (
-  // <PaginatedProducts products={productList}></PaginatedProducts>
-  //);
-
   const productListPaginated2 = (
-    <PaginatedProducts products={products}></PaginatedProducts>
+    <PaginatedProducts
+      products={products}
+      onPageChange={handlePageChange}
+    ></PaginatedProducts>
   );
-
-  //setProductsList(productList);
 
   return (
     <div className="h-auto w-full bg-white font-sans  ">
       <div className=" mx-auto mb-1 flex h-[40px] w-full justify-between border-b border-t border-solid border-[#CCCCCC] text-[14px] text-productsText shadow-[0_4px_6px_-1px_rgba(245,245,245,1)]">
         <div className="mx-auto flex w-[96%] justify-between">
           <p className="  ml-[20px] flex h-full  items-center pl-1 font-medium">
-            Number of results: {productList.length}
+            {rangeInfo}
           </p>
           <select
             onChange={handleChange}
@@ -256,12 +226,6 @@ const AvailableProducts = (props) => {
             Check each product to find the best option.
           </div>
           {isLoading && Loading}
-
-          {/*        {!isLoading && (
-            <div className="grid   grid-cols-[repeat(auto-fill,minmax(250px,270px))]  gap-2 bg-white">
-              {selectUsed === true ? productsFiltered : productListPaginated2}
-            </div>
-          )} */}
 
           {!isLoading &&
             (selectUsed === true ? productsFiltered : productListPaginated2)}

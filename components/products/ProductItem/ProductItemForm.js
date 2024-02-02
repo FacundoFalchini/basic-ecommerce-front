@@ -36,7 +36,7 @@ const ProductItemForm = (props) => {
 
       if (sum > props.stock) {
         setAmountIsValidStock(
-          "The quantity in your cart of this product exceeds the available stock",
+          "Your cart's quantity exceeds the available stock",
         );
         return;
       }
@@ -136,12 +136,12 @@ const ProductItemForm = (props) => {
         </button>
       </div>
       {showErrorAmount && (
-        <div className="absolute left-1/2 top-full  -translate-x-1/2   -translate-y-1/2 transform whitespace-nowrap text-center font-sans text-[9px] text-[#BA0933] ">
+        <div className="absolute left-1/2 top-full  -translate-x-1/2   -translate-y-1/2 transform whitespace-nowrap text-center font-sans text-[13px] text-[#BA0933] ">
           The amount must not exceed the stock: {props.stock}.
         </div>
       )}
       {showError && (
-        <div className="absolute left-1/2 top-full  -translate-x-1/2  -translate-y-1/2   transform    whitespace-nowrap font-sans text-[9px] text-[#BA0933]">
+        <div className="absolute left-1/2 top-full -translate-x-1/2     -translate-y-1/2   transform whitespace-nowrap font-sans text-[13px] text-[#BA0933]">
           {amountisValidStock}
         </div>
       )}
@@ -150,3 +150,6 @@ const ProductItemForm = (props) => {
 };
 
 export default ProductItemForm;
+
+//showError
+//amountisValidStock

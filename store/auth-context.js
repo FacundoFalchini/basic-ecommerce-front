@@ -4,17 +4,23 @@ let logoutTimer;
 
 const AuthContext = React.createContext({
   token: "",
-  isLoggedIn: false,
+  isLoggedIn: false, //Si hay token lo esta, pero esto es para tener esta data apartada en un bool y listo en lugar de chequear el token.
   isLoading: true,
   login: (token) => {},
   logout: () => {},
 });
 
+//El tiempo esta en miliseconds para asi poder usarlo directamente en el timeOut.
 const calculateRemainingTime = (expirationTime) => {
-  const currentTime = new Date().getTime();
-  const adjExpirationTime = new Date(expirationTime).getTime();
+  const currentTime = new Date().getTime(); //ms
+  const adjExpirationTime = new Date(expirationTime).getTime(); //ms
 
-  const remainingDuration = adjExpirationTime - currentTime;
+  console.log("Fecha actual:", new Date(currentTime));
+  console.log("Fecha de expiración:", new Date(adjExpirationTime));
+
+  const remainingDuration = adjExpirationTime - currentTime; //ms
+
+  console.log("Diferencia de tiempo en milisegundos:", remainingDuration);
 
   return remainingDuration;
 };
@@ -41,7 +47,7 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
-  //Cuando un usuario se logea, esta funcion provee el token al estado y lo almacena tambien en local storage.
+  //Cuando un usuario se logea, esta funcion provee el token al estado y lo almacena tambien en local storage, meterlo en el localStorage es para EVITAR perder el estado de logeado en caso de reiniciar la pagina.
   const loginHandler = (token, expirationTime) => {
     setToken(token);
     if (typeof window !== "undefined") {
@@ -51,12 +57,14 @@ export const AuthContextProvider = (props) => {
     }
 
     const remainingTime = calculateRemainingTime(expirationTime);
+    console.log("Expiration time:", expirationTime);
+    console.log("Remaining time:", remainingTime);
 
     //Con el tiempo calculado para que se expire, colocamos un timer que va a desencadenar el metodo para salir.
     logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
 
-  //Este useEffect corre cuando el component ese monta. Usa la funcion para obtener si existe un token en localstorage.
+  //Este useEffect corre cuando el component ese monta. Usa la funcion para obtener si existe un token en localstorage y si es valido LO USAMOS y si no lo es LO BORRAMOS.
   useEffect(() => {
     const retrieveStoredToken = () => {
       const storedToken = localStorage.getItem("token");
@@ -64,9 +72,15 @@ export const AuthContextProvider = (props) => {
 
       const remainingTime = calculateRemainingTime(storedExpirationDate);
 
-      if (remainingTime <= 3600) {
+      console.log("Expiration time del refresh:", storedExpirationDate);
+      console.log("Remaining time del refresh:", remainingTime);
+
+      //Es valido si el token tiene un tiempo restante > 0
+      //En este caso, agregamos un limite de 1 minuto, es decir si tiene menos de 1 minuto ya lo dejamos como invalido, este limite lo consideramos como que "no tiene sentido" logearlo por 1 min, mejor que se vuelva a logear.
+      if (remainingTime <= 60000) {
         localStorage.removeItem("token");
         localStorage.removeItem("expirationTime");
+        console.log("renova");
         return null;
       }
 

@@ -132,7 +132,7 @@ const ProductItem = (props) => {
           onAddToCart={addToCartHandler}
         ></ProductItemForm>
         {showErrorAdd && (
-          <div className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2   transform whitespace-nowrap text-center font-sans text-[9px] text-[#BA0933] ">
+          <div className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2   transform whitespace-nowrap text-center font-sans text-[13px] text-[#BA0933] ">
             {localadd}
           </div>
         )}

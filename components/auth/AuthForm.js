@@ -112,7 +112,9 @@ const AuthForm = () => {
         new Date().getTime() + +data.expiresIn * 1000,
       );
 
-      authCtx.login(data.token, expirationTime.toISOString());
+      //En este punto sabemos que el usuario esta autentificado, entonces llamamos a login del auth context.
+      //Al tenerlo con toISOString el expiration time en auth context parecia ser como de 4 horas de diferencia pero el calculo daba bien igual, lo cambio para q nomas coincida la visual
+      authCtx.login(data.token, expirationTime.toLocaleString());
       setTimeout(() => {
         router.push("/");
       }, 500);

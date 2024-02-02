@@ -187,18 +187,18 @@ const CartItem = (props) => {
           </div>
         </div>
         {showErrorRemove && (
-          <div className="absolute left-1/2  -translate-x-1/2 -translate-y-1/2 transform   text-center font-sans text-[12px] text-[#BA0933] ">
+          <div className="absolute left-1/2  -translate-x-1/2 -translate-y-1/2 transform   text-center font-sans text-[13px] text-[#BA0933] ">
             {localremove}
           </div>
         )}
         {showErrorAdd && (
-          <div className="absolute left-1/2  -translate-x-1/2 -translate-y-1/2 transform   text-center font-sans text-[12px] text-[#BA0933] ">
+          <div className="absolute left-1/2  -translate-x-1/2 -translate-y-1/2 transform   text-center font-sans text-[13px] text-[#BA0933] ">
             {localadd}
           </div>
         )}
 
         {showErrorDelete && (
-          <div className="absolute left-1/2  -translate-x-1/2 -translate-y-1/2 transform   text-center font-sans text-[12px] text-[#BA0933] ">
+          <div className="absolute left-1/2  -translate-x-1/2 -translate-y-1/2 transform   text-center font-sans text-[13px] text-[#BA0933] ">
             {localdelete}
           </div>
         )}

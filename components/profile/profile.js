@@ -17,7 +17,6 @@ import messages from "../../public/messages.jpg";
 import payment from "../../public/payment.png";
 import prime from "../../public/prime.png";
 import security from "../../public/security.png";
-import ProfileNav from "../navigation/ProfileNav/ProfileNav";
 import ProductsFooter from "../Footers/ProductsFooter";
 import StartingFooter from "../Footers/StartingFooter";
 import Language from "../navigation/LanguageNav/LanguageNav";
@@ -82,7 +81,15 @@ const Profile = () => {
         </Link>
         <SearchBar></SearchBar>
         <Language></Language>
-        <ProfileNav></ProfileNav>
+        <div className="max-w-38 flex min-h-[45px] w-auto cursor-pointer flex-col justify-center truncate text-nowrap rounded-sm border border-transparent px-3 hover:border-white">
+          <p className="font-sans text-xs font-thin text-white">
+            Hello {profileCtx.name}
+          </p>
+          <p className="font-sans text-sm font-semibold text-white ">
+            {" "}
+            Account & Lists
+          </p>
+        </div>
         <Orders></Orders>
         <Cart></Cart>
       </div>

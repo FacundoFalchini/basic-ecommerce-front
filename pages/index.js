@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../store/auth-context";
 import StartingPageContent from "@/components/StartingPage/StartingPage";
 import Loader from "@/components/UI/Loader";
+import Head from "next/head";
 
 function HomePage(props) {
   const router = useRouter();
@@ -33,10 +34,19 @@ function HomePage(props) {
   }
 
   return (
-    <StartingPageContent
-      countries={props.countries}
-      error={props.errorMsg}
-    ></StartingPageContent>
+    <Fragment>
+      <Head>
+        <title>Amazon.com. Spend less. Smile more.</title>
+        <meta
+          name="description"
+          content="Free shipping on millions of items. Get the best of Shopping and Entertainment with Prime. Enjoy low prices and great deals on the largest selection of everyday essentials and other products, including fashion, home, beauty, electronics, Alexa Devices, sporting goods, toys, automotive, pets, baby, books, video games, musical instruments, office supplies, and more."
+        />
+      </Head>
+      <StartingPageContent
+        countries={props.countries}
+        error={props.errorMsg}
+      ></StartingPageContent>
+    </Fragment>
   );
 }
 

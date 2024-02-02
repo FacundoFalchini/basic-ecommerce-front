@@ -1,8 +1,8 @@
-import classes from "./loader.module.css";
+import classes from "./Loader.module.css";
 
 const Loader = () => {
   return (
-    <section className={classes.loaderContainer}>
+    <section className="flex items-center justify-center">
       <div className={classes.loader}></div>
     </section>
   );

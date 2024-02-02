@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../store/auth-context";
-import StartingPageContent from "@/components/starting-page/starting-page";
-import Loader from "@/components/UI/loader";
+import StartingPageContent from "@/components/StartingPage/StartingPage";
+import Loader from "@/components/UI/Loader";
+import Head from "next/head";
 
 function HomePage(props) {
   const router = useRouter();
@@ -16,19 +17,36 @@ function HomePage(props) {
 
   // If the context is still loading, show the loading state
   if (authContext.isLoading) {
-    return <Loader></Loader>;
+    return (
+      <div className="flex h-screen items-center justify-center bg-white">
+        <Loader></Loader>
+      </div>
+    );
   }
 
   //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
   if (!authContext.isLoggedIn) {
-    return null;
+    return (
+      <div className="flex h-screen items-center justify-center bg-white">
+        <Loader></Loader>
+      </div>
+    );
   }
 
   return (
-    <StartingPageContent
-      countries={props.countries}
-      error={props.errorMsg}
-    ></StartingPageContent>
+    <Fragment>
+      <Head>
+        <title>Amazon.com. Spend less. Smile more.</title>
+        <meta
+          name="description"
+          content="Free shipping on millions of items. Get the best of Shopping and Entertainment with Prime. Enjoy low prices and great deals on the largest selection of everyday essentials and other products, including fashion, home, beauty, electronics, Alexa Devices, sporting goods, toys, automotive, pets, baby, books, video games, musical instruments, office supplies, and more."
+        />
+      </Head>
+      <StartingPageContent
+        countries={props.countries}
+        error={props.errorMsg}
+      ></StartingPageContent>
+    </Fragment>
   );
 }
 

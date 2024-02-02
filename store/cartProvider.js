@@ -13,6 +13,7 @@ const defaultCartState = {
 const fetchCartData = async () => {
   try {
     const token = localStorage.getItem("token");
+    //const token = localStorage.getItem("sadasdasd12312");
     const response = await fetch(
       "http://localhost:3000/cartItems/getCartElements",
       {
@@ -203,7 +204,7 @@ const CartProvider = (props) => {
 
     //Haciendo asi, logro que el contexto del carrito este siempre en sintonia con la auntentificacion del usuario. Cuando este inicia, se hace igual a lo q esta en su backend y cuando sale se borra.
     if (token) {
-      console.log("CARGANDO CARRITO");
+      console.log("cargando carrito");
       loadCart();
     } else {
       dispatchCartAction({ type: "CLEAR" });

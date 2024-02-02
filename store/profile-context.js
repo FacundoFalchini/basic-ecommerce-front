@@ -10,6 +10,7 @@ const ProfileContext = React.createContext({
 
 const fetchData = async () => {
   try {
+    //const token = localStorage.getItem("sadasdasd12312");
     const token = localStorage.getItem("token");
     const response = await fetch("http://localhost:3000/users/me", {
       headers: {
@@ -37,6 +38,7 @@ const fetchData = async () => {
 
 export const ProfileContextProvider = (props) => {
   const { token } = useContext(AuthContext);
+  //const token = "sadasdasd12312";
   const [error, setError] = useState(null);
   const [profileData, setProfileData] = useState({ name: "", email: "" });
   const [loading, setLoading] = useState(false);
@@ -60,6 +62,7 @@ export const ProfileContextProvider = (props) => {
     };
 
     if (token) {
+      console.log("cargando perfil");
       loadProfile();
     }
   }, [token]);

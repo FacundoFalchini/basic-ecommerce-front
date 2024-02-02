@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../../store/auth-context";
 import Cart from "@/components/Cart/Cart";
-import Loader from "@/components/UI/loader";
-import classes from "../../styles/Cart.module.css";
+import Loader from "@/components/UI/Loader";
+import Head from "next/head";
 
 function CartPage() {
   const router = useRouter();
@@ -18,19 +18,51 @@ function CartPage() {
   // If the context is still loading, show the loading state
   if (authContext.isLoading) {
     return (
-      <div className={classes.container}>
-        <Loader></Loader>
-      </div>
+      <Fragment>
+        <Head>
+          <title>Amazon.com. Shopping Cart</title>
+          <meta
+            name="description"
+            content="Review and manage items in your shopping cart effortlessly. Explore your selected products, adjust quantities, and proceed to checkout seamlessly. Ensure a smooth shopping experience by organizing and finalizing your purchases in your shopping cart on our platform."
+          />
+        </Head>
+        <div className="flex h-screen items-center justify-center bg-white">
+          <Loader></Loader>
+        </div>
+      </Fragment>
     );
   }
 
   //Esto es para que en caso de que haya un tiempo de delay entre que se carga el componente y se corre el useEffect, no se renderize nada del componente, asi no se llega a ver nada.
   if (!authContext.isLoggedIn) {
-    console.log("entra 2");
-    return null;
+    return (
+      <Fragment>
+        <Head>
+          <title>Amazon.com. Shopping Cart</title>
+          <meta
+            name="description"
+            content="Review and manage items in your shopping cart effortlessly. Explore your selected products, adjust quantities, and proceed to checkout seamlessly. Ensure a smooth shopping experience by organizing and finalizing your purchases in your shopping cart on our platform."
+          />
+        </Head>
+        <div className="flex h-screen items-center justify-center bg-white">
+          <Loader></Loader>
+        </div>
+      </Fragment>
+    );
   }
 
-  return <Cart></Cart>;
+  return (
+    <Fragment>
+      <Head>
+        <title>Amazon.com. Shopping Cart</title>
+        <meta
+          name="description"
+          content="Review and manage items in your shopping cart effortlessly. Explore your selected products, adjust quantities, and proceed to checkout seamlessly. Ensure a smooth shopping experience by organizing and finalizing your purchases in your shopping cart on our platform."
+        />
+      </Head>
+      <Cart></Cart>
+    </Fragment>
+  );
 }
 
 export default CartPage;

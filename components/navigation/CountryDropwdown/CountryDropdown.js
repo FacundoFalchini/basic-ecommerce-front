@@ -42,7 +42,10 @@ function CountryDropdown(props) {
         {countriesprops.map((country) => (
           <option
             key={country.id}
-            value={country.name}
+
+            //value={country.name}
+            value={country.id}
+
             className=" !cursor-pointer bg-navColor  "
           >
             {country.name}

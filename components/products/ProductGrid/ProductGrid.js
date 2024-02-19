@@ -13,6 +13,7 @@ const ProductGrid = (props) => {
         description={products.description}
         price={products.price}
         stock={products.stock}
+        imageUrl={products.imageUrl}
       >
         {products.name}
       </ProductItem>

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import logoSite from "../../../public/logoSite.png";
 import Image from "next/image";
 import Orders from "../PurchasesNav/PurchasesNav";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../searchBar/SearchBar";
 import Language from "../LanguageNav/LanguageNav";
 import CountryDropdown from "../CountryDropwdown/CountryDropdown";
 import { useRouter } from "next/router";

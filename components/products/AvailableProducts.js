@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
-import FilterBar from "./FilterBar/FilterBar";
-import ProductsFooter from "../Footers/ProductsFooter";
-import HelpFooter from "../Footers/HelpFooter";
+import FilterBar from "./filterBar/FilterBar";
+import ProductsFooter from "../footers/ProductsFooter";
+import HelpFooter from "../footers/HelpFooter";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import Loader from "../UI/Loader";
 import PaginatedProducts from "./PaginatedProducts/PaginatedProducts";
@@ -26,6 +26,7 @@ const AvailableProducts = (props) => {
   }, [country]);
 
   //Si hay vendedor definido, hay el fetch, y cada vez que cambie el vendedor se hace el fetch de products. Este SIEMPRE va a ser para la opcion default del Select que es Featured
+
   useEffect(() => {
     if (seller) {
       setIsLoading(true);
@@ -42,6 +43,10 @@ const AvailableProducts = (props) => {
         const responseData = await response.json();
         setProducts(responseData);
         setIsLoading(false);
+
+        if (seller != "-1") {
+          filterProductsItems("1");
+        }
       };
 
       fetchProducts().catch((error) => {
@@ -57,19 +62,10 @@ const AvailableProducts = (props) => {
   };
 
   const filterProductsItems = async (filter) => {
-    if (filter === "1" || filter === "5" || filter === "6") {
-      setProductsFiltered(
-        <PaginatedProducts
-          products={products}
-          onPageChange={handlePageChange}
-        ></PaginatedProducts>,
-      );
-      //setProductsFiltered(productList);
-      return;
-    }
-
     let URL = "";
-    if (filter === "2") {
+    if (filter === "1" || filter === "5" || filter === "6") {
+      URL = `http://localhost:3000/products-seller?sellerId=${seller}`;
+    } else if (filter === "2") {
       URL = `http://localhost:3000/products-seller-stock?sellerId=${seller}`;
     } else if (filter === "3") {
       URL = `http://localhost:3000/products-seller-lowprice?sellerId=${seller}`;

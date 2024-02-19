@@ -1,6 +1,6 @@
-import StartingFooter from "../Footers/StartingFooter";
+import StartingFooter from "../footers/startingFooter";
 import AvailableProducts from "../Products/AvailableProducts";
-import Navigation from "../navigation/Navigation";
+import Navigation from "../navigation/navigation";
 import { useState } from "react";
 
 function StartingPageContent(props) {

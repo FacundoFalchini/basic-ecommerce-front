@@ -1,9 +1,9 @@
-import ProductsFooter from "../Footers/ProductsFooter";
-import StartingFooter from "../Footers/StartingFooter";
+import ProductsFooter from "../footers/ProductsFooter";
+import StartingFooter from "../footers/startingFooter";
 import Language from "../navigation/LanguageNav/LanguageNav";
-import OptionsBar from "../navigation/OptionsBar/OptionsBar";
+import OptionsBar from "../navigation/optionsBar/OptionsBar";
 import ProfileNav from "../navigation/ProfileNav/ProfileNav";
-import SearchBar from "../navigation/SearchBar/SearchBar";
+import SearchBar from "../navigation/searchBar/SearchBar";
 import Cart from "../navigation/CartNav/CartNav";
 import logoSite from "../../public/logoSite.png";
 import Image from "next/image";
@@ -313,6 +313,7 @@ function Purchases() {
         price={purchase.productPrice}
         quantity={purchase.quantity}
         date={dateFormated}
+        imageUrl={purchase.productImageUrl}
       ></PurchaseItem>
     );
   });
@@ -453,10 +454,3 @@ function Purchases() {
 }
 
 export default Purchases;
-
-/*
-
-       <div className="mb-[32px] mt-[24px] flex flex-col items-center justify-center text-[14px] leading-5 text-[#0f1111]">
-            {purchaseList}
-          </div>
-*/

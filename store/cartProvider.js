@@ -173,6 +173,7 @@ const CartProvider = (props) => {
       setLoading(true);
       try {
         const cartData = await fetchCartData();
+        //console.log(cartData);
 
         if (cartData) {
           // Aquí asumimos que cartData tiene la estructura correcta para tu contexto
@@ -183,6 +184,7 @@ const CartProvider = (props) => {
               price: item.productPrice,
               stock: item.productStock,
               amount: item.quantity,
+              imageUrl: item.productImageUrl,
             };
           });
 
@@ -204,7 +206,6 @@ const CartProvider = (props) => {
 
     //Haciendo asi, logro que el contexto del carrito este siempre en sintonia con la auntentificacion del usuario. Cuando este inicia, se hace igual a lo q esta en su backend y cuando sale se borra.
     if (token) {
-      console.log("cargando carrito");
       loadCart();
     } else {
       dispatchCartAction({ type: "CLEAR" });

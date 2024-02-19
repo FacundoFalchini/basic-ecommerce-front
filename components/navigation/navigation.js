@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import OptionsBar from "./OptionsBar/OptionsBar";
-import MainBar from "./MainBar/MainBar";
+import OptionsBar from "./optionsBar/OptionsBar";
+import MainBar from "./mainBar/MainBar";
 
 const Navigation = (props) => {
   return (

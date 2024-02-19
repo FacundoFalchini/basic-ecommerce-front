@@ -4,7 +4,8 @@ import AuthContext from "../../store/auth-context";
 import Loader from "../UI/Loader";
 import Image from "next/image";
 import logoSiteBlack from "../../public/logoSiteBlack.png";
-import Footer from "../Footers/CopyrightFooter";
+import Footer from "../footers/CopyrightFooter";
+
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 
 //Solo letras y espacios.

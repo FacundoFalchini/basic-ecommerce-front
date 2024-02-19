@@ -22,27 +22,16 @@ function SellerDropdown(props) {
   useEffect(() => {
     if (selectedCountry) {
       const fetchSellers = async () => {
-
-        /*
-        const response = await fetch(
-          `http://localhost:3000/sellers-country?country=${selectedCountry}`,
-        );
-*/
-
         const response = await fetch(
           `http://localhost:3000/sellers-countryId?countryId=${selectedCountry}`,
         );
-
-
         if (!response.ok) {
           throw new Error("Something went wrong!");
         }
-
         const responseData = await response.json();
         setSellers(responseData);
         setIsLoading(false);
       };
-
       fetchSellers().catch((error) => {
         setIsLoading(false);
         setHttpError(error.message);
@@ -61,9 +50,7 @@ function SellerDropdown(props) {
   //El estado de loding es por default TRUE, entonces siempre sale por aca hasta que se seleccione el pais.
   if (isLoading) {
     return (
-
       <div className="bg flex max-h-[50px] w-40 max-w-40 items-center justify-center rounded-sm border border-transparent px-3 ">
-
         <select
           disabled
           name="sellers"
@@ -79,9 +66,7 @@ function SellerDropdown(props) {
 
   return (
     <div
-
       className={`bg  flex max-h-[50px] w-40 max-w-40 items-center justify-center rounded-sm border border-transparent px-3 ${
-
         isSelectable ? " hover:border-white" : ""
       }`}
     >

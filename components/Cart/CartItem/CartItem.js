@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import { IoIosCheckbox } from "react-icons/io";
-import { GiCrossbow } from "react-icons/gi";
+import noImage from "../../../public/noImage.png";
+import Image from "next/image";
 
 const CartItem = (props) => {
   const [localremove, setLocalErrorRemove] = useState(""); // Estado de error local
@@ -90,12 +91,13 @@ const CartItem = (props) => {
   }, [localdelete]);
 
   const price = `$${props.price.toFixed(2)}`;
+
   return (
     <Fragment>
       <div className="relative border-b border-b-[#DDD] py-[12px] pl-[12px]">
         <div className="mt-[12px]">
           <div className="flex w-full">
-            <div className="relative mb-[8px]   mr-[8px] ">
+            <div className="relative mb-[8px] w-[35px] ">
               <div
                 className="absolute  inset-y-1/2  h-[13px]   w-[13px] rounded-sm border border-[#CCCCCC] hover:border-[3px] hover:border-[#007185]"
                 onClick={handleClickCheck}
@@ -108,8 +110,24 @@ const CartItem = (props) => {
               )}
             </div>
 
-            <div className="mb-[4px] mr-[12px]">
-              <GiCrossbow className="text-[180px]"></GiCrossbow>
+            <div className="mb-[4px] mr-[12px] h-[180px]">
+              {props.imageUrl !== undefined && props.imageUrl !== null ? (
+                <Image
+                  src={props.imageUrl}
+                  alt="productImage"
+                  width={300}
+                  height={300}
+                  className="max-h-full max-w-full"
+                />
+              ) : (
+                <Image
+                  src={noImage}
+                  alt="noImage"
+                  width={300}
+                  height={300}
+                  className="max-h-full max-w-full"
+                />
+              )}
             </div>
             <div className="flex w-full">
               <div className="w-full">

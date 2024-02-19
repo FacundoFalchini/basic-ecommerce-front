@@ -38,14 +38,14 @@ const PaginatedProducts = (props) => {
   };
 
   const previus = (
-    <span className="flex">
+    <span className="flex" onClick={() => window.scrollTo({ top: 0 })}>
       <IoIosArrowBack className="mr-1 text-[20px] "></IoIosArrowBack>
       Previous
     </span>
   );
 
   const next = (
-    <span className="flex">
+    <span className="flex" onClick={() => window.scrollTo({ top: 0 })}>
       Next
       <IoIosArrowForward className="ml-1 text-[20px] "></IoIosArrowForward>
     </span>

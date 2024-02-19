@@ -1,7 +1,7 @@
 import ProductItemForm from "./ProductItemForm";
 import CartContext from "../../../store/cart-context";
 import { useContext, useState, useEffect } from "react";
-import prueba from "../../../public/address.png";
+import noImage from "../../../public/NoImage.png";
 import Image from "next/image";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import Loader from "@/components/UI/Loader";
@@ -24,6 +24,7 @@ const ProductItem = (props) => {
           productPrice: props.price,
           productStock: props.stock,
           quantity: amount,
+          productImageUrl: props.imageUrl,
         }),
         headers: {
           Authorization: `Bearer ${token}`,
@@ -52,6 +53,7 @@ const ProductItem = (props) => {
         amount: amount,
         price: props.price,
         stock: props.stock,
+        imageUrl: props.imageUrl,
       });
 
       setLocalErrorAdd("");
@@ -107,12 +109,24 @@ const ProductItem = (props) => {
   return (
     <div className="flex-col   rounded-sm border border-gridGray border-opacity-50">
       <div className="h-[275px]   bg-gridGray">
-        <div className="mx-auto my-auto flex h-[100%] w-[80%] items-center justify-items-center">
-          <Image
-            src={prueba}
-            alt="productImage"
-            className="object-scale-down"
-          />
+        <div className="mx-auto my-auto flex h-[100%] w-[80%] items-center justify-items-center object-cover">
+          {props.imageUrl ? (
+            <Image
+              src={props.imageUrl}
+              alt="productImage"
+              width={300}
+              height={300}
+              className="max-h-full max-w-full"
+            />
+          ) : (
+            <Image
+              src={noImage}
+              alt="noImage"
+              width={300}
+              height={300}
+              className="max-h-full max-w-full"
+            />
+          )}
         </div>
       </div>
 

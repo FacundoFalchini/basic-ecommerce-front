@@ -4,13 +4,13 @@ import CartItem from "./CartItem/CartItem";
 import Link from "next/link";
 import Loader from "../UI/Loader";
 import Checkout from "./Checkout/Checkout";
-import ProductsFooter from "../Footers/ProductsFooter";
-import StartingFooter from "../Footers/StartingFooter";
-import OptionsBar from "../navigation/OptionsBar/OptionsBar";
+import ProductsFooter from "../footers/ProductsFooter";
+import StartingFooter from "../footers/startingFooter";
+import OptionsBar from "../navigation/optionsBar/OptionsBar";
 import Language from "../navigation/LanguageNav/LanguageNav";
 import logoSite from "../../public/logoSite.png";
 import Image from "next/image";
-import SearchBar from "../navigation/SearchBar/SearchBar";
+import SearchBar from "../navigation/searchBar/SearchBar";
 import Profile from "../navigation/ProfileNav/ProfileNav";
 import Orders from "../navigation/PurchasesNav/PurchasesNav";
 import { IoIosCheckbox } from "react-icons/io";
@@ -140,6 +140,7 @@ const Cart = () => {
           productName: item.name,
           productPrice: item.price,
           productStock: item.stock,
+          productImageUrl: item.imageUrl,
           quantity: 1,
         }),
         headers: {
@@ -414,6 +415,7 @@ const Cart = () => {
         amount={item.amount}
         price={item.price}
         stock={item.stock}
+        imageUrl={item.imageUrl}
         onRemove={cartItemRemoveHandler.bind(null, item.id)}
         onDelete={cartItemDeleteHandler.bind(null, item.id)}
         onAdd={cartItemAddHandler.bind(null, item)}

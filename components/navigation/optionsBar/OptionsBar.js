@@ -1,4 +1,4 @@
-import Sidebar from "../SideBar/SideBar";
+import Sidebar from "../sideBar/SideBar";
 
 const OptionsBar = () => {
   const generateClassName = (maxWidth) => `

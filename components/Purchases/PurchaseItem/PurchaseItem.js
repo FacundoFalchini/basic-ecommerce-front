@@ -1,4 +1,5 @@
-import { GiCrossbow } from "react-icons/gi";
+import Image from "next/image";
+import noImage from "../../../public/noImage.png";
 
 const PurchaseItem = (props) => {
   return (
@@ -7,8 +8,24 @@ const PurchaseItem = (props) => {
         {props.date}
       </div>
       <div className="flex w-full justify-between space-x-[24px] p-[24px] ">
-        <div>
-          <GiCrossbow className="rounded-xl border border-[#DDD] text-[74px]"></GiCrossbow>
+        <div className="h-[75px]">
+          {props.imageUrl !== undefined && props.imageUrl !== null ? (
+            <Image
+              src={props.imageUrl}
+              alt="productImage"
+              width={68}
+              height={75}
+              className="max-h-full max-w-full"
+            />
+          ) : (
+            <Image
+              src={noImage}
+              alt="noImage"
+              width={68}
+              height={75}
+              className="max-h-full max-w-full"
+            />
+          )}
         </div>
         <div className="line-clamp-4  w-[330px]  text-[16px] font-semibold">
           <p>{props.name}</p>

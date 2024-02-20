@@ -18,7 +18,7 @@ To run the app, the command needed is:
 
 - npm run dev
 
-Once the app is up and running, you can view the results at: [http://localhost:3000](http://localhost:3000)
+Once the app is up and running, you can view the results at: [http://localhost:4000](http://localhost:4000)
 
 ## Sample video
 
